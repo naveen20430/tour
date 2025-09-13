@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <title>Travhub - HTML Template</title>
+
+    <!-- Style CSS -->
+    <link href="css/collection.css" rel="stylesheet">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,300,400,500%7CLato:300,400" rel="stylesheet"
+        type="text/css">
+
+    <link rel="icon" type="image/png" href="images/favicon.png">
+</head>
+
+<body data-spy="scroll" data-target=".sidebar" data-offset="200">
+    <!-- Sidebar -->
+    <aside class="sidebar sidebar-boxed sidebar-dark">
+        <ul class="nav sidenav dropable">
+            <li><a href="#getting_started" title="Getting Started">Getting Started</a></li>
+            <li><a href="#head_css_structure" title="HEAD CSS Structure">CSS Structure</a></li>
+            <li><a href="#javascript_structure" title="Javascript Structure">Javascript Structure</a></li>
+            <li><a href="#html_structure" title="HTML Structure">HTML Structure</a></li>
+            <li><a href="#fonts_used" title="Fonts used">Fonts Used</a></li>
+            <li><a href="#color-change-option" title="Main Color Change Option">Main Color Change</a></li>
+            <li><a href="#run-scss" title="How to Run SCSS">How to Run SCSS File</a></li>
+            <li><a href="#slider-edit" title="Owl Carousel Edit Option">Slick Edit Option</a></li>
+            <li><a href="#preloader-hide" title="How to edit/off Preloader">Preloader</a></li>
+            <li><a href="#speed-optimization" title="Speed Optimization">Speed Optimization</a></li>
+        </ul>
+    </aside>
+    <!-- END Sidebar -->
+
+    <header class="site-header navbar-transparent">
+        <!-- Banner -->
+        <div class="banner auto-size" style="background-color: #F84D42">
+            <div class="container-fluid">
+                <h1 style="margin: 0; padding: 30px 0;"><strong>Travhub</strong> Documentation</h1>
+            </div>
+        </div>
+        <!-- END Banner -->
+    </header>
+
+    <main class="container-fluid">
+        <!-- Main content -->
+        <article class="main-content" role="main">
+
+
+            <section id="getting_started">
+                <div class="page-header">
+                    <h3 style="margin-top: 0; margin-bottom: 12px;">Getting Started</h3>
+                </div>
+                <p>The template folder <strong>Travhub</strong> is available inside the downloaded zip file. Need to
+                    unzip the zip file to find the template also the documentation folder.</p>
+                <p>The <strong>files and folders structure</strong> is similar to the following:</p>
+                <ol>
+                    <li><strong>assets/css</strong> — folder with CSS files.</li>
+                    <li><strong>assets/inc</strong> — folder with mail files.</li>
+                    <li><strong>assets/img</strong> — folder with image files.</li>
+                    <li><strong>assets/js</strong> — folder with Javascript files.</li>
+                    <li><strong>assets/vendors</strong> — folder with vendors files.</li>
+                </ol>
+                <p>Upload the template files to the server with the help of one of the FTP-clients like FileZilla.</p>
+
+
+
+
+
+                <h6 style="margin-top: 20px;"><strong>Files Edit & Upload:</strong></h6>
+                <p>Individual pages can be customized by opening in a code editor such as VS Code. Once all the
+                    customization completed then to make the website live you need to upload the updated project files
+                    to the hosting server for your own domain. The files can be uploaded using FTP client such as
+                    FileZilla.</p>
+            </section>
+
+            <section id="head_css_structure">
+                <div class="page-header">
+                    <h3 style="margin-top: 0; margin-bottom: 12px;">HEAD CSS Structure</h3>
+                </div>
+                <p>Followings are the <strong>css</strong> files which loaded inside the <strong>Head Section</strong>:
+                </p>
+                <pre class="line-numbers">
+                    <code class="language-markup">
+                    &lt;!-- Package Css link --&gt;
+                    &lt;link rel="stylesheet" href="assets/vendors/bootstrap/css/bootstrap.min.css"&gt;
+                    &lt;link rel="stylesheet" href="assets/vendors/nice-select/css/nice-select.css"&gt;
+                    &lt;link rel="stylesheet" href="assets/vendors/fontawesome/css/all.min.css"&gt;
+                    &lt;link rel="stylesheet" href="assets/vendors/animate/animate.min.css"&gt;
+                    &lt;link rel="stylesheet" href="assets/vendors/meanmenu/css/meanmenu.css"&gt;
+                    &lt;link rel="stylesheet" href="assets/vendors/jarallax/jarallax.css"&gt;
+                    &lt;link rel="stylesheet" href="assets/vendors/jquery-magnific-popup/jquery.magnific-popup.css"&gt;
+                    &lt;link rel="stylesheet" href="/assets/vendors/travhub-icons/style.css"&gt;
+                    &lt;link rel="stylesheet" href="assets/vendors/owl-carousel/css/owl.carousel.min.css"&gt;
+                    &lt;link rel="stylesheet" href="assets/vendors/owl-carousel/css/owl.theme.default.min.css"&gt;
+                    &lt;link rel="stylesheet" href="assets/vendors/jquery-ui/jquery-ui.css"&gt;
+                    &lt;link rel="stylesheet" href="assets/vendors/glightbox/css/glightbox.min.css"&gt;
+                    &lt;link rel="stylesheet" href="assets/vendors/spacing/spacing.css"&gt;
+                    &lt;!-- template styles --&gt;
+                    &lt;link rel="stylesheet" href="assets/css/travhub.css"&gt;
+                    </code>
+                </pre>
+            </section>
+
+            <section id="javascript_structure">
+                <div class="page-header">
+                    <h3 style="margin-top: 0; margin-bottom: 12px;">Javascript Structure</h3>
+                </div>
+                <p>Followings are the <strong>JS</strong> files which loaded before the end of <strong>HEAD or BODY
+                        Section:</strong>.</p>
+                <pre class="line-numbers">
+                    <code  class="language-markup">
+                        &lt;script src="assets/vendors/jquery/jquery-3.7.0.min.js"&gt;&lt;/script&gt;
+                        &lt;script src="assets/vendors/bootstrap/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;
+                        &lt;script src="assets/vendors/nice-select/js/nice-select.js"&gt;&lt;/script&gt;
+                        &lt;script src="assets/vendors/wow/wow.js"&gt;&lt;/script&gt;
+                        &lt;script src="assets/vendors/meanmenu/js/meanmenu.js"&gt;&lt;/script&gt;
+                        &lt;script src="assets/vendors/jarallax/jarallax.min.js"&gt;&lt;/script&gt;
+                        &lt;script src="assets/vendors/jquery-ui/jquery-ui.js"&gt;&lt;/script&gt;
+                        &lt;script src="assets/vendors/jquery-ajaxchimp/jquery.ajaxchimp.min.js"&gt;&lt;/script&gt;
+                        &lt;script src="assets/vendors/jquery-appear/jquery.appear.min.js"&gt;&lt;/script&gt;
+                        &lt;script src="assets/vendors/jquery-circle-progress/jquery.circle-progress.min.js"&gt;&lt;/script&gt;
+                        &lt;script src="assets/vendors/jquery-magnific-popup/jquery.magnific-popup.min.js"&gt;&lt;/script&gt;
+                        &lt;script src="assets/vendors/jquery-validate/jquery.validate.min.js"&gt;&lt;/script&gt;
+                        &lt;script src="assets/vendors/nouislider/nouislider.min.js"&gt;&lt;/script&gt;
+                        &lt;script src="assets/vendors/tiny-slider/tiny-slider.js"&gt;&lt;/script&gt;
+                        &lt;script src="assets/vendors/wnumb/wNumb.min.js"&gt;&lt;/script&gt;
+                        &lt;script src="assets/vendors/owl-carousel/js/owl.carousel.min.js"&gt;&lt;/script&gt;
+                        &lt;script src="assets/vendors/swiper/js/swiper.min.js"&gt;&lt;/script&gt;
+                        &lt;script src="assets/vendors/imagesloaded/imagesloaded.min.js"&gt;&lt;/script&gt;
+                        &lt;script src="assets/vendors/isotope/isotope.js"&gt;&lt;/script&gt;
+                        &lt;script src="assets/vendors/countdown/countdown.min.js"&gt;&lt;/script&gt;
+                        &lt;script src="assets/vendors/jquery-circleType/jquery.circleType.js"&gt;&lt;/script&gt;
+                        &lt;script src="assets/vendors/jquery-lettering/jquery.lettering.min.js"&gt;&lt;/script&gt;
+                        &lt;script src="assets/vendors/ion.rangeSlider/ion.rangeSlider.min.js"&gt;&lt;/script&gt;
+                        &lt;script src="assets/vendors/jquery-ui/jquery-ui.js"&gt;&lt;/script&gt;
+                        &lt;script src="assets/vendors/glightbox/js/glightbox.min.js"&gt;&lt;/script&gt;
+                        &lt;script src="https://unpkg.com/splitting/dist/splitting.min.js"&gt;&lt;/script&gt;
+                        &lt;script src="https://unpkg.com/scroll-out/dist/scroll-out.min.js"&gt;&lt;/script&gt;
+
+                        &lt;!-- gsap js --&gt;
+                        &lt;script src="assets/vendors/gsap/gsap.js"&gt;&lt;/script&gt;
+                        &lt;script src="assets/vendors/gsap/scrolltrigger.min.js"&gt;&lt;/script&gt;
+                        &lt;script src="assets/vendors/gsap/splittext.min.js"&gt;&lt;/script&gt;
+                        &lt;script src="assets/vendors/gsap/travhub-split.js"&gt;&lt;/script&gt;
+                        
+                        &lt;!-- template js --&gt;
+                        &lt;script src="assets/js/travhub.js"&gt;&lt;/script&gt;
+                    </code>
+                </pre>
+            </section>
+
+
+
+            <section id="html_structure">
+                <div class="page-header">
+                    <h3 style="margin-top: 0; margin-bottom: 12px;">HTML Structure</h3>
+                </div>
+                The <Strong>Travhub</Strong> is a responsive template and is based on the <strong>Bootstrap
+                    Framework</strong>. For more information you can check the <a target="_blank"
+                    href="https://getbootstrap.com/"><strong>Bootstrap CSS</strong></a>.
+                <p>The general template structure is the same throughout the template and each of the part is under a
+                    section with a section id name. Here is the <strong>general structure:</strong></p>
+                <pre class="line-numbers">
+                <code class="language-markup">
+                &lt;!-- page-header start --&gt;
+                &lt;div class="page-header"&gt;
+                    &lt;div class="page-header__bg"&gt;&lt;/div&gt;
+                    &lt;div class="page-header__shape-one"&gt;&lt;/div&gt;
+                    &lt;div class="page-header__shape-two"&gt;&lt;/div&gt;
+                        &lt;div class="container"&gt;
+                            &lt;h2 class="page-header__title bw-split-in-right"&gt;About&lt;/h2&gt;
+                            &lt;ul class="travhub-breadcrumb list-unstyled"&gt;
+                                &lt;li&gt;&lt;a href="index.html"&gt;Home&lt;/a&gt;&lt;/li&gt;
+                                &lt;li&gt;&lt;About&gt;&lt;/i&gt;&lt;/li&gt;
+                            &lt;/ul&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;!-- page-header end --&gt;  
+                </code>
+                </pre>
+            </section>
+
+
+            <section id="fonts_used">
+                <div class="page-header">
+                    <h3 style="margin-top: 30px; margin-bottom: 12px;">Fonts Used</h3>
+                </div>
+                <p>
+                    Font code can be found in the &quot;<strong>travhub.css</strong>&quot; file path:
+                    assets/css/travhub.css
+                </p>
+                <pre class="line-numbers">
+                <code class="language-css">
+                :root {
+                    --travhub-font: "Roboto", serif;
+                    --travhub-heading-font: "Geologica", serif;
+                    --travhub-special-font: "Caveat", serif;
+                }
+                </code>
+                </pre>
+            </section>
+
+
+            <section id="color-change-option">
+                <div class="page-header">
+                    <h3 style="margin-top: 0; margin-bottom: 12px;">Main Color Change Option</h3>
+                </div>
+                <p>File path: assets/css/travhub.css</p>
+
+                <pre class="line-numbers">
+<code class="language-css">
+:root {
+    --travhub-text: #555555;
+    --travhub-text-rgb: 85, 85, 85;
+    --travhub-text2: #757575;
+    --travhub-text2-rgb: 117, 117, 117;
+    --travhub-base: #1BBC9B;
+    --travhub-base-rgb: 27, 188, 155;
+    --travhub-primary: #abe6d7;
+    --travhub-primary-rgb: 171, 230, 215;
+    --travhub-gray: #F0F0F0;
+    --travhub-gray-rgb: 240, 240, 240;
+    --travhub-gray2: #F1F4FA;
+    --travhub-gray2-rgb: 241, 244, 250;
+    --travhub-white: #fff;
+    --travhub-white-rgb: 255, 255, 255;
+    --travhub-black: #292929;
+    --travhub-black-rgb: 41, 41, 41;
+    --travhub-black2: #343434;
+    --travhub-black2-rgb: 52, 52, 52;
+    --travhub-black3: #000;
+    --travhub-black3-rgb: 0, 0, 0;
+    --travhub-border-color: #e5e3e0;
+    --travhub-border-color-rgb: 229, 227, 224;
+}
+</code>
+</pre>
+            </section>
+
+            <section id="slider-edit">
+                <div class="page-header">
+                    <h3 style="margin-top: 0; margin-bottom: 12px;">Owl Carousel Edit Option</h3>
+                </div>
+                <p>File path: assets/js/travhub.js</p>
+
+                <pre class="line-numbers">
+<code class="language-css">
+
+/*--------------------------------------------------
+    Owl Carousel
+---------------------------------------------------*/
+function thmOwlInit() {
+    // owl slider
+    let travhubowlCarousel = $(".travhub-owl__carousel");
+    if (travhubowlCarousel.length) {
+      travhubowlCarousel.each(function () {
+        let elm = $(this);
+        let options = elm.data("owl-options");
+        let thmOwlCarousel = elm.owlCarousel(
+          "object" === typeof options ? options : JSON.parse(options)
+        );
+        elm.find("button").each(function () {
+          $(this).attr("aria-label", "carousel button");
+        });
+      });
+    }
+    let travhubowlCarouselNav = $(".travhub-owl__carousel--custom-nav");
+    if (travhubowlCarouselNav.length) {
+      travhubowlCarouselNav.each(function () {
+        let elm = $(this);
+        let owlNavPrev = elm.data("owl-nav-prev");
+        let owlNavNext = elm.data("owl-nav-next");
+        $(owlNavPrev).on("click", function (e) {
+          elm.trigger("prev.owl.carousel");
+          e.preventDefault();
+        });
+
+        $(owlNavNext).on("click", function (e) {
+          elm.trigger("next.owl.carousel");
+          e.preventDefault();
+        });
+      });
+    }
+  }
+
+</code>
+</pre>
+                <p><strong>More Info please browser the link: <a
+                            href="https://owlcarousel2.github.io/OwlCarousel2/docs/api-options.html" target="_blank">Owl
+                            Carousel Options</a></strong></p>
+            </section>
+
+            <section id="preloader-hide">
+                <div class="page-header">
+                    <h3 style="margin-top: 0; margin-bottom: 12px;">How to edit/off Preloader</h3>
+                </div>
+                <p>Please remove or comment the below code file path: assets/js/main.js</p>
+                <pre class="line-numbers">
+<code class="language-css">
+
+/*-----------------
+    preloader
+------------------*/
+var preload = $('.preloader');
+if (preload.length > 0) {
+    preload.delay(800).fadeOut('slow');
+}
+
+</code>
+</pre>
+
+                <p>Also, please remove or comment the above code all HTML files</p>
+                <pre class="line-numbers">
+<code class="language-css">
+
+&lt;!-- preloader area start --&gt;
+&lt;div class="preloader"&gt;
+  &lt;div class="loaderInner"&gt;
+    &lt;img src="assets/img/preloader/preloader.png" alt="preloader"&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;!-- preloader area end --&gt;
+
+
+</code>
+</pre>
+            </section>
+
+            <section id="speed-optimization">
+                <div class="page-header">
+                    <h3 style="margin-top: 0; margin-bottom: 12px;">Speed Optimization</h3>
+                </div>
+
+                <p>Please optimize all images KB, MB also, use the image size following by placeholder file path:
+                    assets/images/..</p>
+                <p>- <a href="https://tinypng.com/" target="_blank">Tinypng</a></p>
+
+                <p>Please minify all CSS file path: assets/css/..</p>
+                <p>- <a href="https://cssminifier.com/" target="_blank">CSS Minifier</a></p>
+
+
+                <p>Please minify all JS file path: assets/js/..</p>
+                <p>- <a href="https://javascript-minifier.com/" target="_blank">Javascript Minifier</a></p>
+            </section>
+
+            <section id="how-to-change-image">
+                <div class="page-header">
+                    <h3 style="margin-top: 0; margin-bottom: 12px;">How to Change Image?</h3>
+                </div>
+
+                <p>Please go to the image file 'path: assets/img/...' replace the image which one you want following
+                    placeholder image size & name</p>
+            </section>
+
+            <section id="flaticon-edit">
+                <div class="page-header">
+                    <h3 style="margin-top: 0; margin-bottom: 12px;">How to Edit Especially For Font Awesome</h3>
+                </div>
+
+                <p>You won't able to add new flaticon except existing but you can if you want to add from scratch but
+                    existing will not work and it's the feature of flaticon. <a href="https://fontawesome.com/icons"
+                        target="_blank">Fontawesome.com</a>
+            </section>
+
+
+
+            <section id="how-to-change-images">
+                <div class="page-header">
+                    <h3 style="margin-top: 0; margin-bottom: 12px;">How to Add New Updates of Existing Template</h3>
+                </div>
+
+                <p>
+                    After a certain time, we will update our project based on the latest technology but in your
+                    template, you need to update on your own if you want.
+                </p>
+            </section>
+
+            <section id="credits">
+                <div class="page-header">
+                    <h3 style="margin-top: 0; margin-bottom: 12px;">Credits</h3>
+                </div>
+                <p><strong>Note:</strong> All <strong>images</strong> are used for <strong>preview</strong> purpose only
+                    and <strong>not included</strong> in the <strong>final purchase</strong> files.</p>
+                <p> <strong>Images from:</strong><br />
+                    <a target="_blank" href="https://www.freepik.com/">https://www.freepik.com/</a><br />
+                    <a target="_blank" href="https://pixabay.com/">https://pixabay.com/</a><br />
+                    <a target="_blank" href="https://unsplash.com/">https://unsplash.com/</a><br />
+                </p>
+                <p>
+                    <strong>Fonts:</strong><br />
+                    <a target="_blank" href="https://fonts.google.com/specimen/Geologica?query=geo">Geologica</a><br />
+                    <a target="_blank" href="https://fonts.google.com/specimen/Roboto">Roboto</a><br />
+                </p>
+                <p>
+                    <strong>IconFont</strong><br>
+                    <a href="https://fontawesome.com/" target="_blank">Fontawesome</a><br>
+                    <a href="#" target="_blank">Travhub Custom Icon</a><br>
+                </p>
+            </section>
+
+
+        </article>
+        <!-- END Main content -->
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container-fluid"> <a id="scroll-up" href="#"><i class="fa fa-angle-up"></i></a>
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+
+                </div>
+                <div class="col-md-6 col-sm-6">
+
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- END Footer -->
+
+
+    <!-- Scripts -->
+    <script src="js/other.js"></script>
+    <script src="js/custom.js"></script>
+</body>
+
+</html>
