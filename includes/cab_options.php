@@ -108,11 +108,54 @@ class CabOptions {
 function getCabDisplayName($cab_type) {
     $cab_names = [
         'sedan' => 'Sedan',
-        'xuv_tavera' => 'Xylo / XUV / TAVERA', 
-        'innova' => 'Innova'
+        'ertiga' => 'Ertiga',
+        'innova' => 'Innova',
+        'tempo_traveller' => 'Tempo Traveller',
+        // Legacy support
+        'xuv_tavera' => 'Xylo / XUV / TAVERA'
     ];
     
-    return $cab_names[$cab_type] ?? ucfirst($cab_type);
+    return $cab_names[$cab_type] ?? ucfirst(str_replace('_', ' ', $cab_type));
+}
+
+/**
+ * Get tour-specific cab pricing
+ */
+function getTourSpecificPricing($tour_name, $db) {
+    try {
+        $pricing = $db->fetch(
+            "SELECT * FROM tour_cab_pricing WHERE tour_name = ? LIMIT 1", 
+            [$tour_name]
+        );
+        return $pricing;
+    } catch (Exception $e) {
+        return null;
+    }
+}
+
+/**
+ * Get cab price for specific tour and cab type
+ */
+function getCabPriceForTour($tour_name, $cab_type, $db) {
+    $tour_pricing = getTourSpecificPricing($tour_name, $db);
+    
+    if ($tour_pricing) {
+        switch ($cab_type) {
+            case 'sedan':
+                return $tour_pricing['sedan_price'];
+            case 'ertiga':
+                return $tour_pricing['ertiga_price'];
+            case 'innova':
+                return $tour_pricing['innova_price'];
+            case 'tempo_traveller':
+                return $tour_pricing['tempo_traveller_price'];
+        }
+    }
+    
+    // Fallback to base pricing
+    $cab_options = new CabOptions($db);
+    $cab_type_data = $cab_options->getCabTypeByName($cab_type);
+    return $cab_type_data ? $cab_type_data['base_price'] : 0;
 }
 
 /**
@@ -123,23 +166,30 @@ function getDefaultCabPricing() {
         'sedan' => [
             'name' => 'sedan',
             'display_name' => 'Sedan',
-            'base_price' => 2500.00,
+            'base_price' => 3000.00,
             'max_passengers' => 4,
             'description' => 'Comfortable sedan car suitable for small groups'
         ],
-        'xuv_tavera' => [
-            'name' => 'xuv_tavera',
-            'display_name' => 'Xylo / XUV / TAVERA',
-            'base_price' => 3500.00,
+        'ertiga' => [
+            'name' => 'ertiga',
+            'display_name' => 'Ertiga',
+            'base_price' => 4000.00,
             'max_passengers' => 7,
-            'description' => 'SUV vehicles perfect for medium groups'
+            'description' => 'Spacious Ertiga perfect for medium-sized groups'
         ],
         'innova' => [
             'name' => 'innova',
             'display_name' => 'Innova',
-            'base_price' => 4500.00,
+            'base_price' => 5200.00,
             'max_passengers' => 7,
             'description' => 'Premium Toyota Innova for comfortable group travel'
+        ],
+        'tempo_traveller' => [
+            'name' => 'tempo_traveller',
+            'display_name' => 'Tempo Traveller',
+            'base_price' => 7000.00,
+            'max_passengers' => 12,
+            'description' => 'Spacious Tempo Traveller for large groups and extended tours'
         ]
     ];
 }

@@ -130,6 +130,9 @@ try {
                     <a class="nav-link" href="bookings.php">
                         <i class="fas fa-calendar-check me-2"></i> Bookings
                     </a>
+                    <a class="nav-link" href="cab_pricing.php">
+                        <i class="fas fa-car me-2"></i> Cab Pricing
+                    </a>
                     <a class="nav-link" href="blog.php">
                         <i class="fas fa-blog me-2"></i> Blog Posts
                     </a>
@@ -240,6 +243,11 @@ try {
                                             </a>
                                         </div>
                                         <div class="col-md-4 mb-3">
+                                            <a href="cab_pricing.php" class="btn btn-dark w-100">
+                                                <i class="fas fa-car me-2"></i>Cab Pricing
+                                            </a>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
                                             <a href="users.php" class="btn btn-secondary w-100">
                                                 <i class="fas fa-users me-2"></i>Manage Users
                                             </a>
@@ -339,6 +347,10 @@ try {
                                                 <a href="bookings.php" class="list-group-item list-group-item-action py-2">
                                                     <i class="fas fa-calendar-check me-2"></i>All Bookings (<?php echo $totalBookings; ?>)
                                                 </a>
+                                                <a href="cab_pricing.php" class="list-group-item list-group-item-action py-2">
+                                                    <i class="fas fa-car me-2"></i>Cab Pricing Management
+                                                    <span class="badge bg-success ms-2">New</span>
+                                                </a>
                                                 <a href="users.php" class="list-group-item list-group-item-action py-2">
                                                     <i class="fas fa-users me-2"></i>Manage Users (<?php echo $totalUsers; ?>)
                                                 </a>
@@ -380,6 +392,10 @@ try {
                                                 <a href="../install.php" class="list-group-item list-group-item-action py-2" target="_blank">
                                                     <i class="fas fa-database me-2"></i>Database Setup
                                                 </a>
+                                                <a href="../update_cab_pricing.php" class="list-group-item list-group-item-action py-2" target="_blank">
+                                                    <i class="fas fa-car me-2"></i>Setup Cab Pricing
+                                                    <span class="badge bg-warning ms-2">Run Once</span>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -402,6 +418,10 @@ try {
                                                 </a>
                                                 <a href="../booking.php" class="btn btn-outline-primary btn-sm" target="_blank">
                                                     <i class="fas fa-calendar-check me-1"></i>Booking
+                                                </a>
+                                                <a href="../booking_with_cabs.php" class="btn btn-outline-success btn-sm" target="_blank">
+                                                    <i class="fas fa-car me-1"></i>Cab Booking
+                                                    <span class="badge bg-success ms-1">New</span>
                                                 </a>
                                                 <a href="../register.php" class="btn btn-outline-primary btn-sm" target="_blank">
                                                     <i class="fas fa-user-plus me-1"></i>Register
