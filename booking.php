@@ -1,6 +1,19 @@
 <?php
 require_once 'config/config.php';
-require_once 'includes/cab_options.php';
+
+// Try to include cab options, but handle gracefully if not available
+$cab_functionality_enabled = false;
+try {
+    if (file_exists('includes/cab_options.php')) {
+        require_once 'includes/cab_options.php';
+        // Test if cab_types table exists
+        $db->fetch("SELECT COUNT(*) as count FROM cab_types LIMIT 1");
+        $cab_functionality_enabled = true;
+    }
+} catch (Exception $e) {
+    // Cab functionality not available, continue without it
+    $cab_functionality_enabled = false;
+}
 
 $errors = [];
 $success = false;
@@ -23,7 +36,7 @@ if ($_POST) {
     if (empty($guest_name)) $errors[] = 'Your name is required';
     if (empty($guest_email)) $errors[] = 'Your email is required';
     if (empty($guest_phone)) $errors[] = 'Your phone number is required';
-    if (empty($cab_type)) $errors[] = 'Cab type selection is required';
+    if ($cab_functionality_enabled && empty($cab_type)) $errors[] = 'Cab type selection is required';
     
     // Get tour details
     $tour = $db->fetch("SELECT * FROM tours WHERE id = ? AND status = 'active'", [$tour_id]);
@@ -32,31 +45,53 @@ if ($_POST) {
     }
     
     if (empty($errors)) {
-        // Initialize cab options helper
-        $cabOptions = new CabOptions($db);
-        
-        // Validate cab selection can accommodate the number of people
-        if (!$cabOptions->canAccommodate($cab_type, $people)) {
-            $errors[] = 'Selected cab type cannot accommodate ' . $people . ' people';
-        }
-        
         // Calculate total amount
         $price_per_person = $tour['discount_price'] ?: $tour['price'];
         $total_amount = $price_per_person * $people;
         
-        // Calculate cab charges
-        $cab_price = $cabOptions->calculateCabPrice($cab_type, $tour['duration_days']);
-        $total_with_cab = $total_amount + $cab_price;
+        // Initialize cab-related variables
+        $cab_price = 0;
+        $total_with_cab = $total_amount;
+        
+        // Handle cab functionality if enabled
+        if ($cab_functionality_enabled && !empty($cab_type)) {
+            try {
+                $cabOptions = new CabOptions($db);
+                
+                // Validate cab selection can accommodate the number of people
+                if (!$cabOptions->canAccommodate($cab_type, $people)) {
+                    $errors[] = 'Selected cab type cannot accommodate ' . $people . ' people';
+                } else {
+                    // Calculate cab charges
+                    $cab_price = $cabOptions->calculateCabPrice($cab_type, $tour['duration_days']);
+                    $total_with_cab = $total_amount + $cab_price;
+                }
+            } catch (Exception $e) {
+                // Fallback: continue without cab functionality
+                $cab_type = null;
+                $cab_price = 0;
+                $total_with_cab = $total_amount;
+            }
+        }
         
         // Generate booking number
         $booking_number = 'TH' . date('Y') . str_pad(rand(1, 9999), 4, '0', STR_PAD_LEFT);
         
         try {
-            $booking_id = $db->execute(
-                "INSERT INTO bookings (booking_number, tour_id, guest_name, guest_email, guest_phone, number_of_people, tour_date, total_amount, cab_type, cab_price, total_with_cab, special_requirements, booking_status, payment_status, created_at) 
-                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending', 'pending', NOW())",
-                [$booking_number, $tour_id, $guest_name, $guest_email, $guest_phone, $people, $tour_date, $total_amount, $cab_type, $cab_price, $total_with_cab, $special_requirements]
-            );
+            // Use different SQL based on whether cab columns exist
+            if ($cab_functionality_enabled) {
+                $booking_id = $db->execute(
+                    "INSERT INTO bookings (booking_number, tour_id, guest_name, guest_email, guest_phone, number_of_people, tour_date, total_amount, cab_type, cab_price, special_requirements, booking_status, payment_status, created_at) 
+                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending', 'pending', NOW())",
+                    [$booking_number, $tour_id, $guest_name, $guest_email, $guest_phone, $people, $tour_date, $total_amount, $cab_type, $cab_price, $special_requirements]
+                );
+            } else {
+                $booking_id = $db->execute(
+                    "INSERT INTO bookings (booking_number, tour_id, guest_name, guest_email, guest_phone, number_of_people, tour_date, total_amount, special_requirements, booking_status, payment_status, created_at) 
+                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending', 'pending', NOW())",
+                    [$booking_number, $tour_id, $guest_name, $guest_email, $guest_phone, $people, $tour_date, $total_amount, $special_requirements]
+                );
+            }
             
             if ($booking_id) {
                 $success = true;
@@ -82,9 +117,17 @@ if (!empty($_GET['tour_id']) || !empty($_POST['tour_id'])) {
     ", [$tour_id]);
 }
 
-// Initialize cab options for form
-$cabOptions = new CabOptions($db);
-$availableCabs = $cabOptions->getCabOptionsForDropdown();
+// Initialize cab options for form if available
+$availableCabs = [];
+if ($cab_functionality_enabled) {
+    try {
+        $cabOptions = new CabOptions($db);
+        $availableCabs = $cabOptions->getCabOptionsForDropdown();
+    } catch (Exception $e) {
+        $availableCabs = [];
+        $cab_functionality_enabled = false;
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
