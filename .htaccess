@@ -67,10 +67,10 @@ RewriteRule ^book/([0-9]+)/?$ booking.php?tour_id=$1 [NC,L,QSA]
 RewriteRule ^booking/?$ booking.php [NC,L,QSA]
 
 # User authentication
-RewriteRule ^login/?$ auth/login.php [NC,L]
-RewriteRule ^register/?$ auth/register.php [NC,L]
-RewriteRule ^logout/?$ auth/logout.php [NC,L]
-RewriteRule ^profile/?$ user/profile.php [NC,L]
+RewriteRule ^login/?$ login.php [NC,L]
+RewriteRule ^register/?$ register.php [NC,L]
+RewriteRule ^logout/?$ logout.php [NC,L]
+RewriteRule ^profile/?$ profile.php [NC,L]
 
 # ===== ADMIN PANEL =====
 # Admin dashboard
