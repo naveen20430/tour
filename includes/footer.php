@@ -160,7 +160,10 @@
 		<form role="search" method="get" class="search-popup__form" action="#">
 			<input type="text" id="search" placeholder="Search Here..." />
 			<button type="submit" aria-label="search submit">
-				<span><i class="flaticon-search"></i></span>
+				<span>
+					<i class="flaticon-search"></i>
+					<i class="fas fa-search" style="display: none;"></i>
+				</span>
 			</button>
 		</form>
 	</div>
@@ -176,5 +179,45 @@
 
 <!-- COMPRESSED SCRIPTS - All JavaScript combined into one file -->
 <script src="<?php echo BASE_URL; ?>assets/compressed/all-scripts.min.js"></script>
+
+<!-- Flaticon Fallback Script -->
+<script>
+// Check if flaticon font loaded and fallback to FontAwesome if not
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+        // Check if flaticon-search icon is rendering properly
+        var testElement = document.createElement('i');
+        testElement.className = 'flaticon-search';
+        testElement.style.position = 'absolute';
+        testElement.style.visibility = 'hidden';
+        testElement.style.fontSize = '16px';
+        testElement.style.lineHeight = '1';
+        document.body.appendChild(testElement);
+        
+        var width = testElement.offsetWidth;
+        document.body.removeChild(testElement);
+        
+        // If flaticon didn't load (width would be 0 or very small), use FontAwesome fallback
+        if (width < 8) {
+            console.log('Flaticon not loaded, using FontAwesome fallback');
+            var flaticonElements = document.querySelectorAll('.flaticon-search');
+            flaticonElements.forEach(function(element) {
+                element.className = element.className.replace('flaticon-search', 'fas fa-search');
+            });
+            
+            // Show FontAwesome fallback icons that were hidden
+            var fallbackIcons = document.querySelectorAll('.fas.fa-search[style*="display: none"]');
+            fallbackIcons.forEach(function(icon) {
+                icon.style.display = 'inline-block';
+                // Hide the flaticon element
+                var flaticonSibling = icon.previousElementSibling;
+                if (flaticonSibling && flaticonSibling.classList.contains('flaticon-search')) {
+                    flaticonSibling.style.display = 'none';
+                }
+            });
+        }
+    }, 100); // Small delay to ensure fonts are loaded
+});
+</script>
 </body>
 </html>

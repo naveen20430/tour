@@ -39,6 +39,9 @@
   <!-- COMPRESSED STYLES - All CSS combined into one file -->
   <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/compressed/all-styles.min.css" />
   
+  <!-- Flaticon CSS for icons -->
+  <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/travhub-icons/style.css" />
+  
   <?php if (isset($extra_css) && $extra_css): echo $extra_css; endif; ?>
   
   <?php 
@@ -154,6 +157,8 @@
 	                </div><!-- /.mobile-nav__toggler -->
 					<a href="#" class="search-toggler main-header__search">
 						<i class="flaticon-search" aria-hidden="true"></i>
+						<!-- Fallback icon if flaticon doesn't load -->
+						<i class="fas fa-search" aria-hidden="true" style="display: none;"></i>
 						<span class="sr-only">Search</span>
 					</a><!-- /.search-toggler -->
 	                <div class="main-header__btn">
