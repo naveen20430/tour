@@ -1,12 +1,6 @@
 <?php
 require_once '../config/config.php';
-session_start();
-
-// Simple authentication check - adjust according to your auth system
-if (!isset($_SESSION['admin_logged_in']) || !$_SESSION['admin_logged_in']) {
-    header('Location: login.php');
-    exit;
-}
+requireLogin();
 
 $success_message = '';
 $error_message = '';
@@ -91,8 +85,16 @@ if ($_POST) {
 // Fetch current cab types
 $cab_types = $db->fetchAll("SELECT * FROM cab_types ORDER BY base_price ASC");
 
-// Fetch tour-specific pricing
-$tour_pricing = $db->fetchAll("SELECT * FROM tour_cab_pricing ORDER BY tour_name ASC");
+// Fetch all tours for dropdown
+$available_tours = $db->fetchAll("SELECT id, title FROM tours ORDER BY title ASC");
+
+// Fetch tour-specific pricing with tour details
+$tour_pricing = $db->fetchAll("
+    SELECT tcp.*, t.title as tour_title 
+    FROM tour_cab_pricing tcp 
+    LEFT JOIN tours t ON tcp.tour_name = t.title 
+    ORDER BY tcp.tour_name ASC
+");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -232,11 +234,36 @@ $tour_pricing = $db->fetchAll("SELECT * FROM tour_cab_pricing ORDER BY tour_name
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h4><i class="fas fa-map-signs me-2"></i>Tour-Specific Pricing</h4>
-                            <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#addTourModal">
-                                <i class="fas fa-plus me-1"></i> Add Tour Pricing
-                            </button>
+                            <div>
+                                <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#addTourModal">
+                                    <i class="fas fa-plus me-1"></i> Add Tour Pricing
+                                </button>
+                                <span class="badge bg-info ms-2"><?php echo count($available_tours); ?> Tours Available</span>
+                            </div>
                         </div>
                         <div class="card-body">
+                            <!-- Quick Info -->
+                            <?php 
+                            $configured_tours = array_column($tour_pricing, 'tour_name');
+                            $unconfigured_tours = array_filter($available_tours, function($tour) use ($configured_tours) {
+                                return !in_array($tour['title'], $configured_tours);
+                            });
+                            ?>
+                            
+                            <?php if (!empty($unconfigured_tours)): ?>
+                                <div class="alert alert-info">
+                                    <h6><i class="fas fa-info-circle me-2"></i>Tours without cab pricing:</h6>
+                                    <div class="row">
+                                        <?php foreach ($unconfigured_tours as $tour): ?>
+                                            <div class="col-md-4 mb-1">
+                                                <small>• <?php echo htmlspecialchars($tour['title']); ?></small>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    </div>
+                                    <small class="text-muted">Click "Add Tour Pricing" to configure pricing for these tours.</small>
+                                </div>
+                            <?php endif; ?>
+                            
                             <?php if (!empty($tour_pricing)): ?>
                                 <form method="POST">
                                     <input type="hidden" name="action" value="update_tour_pricing">
@@ -258,6 +285,9 @@ $tour_pricing = $db->fetchAll("SELECT * FROM tour_cab_pricing ORDER BY tour_name
                                                     <tr>
                                                         <td>
                                                             <strong><?php echo htmlspecialchars($tour['tour_name']); ?></strong>
+                                                            <?php if ($tour['tour_title'] && $tour['tour_title'] !== $tour['tour_name']): ?>
+                                                                <br><small class="text-muted">Database: <?php echo htmlspecialchars($tour['tour_title']); ?></small>
+                                                            <?php endif; ?>
                                                         </td>
                                                         <td>
                                                             <input type="number" step="0.01" class="form-control price-input" 
@@ -329,9 +359,28 @@ $tour_pricing = $db->fetchAll("SELECT * FROM tour_cab_pricing ORDER BY tour_name
                     
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label class="form-label">Tour Name *</label>
-                            <input type="text" class="form-control" name="new_tour_name" required>
-                            <small class="form-text text-muted">Enter the exact name of the tour</small>
+                            <label class="form-label">Select Tour *</label>
+                            <select class="form-select" name="new_tour_name" required>
+                                <option value="">Choose a tour...</option>
+                                <?php foreach ($available_tours as $tour): ?>
+                                    <?php 
+                                    // Check if this tour already has pricing configured
+                                    $has_pricing = false;
+                                    foreach ($tour_pricing as $existing) {
+                                        if ($existing['tour_name'] === $tour['title']) {
+                                            $has_pricing = true;
+                                            break;
+                                        }
+                                    }
+                                    ?>
+                                    <option value="<?php echo htmlspecialchars($tour['title']); ?>" 
+                                            <?php echo $has_pricing ? 'disabled' : ''; ?>>
+                                        <?php echo htmlspecialchars($tour['title']); ?>
+                                        <?php echo $has_pricing ? ' (Already configured)' : ''; ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                            <small class="form-text text-muted">Select from existing tours in your system</small>
                         </div>
                         
                         <div class="row">
@@ -378,6 +427,54 @@ $tour_pricing = $db->fetchAll("SELECT * FROM tour_cab_pricing ORDER BY tour_name
                     this.style.backgroundColor = '';
                 }, 1000);
             });
+        });
+        
+        // Tour selection enhancement
+        document.addEventListener('DOMContentLoaded', function() {
+            const tourSelect = document.querySelector('select[name="new_tour_name"]');
+            if (tourSelect) {
+                tourSelect.addEventListener('change', function() {
+                    const selectedOption = this.options[this.selectedIndex];
+                    if (selectedOption.disabled) {
+                        this.value = '';
+                        alert('This tour already has pricing configured. Please select a different tour.');
+                    }
+                });
+            }
+            
+            // Highlight unconfigured tours in the alert
+            const unconfiguredAlert = document.querySelector('.alert-info');
+            if (unconfiguredAlert) {
+                unconfiguredAlert.addEventListener('click', function(e) {
+                    if (e.target.tagName === 'SMALL') {
+                        // Open modal and pre-select the clicked tour
+                        const tourName = e.target.textContent.replace('• ', '');
+                        const modal = new bootstrap.Modal(document.getElementById('addTourModal'));
+                        modal.show();
+                        
+                        // Pre-select the tour in dropdown
+                        setTimeout(() => {
+                            const tourSelect = document.querySelector('select[name="new_tour_name"]');
+                            if (tourSelect) {
+                                for (let option of tourSelect.options) {
+                                    if (option.value === tourName) {
+                                        option.selected = true;
+                                        break;
+                                    }
+                                }
+                            }
+                        }, 100);
+                    }
+                });
+                
+                // Add pointer cursor to tour names
+                const tourNames = unconfiguredAlert.querySelectorAll('small');
+                tourNames.forEach(name => {
+                    name.style.cursor = 'pointer';
+                    name.style.textDecoration = 'underline';
+                    name.title = 'Click to add pricing for this tour';
+                });
+            }
         });
     </script>
 </body>
