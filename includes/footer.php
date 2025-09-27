@@ -7,16 +7,30 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="main-footer__about">
                         <a href="<?php echo navUrl('home'); ?>" class="main-footer__logo mb-3 d-block">
-                            <img src="https://theworldjourney.in/images/logo.png" alt="<?php echo function_exists('getSetting') ? getSetting('site_name', 'TravHub') : 'TravHub'; ?>" width="130">
+                            <img src="https://theworldjourney.in/images/logo.png" alt="<?php echo function_exists('getSetting') ? getSetting('site_name') ?: 'TravHub' : 'TravHub'; ?>" width="130">
                         </a>
                         <p class="main-footer__text">
                             <?php echo function_exists('getSetting') ? getSetting('site_description', 'Discover amazing destinations and create unforgettable memories with our expertly crafted travel experiences.') : 'Discover amazing destinations and create unforgettable memories with our expertly crafted travel experiences.'; ?>
                         </p>
                         <div class="main-footer__social">
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <?php if (function_exists('getSetting')): 
+                                $facebook = getSetting('facebook_url');
+                                $twitter = getSetting('twitter_url');
+                                $instagram = getSetting('instagram_url');
+                                $linkedin = getSetting('linkedin_url');
+                                $youtube = getSetting('youtube_url');
+                            ?>
+                                <?php if ($facebook): ?><a href="<?php echo $facebook; ?>" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a><?php endif; ?>
+                                <?php if ($twitter): ?><a href="<?php echo $twitter; ?>" target="_blank" rel="noopener"><i class="fab fa-twitter"></i></a><?php endif; ?>
+                                <?php if ($instagram): ?><a href="<?php echo $instagram; ?>" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a><?php endif; ?>
+                                <?php if ($linkedin): ?><a href="<?php echo $linkedin; ?>" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a><?php endif; ?>
+                                <?php if ($youtube): ?><a href="<?php echo $youtube; ?>" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a><?php endif; ?>
+                            <?php else: ?>
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -94,7 +108,7 @@
 	<div class="mobile-nav__content">
 		<span class="mobile-nav__close mobile-nav__toggler"><i class="fa fa-times"></i></span>
 		<div class="logo-box">
-		<a href="<?php echo navUrl('home'); ?>" aria-label="logo image"><img src="https://theworldjourney.in/images/logo.png" width="155" alt="<?php echo function_exists('getSetting') ? getSetting('site_name', 'TravHub') : 'TravHub'; ?>" /></a>
+		<a href="<?php echo navUrl('home'); ?>" aria-label="logo image"><img src="https://theworldjourney.in/images/logo.png" width="155" alt="<?php echo function_exists('getSetting') ? getSetting('site_name') ?: 'TravHub' : 'TravHub'; ?>" /></a>
 		</div>
 		<!-- /.logo-box -->
 		<div class="mobile-nav__container"></div>
@@ -115,10 +129,24 @@
 			</li>
 		</ul><!-- /.mobile-nav__contact -->
 		<div class="mobile-nav__social">
-			<a href="#"><i class="fab fa-facebook-f" aria-hidden="true"></i><span class="sr-only">Facebook</span></a>
-			<a href="#"><i class="fab fa-twitter" aria-hidden="true"></i><span class="sr-only">Twitter</span></a>
-			<a href="#"><i class="fab fa-linkedin-in" aria-hidden="true"></i><span class="sr-only">Linkedin</span></a>
-			<a href="#"><i class="fab fa-instagram" aria-hidden="true"></i><span class="sr-only">Instagram</span></a>
+			<?php if (function_exists('getSetting')): 
+                $facebook = getSetting('facebook_url');
+                $twitter = getSetting('twitter_url');
+                $instagram = getSetting('instagram_url');
+                $linkedin = getSetting('linkedin_url');
+                $youtube = getSetting('youtube_url');
+            ?>
+                <?php if ($facebook): ?><a href="<?php echo $facebook; ?>" target="_blank" rel="noopener"><i class="fab fa-facebook-f" aria-hidden="true"></i><span class="sr-only">Facebook</span></a><?php endif; ?>
+                <?php if ($twitter): ?><a href="<?php echo $twitter; ?>" target="_blank" rel="noopener"><i class="fab fa-twitter" aria-hidden="true"></i><span class="sr-only">Twitter</span></a><?php endif; ?>
+                <?php if ($instagram): ?><a href="<?php echo $instagram; ?>" target="_blank" rel="noopener"><i class="fab fa-instagram" aria-hidden="true"></i><span class="sr-only">Instagram</span></a><?php endif; ?>
+                <?php if ($linkedin): ?><a href="<?php echo $linkedin; ?>" target="_blank" rel="noopener"><i class="fab fa-linkedin-in" aria-hidden="true"></i><span class="sr-only">Linkedin</span></a><?php endif; ?>
+                <?php if ($youtube): ?><a href="<?php echo $youtube; ?>" target="_blank" rel="noopener"><i class="fab fa-youtube" aria-hidden="true"></i><span class="sr-only">YouTube</span></a><?php endif; ?>
+            <?php else: ?>
+                <a href="#"><i class="fab fa-facebook-f" aria-hidden="true"></i><span class="sr-only">Facebook</span></a>
+                <a href="#"><i class="fab fa-twitter" aria-hidden="true"></i><span class="sr-only">Twitter</span></a>
+                <a href="#"><i class="fab fa-linkedin-in" aria-hidden="true"></i><span class="sr-only">Linkedin</span></a>
+                <a href="#"><i class="fab fa-instagram" aria-hidden="true"></i><span class="sr-only">Instagram</span></a>
+            <?php endif; ?>
 		</div><!-- /.mobile-nav__social -->
 	</div>
 	<!-- /.mobile-nav__content -->
