@@ -3,6 +3,13 @@
 if (!function_exists('getSetting')) {
     die('This file must be included after config.php');
 }
+
+// Get contact message statistics for sidebar badge
+try {
+    $newContacts = $db->fetch("SELECT COUNT(*) as count FROM contact_inquiries WHERE status = 'new'")['count'] ?? 0;
+} catch (Exception $e) {
+    $newContacts = 0;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -78,6 +85,12 @@ if (!function_exists('getSetting')) {
                     <a class="nav-link" href="users.php">
                         <i class="fas fa-users me-2"></i> Users
                     </a>
+                    <a class="nav-link" href="contacts.php">
+                        <i class="fas fa-envelope me-2"></i> Contact Messages
+                        <?php if ($newContacts > 0): ?>
+                            <span class="badge bg-danger ms-1"><?php echo $newContacts; ?></span>
+                        <?php endif; ?>
+                    </a>
                     <a class="nav-link" href="hero-images.php">
                         <i class="fas fa-image me-2"></i> Hero Images
                     </a>
@@ -104,9 +117,12 @@ if (!function_exists('getSetting')) {
                                 case 'tour-add': echo 'Add New Tour'; break;
                                 case 'tour-edit': echo 'Edit Tour'; break;
                                 case 'destinations': echo 'Destinations'; break;
-                                case 'bookings': echo 'Bookings'; break;
+                                case 'bookings': echo 'Bookings Management'; break;
+                                case 'booking-add': echo 'Add New Booking'; break;
+                                case 'booking-edit': echo 'Edit Booking'; break;
                                 case 'blog': echo 'Blog Management'; break;
                                 case 'users': echo 'Users Management'; break;
+                                case 'contacts': echo 'Contact Messages'; break;
                                 case 'hero-images': echo 'Hero Images'; break;
                                 case 'settings': echo 'Settings'; break;
                                 default: echo 'Admin Panel';

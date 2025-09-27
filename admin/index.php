@@ -51,6 +51,25 @@ try {
     $recentBookings = 0;
 }
 
+// Get contact message statistics
+try {
+    $totalContacts = $db->fetch("SELECT COUNT(*) as count FROM contact_inquiries")['count'] ?? 0;
+} catch (Exception $e) {
+    $totalContacts = 0;
+}
+
+try {
+    $newContacts = $db->fetch("SELECT COUNT(*) as count FROM contact_inquiries WHERE status = 'new'")['count'] ?? 0;
+} catch (Exception $e) {
+    $newContacts = 0;
+}
+
+try {
+    $recentContacts = $db->fetch("SELECT COUNT(*) as count FROM contact_inquiries WHERE created_at >= DATE_SUB(NOW(), INTERVAL 7 DAY)")['count'] ?? 0;
+} catch (Exception $e) {
+    $recentContacts = 0;
+}
+
 // Get recent activity
 try {
     $recentTours = $db->fetchAll("SELECT title, created_at FROM tours ORDER BY created_at DESC LIMIT 5");
@@ -139,6 +158,12 @@ try {
                     <a class="nav-link" href="users.php">
                         <i class="fas fa-users me-2"></i> Users
                     </a>
+                    <a class="nav-link" href="contacts.php">
+                        <i class="fas fa-envelope me-2"></i> Contact Messages
+                        <?php if ($newContacts > 0): ?>
+                            <span class="badge bg-danger ms-1"><?php echo $newContacts; ?></span>
+                        <?php endif; ?>
+                    </a>
                     <a class="nav-link" href="hero-images.php">
                         <i class="fas fa-image me-2"></i> Hero Images
                     </a>
@@ -200,10 +225,10 @@ try {
                         <div class="col-md-3 mb-3">
                             <div class="card stats-card">
                                 <div class="card-body text-center">
-                                    <i class="fas fa-blog fa-3x mb-3"></i>
-                                    <h3><?php echo $totalBlogs; ?></h3>
-                                    <p>Blog Posts</p>
-                                    <small><?php echo $totalUsers; ?> Users</small>
+                                    <i class="fas fa-envelope fa-3x mb-3"></i>
+                                    <h3><?php echo $totalContacts; ?></h3>
+                                    <p>Contact Messages</p>
+                                    <small><?php echo $newContacts; ?> New Messages</small>
                                 </div>
                             </div>
                         </div>
@@ -239,7 +264,12 @@ try {
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <a href="bookings.php" class="btn btn-danger w-100">
-                                                <i class="fas fa-calendar-check me-2"></i>View Bookings
+                                                <i class="fas fa-list me-2"></i>Manage Bookings
+                                            </a>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <a href="booking-add.php" class="btn btn-success w-100">
+                                                <i class="fas fa-plus me-2"></i>Add New Booking
                                             </a>
                                         </div>
                                         <div class="col-md-4 mb-3">
@@ -250,6 +280,14 @@ try {
                                         <div class="col-md-4 mb-3">
                                             <a href="users.php" class="btn btn-secondary w-100">
                                                 <i class="fas fa-users me-2"></i>Manage Users
+                                            </a>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <a href="contacts.php" class="btn btn-outline-primary w-100">
+                                                <i class="fas fa-envelope me-2"></i>Contact Messages
+                                                <?php if ($newContacts > 0): ?>
+                                                    <span class="badge bg-danger ms-1"><?php echo $newContacts; ?></span>
+                                                <?php endif; ?>
                                             </a>
                                         </div>
                                     </div>
@@ -345,11 +383,14 @@ try {
                                             <h6 class="text-success border-bottom pb-2"><i class="fas fa-calendar-check me-2"></i>Bookings & Users</h6>
                                             <div class="list-group list-group-flush">
                                                 <a href="bookings.php" class="list-group-item list-group-item-action py-2">
-                                                    <i class="fas fa-calendar-check me-2"></i>All Bookings (<?php echo $totalBookings; ?>)
+                                                    <i class="fas fa-list me-2"></i>All Bookings (<?php echo $totalBookings; ?>)
+                                                </a>
+                                                <a href="booking-add.php" class="list-group-item list-group-item-action py-2">
+                                                    <i class="fas fa-plus me-2"></i>Add New Booking
+                                                    <span class="badge bg-success ms-2">CRUD</span>
                                                 </a>
                                                 <a href="cab_pricing.php" class="list-group-item list-group-item-action py-2">
                                                     <i class="fas fa-car me-2"></i>Cab Pricing Management
-                                                    <span class="badge bg-success ms-2">New</span>
                                                 </a>
                                                 <a href="users.php" class="list-group-item list-group-item-action py-2">
                                                     <i class="fas fa-users me-2"></i>Manage Users (<?php echo $totalUsers; ?>)
@@ -362,13 +403,22 @@ try {
                                         
                                         <!-- Content Management -->
                                         <div class="col-md-3 mb-4">
-                                            <h6 class="text-info border-bottom pb-2"><i class="fas fa-blog me-2"></i>Content & Blog</h6>
+                                            <h6 class="text-info border-bottom pb-2"><i class="fas fa-blog me-2"></i>Content & Messages</h6>
                                             <div class="list-group list-group-flush">
                                                 <a href="blog.php" class="list-group-item list-group-item-action py-2">
                                                     <i class="fas fa-blog me-2"></i>Blog Posts (<?php echo $totalBlogs; ?>)
                                                 </a>
+                                                <a href="contacts.php" class="list-group-item list-group-item-action py-2">
+                                                    <i class="fas fa-envelope me-2"></i>Contact Messages (<?php echo $totalContacts; ?>)
+                                                    <?php if ($newContacts > 0): ?>
+                                                        <span class="badge bg-danger ms-2"><?php echo $newContacts; ?></span>
+                                                    <?php endif; ?>
+                                                </a>
                                                 <a href="../blog.php" class="list-group-item list-group-item-action py-2" target="_blank">
                                                     <i class="fas fa-external-link-alt me-2"></i>View Blog Page
+                                                </a>
+                                                <a href="../contact.php" class="list-group-item list-group-item-action py-2" target="_blank">
+                                                    <i class="fas fa-external-link-alt me-2"></i>View Contact Page
                                                 </a>
                                                 <a href="settings.php" class="list-group-item list-group-item-action py-2">
                                                     <i class="fas fa-cog me-2"></i>Site Settings
@@ -422,6 +472,9 @@ try {
                                                 <a href="../booking_with_cabs.php" class="btn btn-outline-success btn-sm" target="_blank">
                                                     <i class="fas fa-car me-1"></i>Cab Booking
                                                     <span class="badge bg-success ms-1">New</span>
+                                                </a>
+                                                <a href="../contact.php" class="btn btn-outline-info btn-sm" target="_blank">
+                                                    <i class="fas fa-envelope me-1"></i>Contact
                                                 </a>
                                                 <a href="../register.php" class="btn btn-outline-primary btn-sm" target="_blank">
                                                     <i class="fas fa-user-plus me-1"></i>Register
