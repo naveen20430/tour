@@ -37,9 +37,23 @@ $related_tours = $db->fetchAll("
     LIMIT 3
 ", [$tour['destination_id'], $tour['id']]);
 
-// Initialize cab options
-$cabOptions = new CabOptions($db);
-$availableCabs = $cabOptions->getCabOptionsForDropdown();
+// Initialize cab options with error handling
+$availableCabs = [];
+$cab_functionality_enabled = false;
+
+try {
+    if (file_exists('includes/cab_options.php')) {
+        // Test if cab_types table exists
+        $db->fetch("SELECT COUNT(*) as count FROM cab_types LIMIT 1");
+        $cabOptions = new CabOptions($db);
+        $availableCabs = $cabOptions->getCabOptionsForDropdown();
+        $cab_functionality_enabled = true;
+    }
+} catch (Exception $e) {
+    // Cab functionality not available, continue without it
+    $availableCabs = [];
+    $cab_functionality_enabled = false;
+}
 
 // Set page variables
 $page_title = htmlspecialchars($tour['title']) . ' - ' . getSetting('site_name');
@@ -268,7 +282,7 @@ include 'includes/header.php';
                             </div>
                         </div>
 
-                        <form action="booking.php" method="POST" id="quickBookingForm">
+                        <form action="<?php echo bookingUrl(); ?>" method="POST" id="quickBookingForm">
                             <input type="hidden" name="tour_id" value="<?php echo $tour['id']; ?>">
                             
                             <div class="mb-3">
@@ -286,6 +300,7 @@ include 'includes/header.php';
                                 </select>
                             </div>
                             
+                            <?php if ($cab_functionality_enabled && !empty($availableCabs)): ?>
                             <div class="mb-3">
                                 <label class="form-label text-light">Cab Type</label>
                                 <select class="form-control" name="cab_type" required id="cabSelect">
@@ -300,6 +315,7 @@ include 'includes/header.php';
                                 </select>
                                 <small class="text-light opacity-75">Cab provided for entire tour duration</small>
                             </div>
+                            <?php endif; ?>
                             
                             <button type="submit" class="btn btn-light w-100 fw-bold">
                                 <i class="fas fa-calendar-plus me-2"></i>Book This Tour
@@ -337,14 +353,15 @@ include 'includes/header.php';
     </section>
 
 <script>
-// Cab selection validation and price indication for tour details page
+// Booking form validation for tour details page
 document.addEventListener('DOMContentLoaded', function() {
     const peopleSelect = document.getElementById('peopleSelect');
     const cabSelect = document.getElementById('cabSelect');
     const form = document.getElementById('quickBookingForm');
+    const cabEnabled = <?php echo $cab_functionality_enabled ? 'true' : 'false'; ?>;
     
     function validateCabSelection() {
-        if (!peopleSelect || !cabSelect) return true;
+        if (!cabEnabled || !peopleSelect || !cabSelect) return true;
         
         const people = parseInt(peopleSelect.value);
         const selectedCab = cabSelect.options[cabSelect.selectedIndex];
@@ -375,7 +392,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (form) {
         form.addEventListener('submit', function(e) {
-            if (!validateCabSelection()) {
+            if (cabEnabled && !validateCabSelection()) {
                 e.preventDefault();
                 alert('Please select an appropriate cab type for your group size.');
             }
