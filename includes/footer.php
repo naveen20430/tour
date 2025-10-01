@@ -52,9 +52,9 @@
                         <h3 class="main-footer__title">Services</h3>
                         <ul class="list-unstyled main-footer__menu">
                             <li><a href="<?php echo navUrl('tours'); ?>">Tour Packages</a></li>
-                            <li><a href="<?php echo bookingUrl(); ?>">Hotel Booking</a></li>
-                            <li><a href="#">Travel Insurance</a></li>
-                            <li><a href="#">Custom Trips</a></li>
+                            <li><a href="<?php echo navUrl('destinations'); ?>">Destinations</a></li>
+                            <li><a href="<?php echo navUrl('blog'); ?>">Travel Blog</a></li>
+                            <li><a href="<?php echo navUrl('contact'); ?>">Customer Support</a></li>
                         </ul>
                     </div>
                 </div>
@@ -157,15 +157,68 @@
 	<div class="search-popup__overlay search-toggler"></div>
 	<!-- /.search-popup__overlay -->
 	<div class="search-popup__content">
-		<form role="search" method="get" class="search-popup__form" action="#">
-			<input type="text" id="search" placeholder="Search Here..." />
-			<button type="submit" aria-label="search submit">
-				<span>
-					<i class="flaticon-search"></i>
-					<i class="fas fa-search" style="display: none;"></i>
-				</span>
+		<div class="search-popup__header">
+			<h3 class="search-popup__title">Search Tours, Destinations & Blogs</h3>
+			<button class="search-popup__close search-toggler" aria-label="Close search">
+				<i class="fas fa-times"></i>
 			</button>
+		</div>
+		
+		<form role="search" method="get" class="search-popup__form" id="ajaxSearchForm">
+			<div class="search-input-wrapper">
+				<input type="text" id="ajaxSearchInput" placeholder="Search tours, destinations, blogs..." autocomplete="off" />
+				<button type="submit" aria-label="search submit" class="search-submit-btn">
+					<span>
+						<i class="flaticon-search"></i>
+						<i class="fas fa-search" style="display: none;"></i>
+					</span>
+				</button>
+				<div class="search-loading" id="searchLoading" style="display: none;">
+					<i class="fas fa-spinner fa-spin"></i>
+				</div>
+			</div>
+			
+			<!-- Search Filters -->
+			<div class="search-filters">
+				<button type="button" class="search-filter-btn active" data-type="all">
+					<i class="fas fa-search"></i> All
+				</button>
+				<button type="button" class="search-filter-btn" data-type="tours">
+					<i class="fas fa-map-marked-alt"></i> Tours
+				</button>
+				<button type="button" class="search-filter-btn" data-type="destinations">
+					<i class="fas fa-globe"></i> Destinations
+				</button>
+				<button type="button" class="search-filter-btn" data-type="blog">
+					<i class="fas fa-blog"></i> Blog
+				</button>
+			</div>
 		</form>
+		
+		<!-- Search Results -->
+		<div class="search-results" id="searchResults">
+			<div class="search-welcome">
+				<i class="fas fa-search fa-3x mb-3"></i>
+				<h4>Start typing to search</h4>
+				<p>Find tours, destinations, and blog posts instantly</p>
+			</div>
+		</div>
+		
+		<!-- Quick Actions -->
+		<div class="search-quick-actions">
+			<h5>Quick Links</h5>
+			<div class="quick-action-buttons">
+				<a href="<?php echo BASE_URL; ?>tours.php" class="quick-action-btn">
+					<i class="fas fa-map-marked-alt"></i> Browse All Tours
+				</a>
+				<a href="<?php echo BASE_URL; ?>destinations.php" class="quick-action-btn">
+					<i class="fas fa-globe"></i> Explore Destinations
+				</a>
+				<a href="<?php echo BASE_URL; ?>blog.php" class="quick-action-btn">
+					<i class="fas fa-blog"></i> Read Our Blog
+				</a>
+			</div>
+		</div>
 	</div>
 	<!-- /.search-popup__content -->
 </div>
@@ -228,5 +281,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 100); // Small delay to ensure fonts are loaded
 });
 </script>
+
+<?php 
+// Initialize tour slider and carousel if they exist on the page
+if (function_exists('initTourSliderJS')) {
+    initTourSliderJS();
+}
+if (function_exists('initTourCarouselJS')) {
+    initTourCarouselJS();
+}
+?>
+
 </body>
 </html>

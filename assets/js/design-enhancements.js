@@ -225,7 +225,7 @@ document.addEventListener('DOMContentLoaded', function() {
         requestAnimationFrame(step);
     }
 
-    // Search enhancement
+    // Search enhancement with AJAX functionality
     function enhanceSearch() {
         const searchToggler = document.querySelector('.search-toggler');
         const searchPopup = document.querySelector('.search-popup');
@@ -240,6 +240,261 @@ document.addEventListener('DOMContentLoaded', function() {
                     const searchInput = searchPopup.querySelector('input');
                     if (searchInput) searchInput.focus();
                 }, 300);
+            });
+            
+            // Initialize AJAX search
+            initAjaxSearch(searchPopup);
+        }
+    }
+    
+    // AJAX Search Implementation
+    function initAjaxSearch(searchPopup) {
+        const searchInput = searchPopup.querySelector('#ajaxSearchInput');
+        const filterButtons = searchPopup.querySelectorAll('.search-filter-btn');
+        const loadingSpinner = searchPopup.querySelector('#searchLoading');
+        const resultsContainer = searchPopup.querySelector('#searchResults');
+        const closeBtn = searchPopup.querySelector('.search-popup__close');
+        
+        let searchTimeout;
+        let currentFilter = 'all';
+        
+        // Close search popup
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function() {
+                searchPopup.classList.remove('search-popup--visible');
+                searchInput.value = '';
+                resultsContainer.innerHTML = '<div class="search-welcome"><i class="fas fa-search fa-3x mb-3"></i><h4>Start typing to search</h4><p>Find tours, destinations, and blog posts instantly</p></div>';
+            });
+        }
+        
+        // Click outside to close
+        searchPopup.addEventListener('click', function(e) {
+            if (e.target === searchPopup || e.target.classList.contains('search-popup__overlay')) {
+                searchPopup.classList.remove('search-popup--visible');
+                searchInput.value = '';
+                resultsContainer.innerHTML = '<div class="search-welcome"><i class="fas fa-search fa-3x mb-3"></i><h4>Start typing to search</h4><p>Find tours, destinations, and blog posts instantly</p></div>';
+            }
+        });
+        
+        // Filter button functionality
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Update active filter
+                filterButtons.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentFilter = this.dataset.type;
+                
+                // Re-search with new filter if there's a query
+                if (searchInput.value.trim()) {
+                    performSearch(searchInput.value.trim(), currentFilter);
+                }
+            });
+        });
+        
+        // Search input functionality
+        if (searchInput) {
+            searchInput.addEventListener('input', function() {
+                const query = this.value.trim();
+                
+                // Clear previous timeout
+                clearTimeout(searchTimeout);
+                
+                if (query.length < 2) {
+                    resultsContainer.innerHTML = '';
+                    return;
+                }
+                
+                // Debounce search requests
+                searchTimeout = setTimeout(() => {
+                    performSearch(query, currentFilter);
+                }, 300);
+            });
+            
+            // Handle Enter key
+            searchInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    const query = this.value.trim();
+                    if (query.length >= 2) {
+                        performSearch(query, currentFilter);
+                    }
+                }
+            });
+        }
+        
+        // Perform AJAX search
+        function performSearch(query, filter) {
+            if (!query || query.length < 2) return;
+            
+            // Show loading state
+            loadingSpinner.style.display = 'block';
+            resultsContainer.innerHTML = '';
+            
+            // Build API URL
+            const apiUrl = `ajax/search.php?q=${encodeURIComponent(query)}&type=${encodeURIComponent(filter)}`;
+            
+            // Make AJAX request
+            fetch(apiUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Search response:', data); // Debug log
+                    loadingSpinner.style.display = 'none';
+                    renderSearchResults(data, query);
+                })
+                .catch(error => {
+                    console.error('Search error:', error);
+                    loadingSpinner.style.display = 'none';
+                    resultsContainer.innerHTML = `
+                        <div class="no-results">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <p>Search temporarily unavailable. Please try again later.</p>
+                        </div>
+                    `;
+                });
+        }
+        
+        // Render search results
+        function renderSearchResults(data, query) {
+            let html = '';
+            
+            // Handle both old and new data structures
+            const results = data.results || data;
+            const tours = results.tours || [];
+            const destinations = results.destinations || [];
+            const blogPosts = results.blog_posts || results.blog || [];
+            
+            if (!tours.length && !destinations.length && !blogPosts.length) {
+                html = `
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <p>No results found for "${escapeHtml(query)}"</p>
+                        <small>Try different keywords or browse our content below</small>
+                    </div>
+                `;
+            } else {
+                // Tours results
+                if (tours && tours.length > 0) {
+                    html += '<div class="results-section">';
+                    html += `<h4><i class="fas fa-map-marked-alt"></i> Tours (${tours.length})</h4>`;
+                    tours.forEach(tour => {
+                        const price = tour.discount_price ? tour.discount_price : tour.price;
+                        const originalPrice = tour.discount_price ? tour.price : null;
+                        const priceFormatted = tour.price_formatted || `₹${parseInt(price || 0).toLocaleString('en-IN')}`;
+                        const originalPriceFormatted = originalPrice ? `₹${parseInt(originalPrice).toLocaleString('en-IN')}` : null;
+                        
+                        html += `
+                            <div class="result-item">
+                                <a href="tour-details.php?id=${tour.id}">
+                                    <div class="result-content">
+                                        <h5>${highlightQuery(escapeHtml(tour.title), query)}</h5>
+                                        <p class="result-meta">
+                                            <span><i class="fas fa-map-marker-alt"></i> ${escapeHtml(tour.location || tour.destination_name || 'Location TBD')}</span>
+                                            <span class="price-info">
+                                                <i class="fas fa-tag"></i> 
+                                                ${originalPriceFormatted ? `<span class="original-price" style="text-decoration: line-through; color: #888;">${originalPriceFormatted}</span> ` : ''}
+                                                <span class="current-price" style="font-weight: bold; color: #28a745;">${priceFormatted}</span>
+                                                ${tour.duration_text ? ` • ${tour.duration_text}` : ''}
+                                            </span>
+                                        </p>
+                                        <p class="result-description">${truncateText(escapeHtml(tour.short_description || tour.description || 'Explore this amazing destination with our carefully crafted tour package.'), 120)}</p>
+                                    </div>
+                                </a>
+                            </div>
+                        `;
+                    });
+                    html += '</div>';
+                }
+                
+                // Destinations results
+                if (destinations && destinations.length > 0) {
+                    html += '<div class="results-section">';
+                    html += `<h4><i class="fas fa-globe-americas"></i> Destinations (${destinations.length})</h4>`;
+                    destinations.forEach(destination => {
+                        const toursCount = destination.tours_count || 0;
+                        const locationText = destination.location || (destination.city ? `${destination.city}, ${destination.country}` : destination.country || 'Amazing Destination');
+                        
+                        html += `
+                            <div class="result-item">
+                                <a href="destination-details.php?id=${destination.id}">
+                                    <div class="result-content">
+                                        <h5>${highlightQuery(escapeHtml(destination.name), query)}</h5>
+                                        <p class="result-meta">
+                                            <span><i class="fas fa-map-marker-alt"></i> ${escapeHtml(locationText)}</span>
+                                            <span><i class="fas fa-route"></i> ${toursCount} tour${toursCount === 1 ? '' : 's'} available</span>
+                                        </p>
+                                        <p class="result-description">${truncateText(escapeHtml(destination.short_description || destination.description || 'Discover the beauty and culture of this incredible destination with our expert-guided tours.'), 120)}</p>
+                                    </div>
+                                </a>
+                            </div>
+                        `;
+                    });
+                    html += '</div>';
+                }
+                
+                // Blog posts results
+                if (blogPosts && blogPosts.length > 0) {
+                    html += '<div class="results-section">';
+                    html += `<h4><i class="fas fa-blog"></i> Blog Posts (${blogPosts.length})</h4>`;
+                    blogPosts.forEach(post => {
+                        const publishDate = post.published_at || post.created_at;
+                        const authorName = post.author_name || 'Travel Expert';
+                        const categoryName = post.category_name || 'Travel';
+                        
+                        html += `
+                            <div class="result-item">
+                                <a href="blog-post.php?id=${post.id}">
+                                    <div class="result-content">
+                                        <h5>${highlightQuery(escapeHtml(post.title), query)}</h5>
+                                        <p class="result-meta">
+                                            <span><i class="fas fa-calendar"></i> ${formatDate(publishDate)}</span>
+                                            <span><i class="fas fa-user"></i> by ${escapeHtml(authorName)}</span>
+                                            <span><i class="fas fa-folder"></i> ${escapeHtml(categoryName)}</span>
+                                        </p>
+                                        <p class="result-description">${truncateText(escapeHtml(post.excerpt || post.content || 'Read this interesting article about travel tips, destinations, and experiences from our travel experts.'), 120)}</p>
+                                    </div>
+                                </a>
+                            </div>
+                        `;
+                    });
+                    html += '</div>';
+                }
+            }
+            
+            resultsContainer.innerHTML = html;
+        }
+        
+        // Helper functions
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        function highlightQuery(text, query) {
+            const regex = new RegExp(`(${escapeRegex(query)})`, 'gi');
+            return text.replace(regex, '<mark>$1</mark>');
+        }
+        
+        function escapeRegex(string) {
+            return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+        
+        function truncateText(text, maxLength) {
+            if (text.length <= maxLength) return text;
+            return text.substring(0, maxLength).trim() + '...';
+        }
+        
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
             });
         }
     }

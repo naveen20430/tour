@@ -48,6 +48,9 @@
   <!-- Responsive Improvements CSS -->
   <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/responsive-improvements.css" />
   
+  <!-- AJAX Search CSS -->
+  <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/ajax-search.css" />
+  
   <!-- Flatpickr CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   

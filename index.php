@@ -6,7 +6,7 @@ require_once 'includes/tour_slider_helper.php';
 $page_title = getSetting('site_name') . ' || Travel & Tour Booking Agency';
 $current_page = 'home';
 
-// Enable tour slider CSS for this page
+// Enable tour slider CSS for this page (needed for carousel styling)
 enableTourSliderCSS();
 
 // Get featured tours
@@ -32,6 +32,8 @@ include 'includes/header.php';
 ?>
 
 <?php displayTourSlider(); ?>
+
+<?php displayTourCarousel(); ?>
 
     <section class="about-one section-space" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); position: relative; overflow: hidden;">
         <!-- Floating elements for visual appeal -->
@@ -306,114 +308,8 @@ include 'includes/header.php';
         </script>
     </section>
 
-    <!-- Featured Tours Section -->
-    <?php if (!empty($featured_tours)): ?>
-    <section class="tours-one section-space" style="background: #fff; position: relative;">
-        <div class="container">
-            <div class="section-title text-center scroll-reveal" style="margin-bottom: 60px;">
-                <div style="margin-bottom: 15px;">
-                    <span class="badge" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 8px 16px; border-radius: 20px; font-size: 0.9rem;">
-                        ✨ Discover Amazing
-                    </span>
-                </div>
-                <h2 class="gradient-text" style="font-size: 2.8rem; font-weight: 700; margin-bottom: 20px;">Featured Tour Packages</h2>
-                <p style="font-size: 1.1rem; color: #6c757d; max-width: 500px; margin: 0 auto; line-height: 1.6;">
-                    Explore our handpicked selection of the most popular and exciting tours
-                </p>
-                <div style="width: 80px; height: 4px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); margin: 20px auto 0; border-radius: 2px;"></div>
-            </div>
-            
-            <div class="row mt-5">
-                <?php foreach ($featured_tours as $index => $tour): ?>
-                    <div class="col-lg-4 col-md-6 mb-5 scroll-reveal" style="transition-delay: <?php echo $index * 0.1; ?>s;">
-                        <div class="card h-100" style="border: none; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); position: relative; background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);">
-                            <!-- Light hover overlay -->
-                            <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%); opacity: 0; transition: all 0.3s ease; z-index: 1; border-radius: 20px;"></div>
-                            
-                            <div class="position-relative" style="overflow: hidden;">
-                                <img src="<?php echo $tour['featured_image'] ?: 'assets/images/tours/default.jpg'; ?>" 
-                                     class="card-img-top" style="height: 280px; object-fit: cover; transition: transform 0.4s ease;" 
-                                     alt="<?php echo htmlspecialchars($tour['title']); ?>">
-                                
-                                <!-- Gradient overlay -->
-                                <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 100px; background: linear-gradient(transparent, rgba(0,0,0,0.3));"></div>
-                                
-                                <div class="position-absolute top-0 end-0 m-3" style="z-index: 2;">
-                                    <span class="badge px-3 py-2" style="border-radius: 25px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; font-weight: 600; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);">
-                                        <?php if ($tour['discount_price']): ?>
-                                            <span style="text-decoration: line-through; opacity: 0.7; font-size: 0.8rem;">₹<?php echo number_format($tour['price'], 0); ?></span>
-                                            <span style="font-size: 1rem;">₹<?php echo number_format($tour['discount_price'], 0); ?></span>
-                                        <?php else: ?>
-                                            <span style="font-size: 1rem;">₹<?php echo number_format($tour['price'], 0); ?></span>
-                                        <?php endif; ?>
-                                    </span>
-                                </div>
-                                
-                                <div class="position-absolute top-0 start-0 m-3" style="z-index: 2;">
-                                    <span class="badge" style="border-radius: 15px; background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%); color: white; padding: 6px 12px; font-weight: 500; box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);">🔥 Featured</span>
-                                </div>
-                                
-                                <!-- Rating badge -->
-                                <div class="position-absolute bottom-0 start-0 m-3" style="z-index: 2;">
-                                    <span class="badge" style="background: rgba(255, 255, 255, 0.9); color: #333; border-radius: 20px; padding: 6px 12px; font-weight: 500;">
-                                        ⭐ 4.8 (120+ reviews)
-                                    </span>
-                                </div>
-                            </div>
-                            
-                            <div class="card-body d-flex flex-column" style="padding: 25px; position: relative; z-index: 2; background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%); border-radius: 0 0 20px 20px;">
-                                <div class="mb-3" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
-                                    <div style="display: flex; align-items: center; color: #667eea; font-weight: 500;">
-                                        <i class="fas fa-map-marker-alt me-2" style="color: #667eea;"></i>
-                                        <span style="font-size: 0.9rem;"><?php echo htmlspecialchars($tour['destination_name'] . ', ' . $tour['country']); ?></span>
-                                    </div>
-                                    <div style="display: flex; align-items: center; color: #28a745; font-weight: 500;">
-                                        <i class="fas fa-clock me-2" style="color: #28a745;"></i>
-                                        <span style="font-size: 0.9rem;"><?php echo $tour['duration_days']; ?> Days</span>
-                                    </div>
-                                </div>
-                                
-                                <h5 class="card-title" style="margin-bottom: 15px; font-size: 1.3rem; font-weight: 600; line-height: 1.4; color: #2c3e50;">
-                                    <a href="<?php echo tourUrl($tour['slug']); ?>" class="text-decoration-none" style="color: inherit; transition: all 0.3s ease;" onmouseover="this.style.color='#667eea'" onmouseout="this.style.color='#2c3e50'">
-                                        <?php echo htmlspecialchars($tour['title']); ?>
-                                    </a>
-                                </h5>
-                                
-                                <p class="card-text flex-grow-1" style="color: #6c757d; font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px;">
-                                    <?php echo substr(htmlspecialchars($tour['short_description']), 0, 100); ?>...
-                                </p>
-                                
-                                <div class="d-flex justify-content-between align-items-center mb-3" style="flex-wrap: wrap; gap: 10px;">
-                                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                                        <span class="badge" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; padding: 5px 10px; border-radius: 12px; font-size: 0.75rem;"><?php echo ucfirst($tour['difficulty_level']); ?></span>
-                                        <span class="badge" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); color: #495057; padding: 5px 10px; border-radius: 12px; font-size: 0.75rem;"><?php echo ucfirst($tour['tour_type']); ?></span>
-                                    </div>
-                                    <div style="display: flex; align-items: center; color: #6c757d; font-size: 0.85rem;">
-                                        <i class="fas fa-users me-1" style="color: #667eea;"></i>
-                                        <span>Max <?php echo $tour['max_people']; ?></span>
-                                    </div>
-                                </div>
-                                
-                                <div class="mt-auto">
-                                    <a href="<?php echo tourUrl($tour['slug']); ?>" class="travhub-btn w-100" style="padding: 12px; font-size: 0.95rem; font-weight: 600; text-transform: none; letter-spacing: 0.5px;">
-                                        <span>🔍 Explore Details</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-            
-            <div class="text-center mt-5 scroll-reveal">
-                <a href="<?php echo navUrl('tours'); ?>" class="travhub-btn" style="padding: 15px 40px; font-size: 1.1rem; font-weight: 600;">
-                    <span>🌍 View All Tours</span>
-                </a>
-                <p style="margin-top: 15px; color: #6c757d; font-size: 0.9rem;">Discover <?php echo count($featured_tours); ?>+ amazing destinations worldwide</p>
-            </div>
-        </div>
-    </section>
-    <?php endif; ?>
+    <!-- Tour Carousel Section - 3 slides at a time -->
+    <?php displayTourCarousel(9); ?>
 
     <!-- Popular Destinations -->
     <?php if (!empty($popular_destinations)): ?>
