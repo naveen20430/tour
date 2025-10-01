@@ -1,6 +1,10 @@
 <?php
 require_once 'config/config.php';
 
+// Set page variables
+$page_title = 'Travel Blog - ' . getSetting('site_name');
+$current_page = 'blog';
+
 // Get search parameters
 $category = $_GET['category'] ?? '';
 $search = $_GET['search'] ?? '';
@@ -52,7 +56,7 @@ $categories = $db->fetchAll("SELECT * FROM blog_categories WHERE status = 'activ
 
 // Get featured posts
 $featured_posts = $db->fetchAll("
-    SELECT bp.*, bc.name as category_name, au.full_name as author_name
+    SELECT bp.*, bc.name as category_name, bc.slug as category_slug, au.full_name as author_name
     FROM blog_posts bp
     LEFT JOIN blog_categories bc ON bp.category_id = bc.id
     LEFT JOIN admin_users au ON bp.author_id = au.id
@@ -60,20 +64,9 @@ $featured_posts = $db->fetchAll("
     ORDER BY bp.published_at DESC
     LIMIT 3
 ");
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Travel Blog - <?php echo getSetting('site_name'); ?></title>
-  
-  <!-- fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Geologica:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-  <!-- COMPRESSED STYLES - All CSS combined into one file -->
-  <link rel="stylesheet" href="assets/compressed/all-styles.min.css" />
+
+// Set extra CSS for blog page
+$extra_css = '
 <style>
     .blog-card {
         transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -117,61 +110,12 @@ $featured_posts = $db->fetchAll("
         font-size: 0.8em;
         text-decoration: none;
     }
-  </style>
-</head>
+</style>
+';
 
-<body>
-<div class="page-wrapper">
-    <!-- Header -->
-    <div class="topbar-one">
-        <div class="container">
-            <div class="topbar-one__inner">
-                <ul class="list-unstyled topbar-one__info">
-                    <li class="topbar-one__info__item">
-                        <i class="flaticon-pin-1 topbar-one__info__icon"></i>
-                        <?php echo getSetting('site_address'); ?>
-                    </li>
-                    <li class="topbar-one__info__item">
-                        <i class="flaticon-mail topbar-one__info__icon"></i>
-                        <a href="mailto:<?php echo getSetting('contact_email'); ?>"><?php echo getSetting('contact_email'); ?></a>
-                    </li>
-                    <li class="topbar-one__info__item topbar-one__info__item--last">
-                        <i class="flaticon-three-o-clock-clock topbar-one__info__icon"></i>
-                        Opening Hour <?php echo getSetting('opening_hours'); ?>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <header class="main-header sticky-header sticky-header--normal">
-        <div class="container">
-            <div class="main-header__inner">
-                <div class="main-header__logo">
-                    <a href="index">
-                        <img src="https://theworldjourney.in/images/logo.png" alt="<?php echo getSetting('site_name'); ?>" width="152">
-                    </a>
-                </div>
-                <nav class="main-header__nav main-menu">
-                    <ul class="main-menu__list">
-                        <li><a href="index">Home</a></li>
-                        <li><a href="about">About</a></li>
-                        <li><a href="tours">Tours</a></li>
-                        <li><a href="destinations">Destinations</a></li>
-                        <li><a href="blog" class="current">Blog</a></li>
-                        <li><a href="contact">Contact</a></li>
-                    </ul>
-                </nav>
-                <div class="main-header__right">
-                    <div class="main-header__btn">
-                        <a href="contact" class="travhub-btn">
-                            <span>Start Booking</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
+// Include header
+include 'includes/header.php';
+?>
 
     <!-- Blog Hero -->
     <section class="blog-hero">
@@ -385,60 +329,4 @@ $featured_posts = $db->fetchAll("
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="main-footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="footer-widget">
-                        <a href="index" class="footer-widget__logo">
-                            <img src="assets/images/logo-2.png" width="152" alt="<?php echo getSetting('site_name'); ?>">
-                        </a>
-                        <p class="footer-widget__text">
-                            Your trusted travel partner for unforgettable adventures around the world.
-                        </p>
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="footer-widget">
-                        <h4 class="footer-widget__title">Quick Links</h4>
-                        <ul class="footer-widget__links">
-                            <li><a href="about">About Us</a></li>
-                            <li><a href="tours">Tours</a></li>
-                            <li><a href="destinations">Destinations</a></li>
-                            <li><a href="contact">Contact</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="footer-widget">
-                        <h4 class="footer-widget__title">Contact Info</h4>
-                        <ul class="footer-widget__info">
-                            <li><i class="flaticon-pin-1"></i><?php echo getSetting('site_address'); ?></li>
-                            <li><i class="flaticon-mail"></i><?php echo getSetting('site_email'); ?></li>
-                            <li><i class="flaticon-phone-call"></i><?php echo getSetting('site_phone'); ?></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="footer-widget">
-                        <h4 class="footer-widget__title">Opening Hours</h4>
-                        <p><?php echo getSetting('opening_hours'); ?></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="main-footer__bottom">
-            <div class="container">
-                <p class="main-footer__copyright">
-                    &copy; Copyright 2025 by <?php echo getSetting('site_name'); ?>. All Rights Reserved.
-                </p>
-            </div>
-        </div>
-    </footer>
-
-</div>
-<!-- COMPRESSED SCRIPTS - All JavaScript combined into one file -->
-<script src="assets/compressed/all-scripts.min.js"></script>
-</body>
-</html>
+<?php include 'includes/footer.php'; ?>

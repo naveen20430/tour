@@ -73,6 +73,9 @@ try {
                     <a class="nav-link" href="tours.php">
                         <i class="fas fa-map-marked-alt me-2"></i> Tours
                     </a>
+                    <a class="nav-link" href="tour-slider.php">
+                        <i class="fas fa-sliders-h me-2"></i> Tour Slider
+                    </a>
                     <a class="nav-link" href="destinations.php">
                         <i class="fas fa-globe me-2"></i> Destinations
                     </a>
@@ -116,6 +119,7 @@ try {
                                 case 'tours': echo 'Tours Management'; break;
                                 case 'tour-add': echo 'Add New Tour'; break;
                                 case 'tour-edit': echo 'Edit Tour'; break;
+                                case 'tour-slider': echo 'Tour Slider Management'; break;
                                 case 'destinations': echo 'Destinations'; break;
                                 case 'bookings': echo 'Bookings Management'; break;
                                 case 'booking-add': echo 'Add New Booking'; break;

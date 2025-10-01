@@ -1,0 +1,437 @@
+/* ==========================================================================
+   DESIGN IMPROVEMENTS & MODERN ENHANCEMENTS
+   ========================================================================== */
+
+/* Modern Button Styles */
+.travhub-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    border: none !important;
+    border-radius: 25px !important;
+    padding: 12px 30px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4) !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.travhub-btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6) !important;
+    background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%) !important;
+}
+
+.travhub-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.travhub-btn:hover::before {
+    left: 100%;
+}
+
+/* Card Enhancements - Global Light Theme */
+.card {
+    border: none !important;
+    border-radius: 20px !important;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1) !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    overflow: hidden !important;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%) !important;
+    position: relative !important;
+}
+
+.card:hover {
+    transform: translateY(-8px) scale(1.02) !important;
+    box-shadow: 0 25px 50px rgba(102, 126, 234, 0.15), 0 0 0 1px rgba(102, 126, 234, 0.1) !important;
+}
+
+.card-img-top {
+    border-radius: 20px 20px 0 0 !important;
+    transition: transform 0.4s ease !important;
+}
+
+.card:hover .card-img-top {
+    transform: scale(1.05) !important;
+}
+
+/* Card Body Light Theme */
+.card-body {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%) !important;
+    border-radius: 0 0 20px 20px !important;
+    position: relative !important;
+    z-index: 2 !important;
+}
+
+/* Tour Card Specific Styling */
+.tour-card, .card.tour-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%) !important;
+}
+
+.tour-card:hover, .card.tour-card:hover {
+    transform: translateY(-8px) scale(1.02) !important;
+    box-shadow: 0 25px 50px rgba(102, 126, 234, 0.15), 0 0 0 1px rgba(102, 126, 234, 0.1) !important;
+}
+
+/* Badge Improvements */
+.badge {
+    border-radius: 20px !important;
+    padding: 8px 16px !important;
+    font-weight: 500 !important;
+    font-size: 0.8rem !important;
+}
+
+.badge-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+}
+
+.badge-success {
+    background: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%) !important;
+}
+
+.badge-info {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%) !important;
+}
+
+.badge-warning {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important;
+}
+
+/* Form Improvements */
+.form-control, .form-select {
+    border-radius: 12px !important;
+    border: 2px solid #e9ecef !important;
+    padding: 12px 16px !important;
+    transition: all 0.3s ease !important;
+    background: #ffffff !important;
+    color: #495057 !important;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #667eea !important;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.15) !important;
+    transform: scale(1.02) !important;
+}
+
+.form-label {
+    font-weight: 600 !important;
+    color: #495057 !important;
+    margin-bottom: 8px !important;
+}
+
+/* Alert Enhancements */
+.alert {
+    border: none !important;
+    border-radius: 15px !important;
+    padding: 20px !important;
+    font-weight: 500 !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+.alert-success {
+    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%) !important;
+    color: #155724 !important;
+}
+
+.alert-danger {
+    background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%) !important;
+    color: #721c24 !important;
+}
+
+.alert-info {
+    background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%) !important;
+    color: #0c5460 !important;
+}
+
+/* Navigation Enhancements */
+.main-header {
+    backdrop-filter: blur(10px) !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+.main-menu__list li a {
+    font-weight: 500 !important;
+    position: relative !important;
+    transition: all 0.3s ease !important;
+}
+
+.main-menu__list li a:hover {
+    color: #667eea !important;
+}
+
+.main-menu__list li.current a::after,
+.main-menu__list li a:hover::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 3px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 2px;
+}
+
+/* Topbar Enhancements */
+.topbar-one {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%) !important;
+}
+
+.topbar-one__info__item a {
+    transition: all 0.3s ease !important;
+}
+
+.topbar-one__info__item a:hover {
+    color: #667eea !important;
+    transform: translateX(3px) !important;
+}
+
+/* Price Box Enhancements */
+.price-display, .h3, .h4 {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    font-weight: 700 !important;
+}
+
+/* Section Spacing */
+.section-space {
+    padding: 80px 0 !important;
+}
+
+/* Custom Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.6s ease-out !important;
+}
+
+/* Loading States */
+.loading-skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%) !important;
+    background-size: 200% 100% !important;
+    animation: loading 1.5s infinite !important;
+}
+
+@keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .travhub-btn {
+        padding: 10px 20px !important;
+        font-size: 0.9rem !important;
+    }
+    
+    .section-space {
+        padding: 40px 0 !important;
+    }
+    
+    .card {
+        margin-bottom: 20px !important;
+    }
+}
+
+/* Scroll Animations */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.6s ease-out;
+}
+
+.scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Enhanced Icons */
+.fas, .flaticon {
+    transition: all 0.3s ease !important;
+}
+
+.fas:hover, .flaticon:hover {
+    transform: scale(1.1) !important;
+    color: #667eea !important;
+}
+
+/* Search Enhancements */
+.search-toggler {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    border-radius: 50% !important;
+    width: 45px !important;
+    height: 45px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.3s ease !important;
+}
+
+.search-toggler:hover {
+    transform: scale(1.1) rotate(15deg) !important;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4) !important;
+}
+
+/* Tour Hero Enhancements */
+.tour-hero {
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.tour-hero::before {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.8) 100%) !important;
+}
+
+/* Breadcrumb Improvements */
+.breadcrumb {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px) !important;
+    border-radius: 25px !important;
+    padding: 10px 20px !important;
+}
+
+.breadcrumb-item a {
+    color: rgba(255, 255, 255, 0.8) !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease !important;
+}
+
+.breadcrumb-item a:hover {
+    color: #fff !important;
+    transform: translateX(3px) !important;
+}
+
+/* Footer Enhancements */
+.main-footer {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%) !important;
+    position: relative !important;
+    color: white !important;
+}
+
+.main-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #667eea, transparent) !important;
+}
+
+/* Make all footer text white */
+.main-footer,
+.main-footer p,
+.main-footer h1,
+.main-footer h2,
+.main-footer h3,
+.main-footer h4,
+.main-footer h5,
+.main-footer h6,
+.main-footer .main-footer__text,
+.main-footer .main-footer__title,
+.main-footer .main-footer__copyright,
+.main-footer .main-footer__menu li,
+.main-footer .main-footer__contact-list li,
+.main-footer .main-footer__bottom-menu li {
+    color: white !important;
+}
+
+/* Footer links */
+.main-footer a,
+.main-footer .main-footer__menu a,
+.main-footer .main-footer__contact-list a,
+.main-footer .main-footer__bottom-menu a {
+    color: rgba(255, 255, 255, 0.8) !important;
+    transition: all 0.3s ease !important;
+}
+
+.main-footer a:hover,
+.main-footer .main-footer__menu a:hover,
+.main-footer .main-footer__contact-list a:hover,
+.main-footer .main-footer__bottom-menu a:hover {
+    color: white !important;
+    transform: translateX(3px) !important;
+}
+
+/* Footer icons */
+.main-footer i {
+    color: #667eea !important;
+    margin-right: 8px !important;
+}
+
+.main-footer__social a {
+    background: rgba(102, 126, 234, 0.1) !important;
+    border-radius: 50% !important;
+    width: 40px !important;
+    height: 40px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 5px !important;
+    transition: all 0.3s ease !important;
+    color: white !important;
+}
+
+.main-footer__social a:hover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4) !important;
+    color: white !important;
+}
+
+.main-footer__social a i {
+    color: white !important;
+    margin: 0 !important;
+}
+
+/* Utility Classes */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+}
+
+.shadow-custom {
+    box-shadow: 0 10px 40px rgba(102, 126, 234, 0.15) !important;
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    .card {
+        background: #1a1a1a !important;
+        color: #fff !important;
+    }
+    
+    .form-control, .form-select {
+        background: #ffffff !important;
+        border-color: #e9ecef !important;
+        color: #495057 !important;
+    }
+}

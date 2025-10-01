@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Datepicker Example</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Flatpickr CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    
+    <!-- Enhanced Datepicker CSS -->
+    <link rel="stylesheet" href="assets/css/attractive-datepicker.css">
+    
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 0;
+        }
+        
+        .demo-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+        
+        .demo-title {
+            text-align: center;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+            font-size: 2.5rem;
+        }
+        
+        .demo-section {
+            margin-bottom: 40px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .demo-section h3 {
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .code-example {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+        
+        .code-example code {
+            color: #e2e8f0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .row {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <h1 class="demo-title">Enhanced Datepicker Examples</h1>
+        
+        <!-- Basic Datepicker -->
+        <div class="demo-section">
+            <h3>Basic Floating Label Datepicker</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="datepicker-wrapper">
+                        <input type="text" 
+                               class="form-control datepicker-input" 
+                               id="basic-date"
+                               placeholder="Select a date">
+                        <label for="basic-date" class="form-label">Check-in Date *</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="datepicker-wrapper">
+                        <input type="text" 
+                               class="form-control datepicker-input" 
+                               id="checkout-date"
+                               placeholder="Select checkout date">
+                        <label for="checkout-date" class="form-label">Check-out Date *</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="code-example">
+                <code>
+&lt;div class="datepicker-wrapper"&gt;<br>
+&nbsp;&nbsp;&lt;input type="text" <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class="form-control datepicker-input" <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id="basic-date"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;placeholder="Select a date"&gt;<br>
+&nbsp;&nbsp;&lt;label for="basic-date" class="form-label"&gt;Check-in Date *&lt;/label&gt;<br>
+&lt;/div&gt;
+                </code>
+            </div>
+        </div>
+        
+        <!-- Date Range Datepicker -->
+        <div class="demo-section">
+            <h3>Date Range with Restrictions</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="datepicker-wrapper">
+                        <input type="text" 
+                               class="form-control datepicker-input" 
+                               id="restricted-date"
+                               data-min-date="today"
+                               data-max-date="2024-12-31"
+                               placeholder="Select within range">
+                        <label for="restricted-date" class="form-label">Future Date Only</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="datepicker-wrapper">
+                        <input type="text" 
+                               class="form-control datepicker-input" 
+                               id="birth-date"
+                               data-max-date="today"
+                               data-alt-format="F j, Y"
+                               placeholder="Your birth date">
+                        <label for="birth-date" class="form-label">Date of Birth</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="code-example">
+                <code>
+&lt;input type="text" <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class="form-control datepicker-input" <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-min-date="today"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-max-date="2024-12-31"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-alt-format="F j, Y"&gt;
+                </code>
+            </div>
+        </div>
+        
+        <!-- Multiple Format Options -->
+        <div class="demo-section">
+            <h3>Different Format Options</h3>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="datepicker-wrapper">
+                        <input type="text" 
+                               class="form-control datepicker-input" 
+                               id="format-1"
+                               data-date-format="d/m/Y"
+                               data-alt-format="d/m/Y"
+                               placeholder="DD/MM/YYYY">
+                        <label for="format-1" class="form-label">European Format</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="datepicker-wrapper">
+                        <input type="text" 
+                               class="form-control datepicker-input" 
+                               id="format-2"
+                               data-date-format="m/d/Y"
+                               data-alt-format="m/d/Y"
+                               placeholder="MM/DD/YYYY">
+                        <label for="format-2" class="form-label">US Format</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="datepicker-wrapper">
+                        <input type="text" 
+                               class="form-control datepicker-input" 
+                               id="format-3"
+                               data-date-format="Y-m-d"
+                               data-alt-format="l, F j, Y"
+                               placeholder="Full format">
+                        <label for="format-3" class="form-label">Full Day Format</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Usage Instructions -->
+        <div class="demo-section">
+            <h3>How to Use</h3>
+            <p><strong>1. Include Required Files:</strong></p>
+            <div class="code-example">
+                <code>
+&lt;!-- Flatpickr CSS --&gt;<br>
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"&gt;<br><br>
+&lt;!-- Enhanced Datepicker CSS --&gt;<br>
+&lt;link rel="stylesheet" href="assets/css/attractive-datepicker.css"&gt;<br><br>
+&lt;!-- Flatpickr JS --&gt;<br>
+&lt;script src="https://cdn.jsdelivr.net/npm/flatpickr"&gt;&lt;/script&gt;<br><br>
+&lt;!-- Enhanced Datepicker JS --&gt;<br>
+&lt;script src="assets/js/enhanced-datepicker.js"&gt;&lt;/script&gt;
+                </code>
+            </div>
+            
+            <p><strong>2. Features:</strong></p>
+            <ul>
+                <li>✨ Floating labels with smooth animations</li>
+                <li>🎨 Modern gradient design matching your theme</li>
+                <li>📱 Fully responsive on all devices</li>
+                <li>⚡ Smooth hover and focus effects</li>
+                <li>🎯 Click anywhere on wrapper to open calendar</li>
+                <li>⌨️ Press Enter to open calendar</li>
+                <li>🔧 Customizable date formats and restrictions</li>
+                <li>♿ Accessibility compliant</li>
+                <li>🔄 Auto-initializes for dynamic content</li>
+            </ul>
+            
+            <p><strong>3. Data Attributes:</strong></p>
+            <ul>
+                <li><code>data-date-format</code>: Internal date format (Y-m-d, d/m/Y, etc.)</li>
+                <li><code>data-alt-format</code>: Display format (F j, Y shows "January 1, 2024")</li>
+                <li><code>data-min-date</code>: Minimum selectable date ("today", "2024-01-01", etc.)</li>
+                <li><code>data-max-date</code>: Maximum selectable date ("today", "2024-12-31", etc.)</li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- JavaScript Dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="assets/js/enhanced-datepicker.js"></script>
+</body>
+</html>

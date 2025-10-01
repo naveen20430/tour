@@ -1,8 +1,23 @@
 <?php
 session_start();
 
-// Define constants
-define('BASE_URL', 'http://localhost/tour/');
+// Define constants - Dynamic Base URL
+// Auto-detect the base URL based on current server and directory
+$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https://' : 'http://';
+$host = $_SERVER['HTTP_HOST'];
+$scriptPath = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME']));
+$basePath = rtrim($scriptPath, '/');
+
+// Remove common subdirectories from the path to get the project root
+$pathParts = explode('/', trim($basePath, '/'));
+$projectRoot = '';
+foreach ($pathParts as $part) {
+    if ($part && !in_array($part, ['admin', 'includes', 'config'])) {
+        $projectRoot .= '/' . $part;
+    }
+}
+
+define('BASE_URL', $protocol . $host . $projectRoot . '/');
 define('BASE_PATH', dirname(dirname(__FILE__)) . '/');
 define('UPLOAD_PATH', BASE_PATH . 'uploads/');
 define('UPLOAD_URL', BASE_URL . 'uploads/');

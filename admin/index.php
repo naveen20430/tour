@@ -70,6 +70,19 @@ try {
     $recentContacts = 0;
 }
 
+// Get tour slider statistics
+try {
+    $sliderTours = $db->fetch("SELECT COUNT(*) as count FROM tours WHERE in_slider = 1 AND status = 'active'")['count'] ?? 0;
+} catch (Exception $e) {
+    $sliderTours = 0;
+}
+
+try {
+    $sliderEnabled = $db->fetch("SELECT setting_value FROM site_settings WHERE setting_key = 'slider_autoplay'")['setting_value'] ?? '1';
+} catch (Exception $e) {
+    $sliderEnabled = '1';
+}
+
 // Get recent activity
 try {
     $recentTours = $db->fetchAll("SELECT title, created_at FROM tours ORDER BY created_at DESC LIMIT 5");
@@ -248,6 +261,11 @@ try {
                                             </a>
                                         </div>
                                         <div class="col-md-4 mb-3">
+                                            <a href="tour-slider.php" class="btn btn-warning w-100">
+                                                <i class="fas fa-sliders-h me-2"></i>Tour Slider
+                                            </a>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
                                             <a href="destinations.php" class="btn btn-success w-100">
                                                 <i class="fas fa-globe me-2"></i>Manage Destinations
                                             </a>
@@ -371,6 +389,14 @@ try {
                                                 </a>
                                                 <a href="tour-add.php" class="list-group-item list-group-item-action py-2">
                                                     <i class="fas fa-plus me-2"></i>Add New Tour
+                                                </a>
+                                                <a href="tour-slider.php" class="list-group-item list-group-item-action py-2">
+                                                    <i class="fas fa-sliders-h me-2"></i>Tour Slider (<?php echo $sliderTours; ?>)
+                                                    <?php if ($sliderEnabled == '1'): ?>
+                                                        <span class="badge bg-success ms-2">Active</span>
+                                                    <?php else: ?>
+                                                        <span class="badge bg-secondary ms-2">Paused</span>
+                                                    <?php endif; ?>
                                                 </a>
                                                 <a href="destinations.php" class="list-group-item list-group-item-action py-2">
                                                     <i class="fas fa-globe me-2"></i>Destinations (<?php echo $totalDestinations; ?>)

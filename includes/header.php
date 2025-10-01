@@ -42,6 +42,15 @@
   <!-- Flaticon CSS for icons -->
   <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/vendors/travhub-icons/style.css" />
   
+  <!-- Design Improvements CSS -->
+  <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/design-improvements.css" />
+  
+  <!-- Flatpickr CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  
+  <!-- Attractive Datepicker CSS -->
+  <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/attractive-datepicker.css" />
+  
   <?php if (isset($extra_css) && $extra_css): echo $extra_css; endif; ?>
   
   <?php 
@@ -117,7 +126,7 @@
 	        <div class="main-header__inner">
             <div class="main-header__logo">
                 <a href="<?php echo navUrl('home'); ?>">
-	                    <img src="https://theworldjourney.in/images/logo.png" alt="<?php echo function_exists('getSetting') ? getSetting('site_name') ?: 'TravHub' : 'TravHub'; ?>" width="80">
+                    <img src="<?php echo BASE_URL; ?>assets/images/logo.png" alt="<?php echo function_exists('getSetting') ? getSetting('site_name') ?: 'TravHub' : 'TravHub'; ?>" width="152">
 	                </a>
 	            </div><!-- /.main-header__logo -->
 <nav class="main-header__nav main-menu">

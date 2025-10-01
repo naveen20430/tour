@@ -139,14 +139,18 @@ include 'includes/header.php';
     </section>
 
     <!-- Filters Section -->
-    <section class="filter-section">
+    <section class="filter-section" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #f8f9fa 100%); padding: 40px 0; margin-bottom: 50px; position: relative; overflow: hidden;">
+        <!-- Background decorative elements -->
+        <div style="position: absolute; top: -30px; right: -30px; width: 120px; height: 120px; background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%); border-radius: 50%; animation: float 8s ease-in-out infinite;"></div>
+        <div style="position: absolute; bottom: -50px; left: -50px; width: 180px; height: 180px; background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%); border-radius: 50%; animation: float 10s ease-in-out infinite reverse;"></div>
+        
         <div class="container">
-            <form method="GET" class="row g-3">
-                <div class="col-md-3">
-                    <input type="text" class="form-control" name="search" placeholder="Search tours..." value="<?php echo htmlspecialchars($search); ?>">
+            <form method="GET" class="row g-4" style="position: relative; z-index: 2; align-items: center;">
+                <div class="col-lg-3 col-md-4">
+                    <input type="text" class="form-control filter-input" name="search" placeholder="Search tours..." value="<?php echo htmlspecialchars($search); ?>" style="border-radius: 25px; border: none; padding: 14px 20px; background: #2c3e50; color: white; font-weight: 500; box-shadow: 0 4px 15px rgba(44, 62, 80, 0.3); transition: all 0.3s ease;">
                 </div>
-                <div class="col-md-2">
-                    <select name="category" class="form-control">
+                <div class="col-lg-2 col-md-4">
+                    <select name="category" class="form-control filter-select" style="border-radius: 25px; border: none; padding: 14px 20px; background: #2c3e50; color: white; font-weight: 500; box-shadow: 0 4px 15px rgba(44, 62, 80, 0.3); transition: all 0.3s ease; appearance: none; background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23ffffff" d="M2 0L0 2h4zm0 5L0 3h4z"/></svg>'); background-repeat: no-repeat; background-position: right 15px center; background-size: 12px;">
                         <option value="">All Categories</option>
                         <?php foreach ($categories as $cat): ?>
                             <option value="<?php echo $cat['slug']; ?>" <?php echo $category == $cat['slug'] ? 'selected' : ''; ?>>
@@ -155,25 +159,79 @@ include 'includes/header.php';
                         <?php endforeach; ?>
                     </select>
                 </div>
-                <div class="col-md-2">
-                    <select name="difficulty" class="form-control">
+                <div class="col-lg-2 col-md-4">
+                    <select name="difficulty" class="form-control filter-select" style="border-radius: 25px; border: none; padding: 14px 20px; background: #2c3e50; color: white; font-weight: 500; box-shadow: 0 4px 15px rgba(44, 62, 80, 0.3); transition: all 0.3s ease; appearance: none; background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23ffffff" d="M2 0L0 2h4zm0 5L0 3h4z"/></svg>'); background-repeat: no-repeat; background-position: right 15px center; background-size: 12px;">
                         <option value="">Difficulty</option>
                         <option value="easy" <?php echo $difficulty == 'easy' ? 'selected' : ''; ?>>Easy</option>
                         <option value="moderate" <?php echo $difficulty == 'moderate' ? 'selected' : ''; ?>>Moderate</option>
                         <option value="difficult" <?php echo $difficulty == 'difficult' ? 'selected' : ''; ?>>Difficult</option>
                     </select>
                 </div>
-                <div class="col-md-2">
-                    <input type="number" class="form-control" name="min_price" placeholder="Min Price" value="<?php echo $min_price; ?>">
+                <div class="col-lg-2 col-md-6">
+                    <input type="number" class="form-control filter-input" name="min_price" placeholder="Min Price" value="<?php echo $min_price; ?>" style="border-radius: 25px; border: none; padding: 14px 20px; background: #2c3e50; color: white; font-weight: 500; box-shadow: 0 4px 15px rgba(44, 62, 80, 0.3); transition: all 0.3s ease;">
                 </div>
-                <div class="col-md-2">
-                    <input type="number" class="form-control" name="max_price" placeholder="Max Price" value="<?php echo $max_price; ?>">
+                <div class="col-lg-2 col-md-6">
+                    <input type="number" class="form-control filter-input" name="max_price" placeholder="Max Price" value="<?php echo $max_price; ?>" style="border-radius: 25px; border: none; padding: 14px 20px; background: #2c3e50; color: white; font-weight: 500; box-shadow: 0 4px 15px rgba(44, 62, 80, 0.3); transition: all 0.3s ease;">
                 </div>
-                <div class="col-md-1">
-                    <button type="submit" class="btn btn-primary w-100">Filter</button>
+                <div class="col-lg-1 col-md-12 d-flex align-items-center">
+                    <button type="submit" class="btn w-100" style="border-radius: 25px; border: none; padding: 14px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; font-weight: 600; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 0.5px;">
+                        Filter
+                    </button>
                 </div>
             </form>
         </div>
+        
+        <style>
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        /* Filter Input Enhancements */
+        .filter-input::placeholder,
+        .filter-select option {
+            color: rgba(255, 255, 255, 0.7) !important;
+        }
+        
+        .filter-input:focus,
+        .filter-select:focus {
+            background: #34495e !important;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3) !important;
+            transform: translateY(-2px) !important;
+            outline: none !important;
+        }
+        
+        .filter-input:hover,
+        .filter-select:hover {
+            background: #34495e !important;
+            transform: translateY(-2px) !important;
+        }
+        
+        .filter-select option {
+            background: #2c3e50 !important;
+            color: white !important;
+            padding: 8px !important;
+        }
+        
+        /* Button hover effect */
+        button[type="submit"]:hover {
+            transform: translateY(-3px) scale(1.05) !important;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6) !important;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .row.g-4 {
+                gap: 15px !important;
+            }
+            
+            .filter-input,
+            .filter-select,
+            button[type="submit"] {
+                margin-bottom: 10px;
+            }
+        }
+        </style>
     </section>
 
     <!-- Tours Grid -->
@@ -181,12 +239,17 @@ include 'includes/header.php';
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="section-title text-center">
-                        <span class="section-title__tagline">Discover Amazing</span>
-                        <h2 class="section-title__title">Our Tour Packages</h2>
-                        <p class="section-title__text">
+                    <div class="section-title text-center scroll-reveal" style="margin-bottom: 60px;">
+                        <div style="margin-bottom: 15px;">
+                            <span class="badge" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);">
+                                ✨ Discover Amazing
+                            </span>
+                        </div>
+                        <h2 class="gradient-text" style="font-size: 2.8rem; font-weight: 700; margin-bottom: 20px;">Our Tour Packages</h2>
+                        <p style="font-size: 1.1rem; color: #6c757d; max-width: 500px; margin: 0 auto; line-height: 1.6;">
                             Choose from our carefully curated selection of tours designed to give you the best travel experience
                         </p>
+                        <div style="width: 80px; height: 4px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); margin: 20px auto 0; border-radius: 2px;"></div>
                     </div>
                 </div>
             </div>
