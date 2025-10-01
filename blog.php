@@ -110,6 +110,49 @@ $extra_css = '
         font-size: 0.8em;
         text-decoration: none;
     }
+    
+    /* Blog-specific responsive improvements */
+    @media (max-width: 767px) {
+        .blog-hero {
+            padding: 40px 0 25px;
+        }
+        
+        .blog-hero h1 {
+            font-size: 1.8rem;
+        }
+        
+        .blog-hero p {
+            font-size: 1rem;
+        }
+        
+        .blog-image {
+            height: 180px;
+        }
+        
+        .search-toggler {
+            display: none !important; /* Hide search on mobile for blog page */
+        }
+    }
+    
+    @media (max-width: 575px) {
+        .blog-hero h1 {
+            font-size: 1.5rem;
+        }
+        
+        .blog-hero p {
+            font-size: 0.9rem;
+        }
+        
+        .blog-image {
+            height: 160px;
+        }
+        
+        .featured-badge,
+        .category-badge {
+            font-size: 0.65rem;
+            padding: 3px 8px;
+        }
+    }
 </style>
 ';
 

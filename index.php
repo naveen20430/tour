@@ -122,7 +122,7 @@ include 'includes/header.php';
         }
         
         /* Responsive improvements */
-        @media (max-width: 768px) {
+        @media (max-width: 991px) {
             .gradient-text {
                 font-size: 2.5rem !important;
             }
@@ -130,15 +130,84 @@ include 'includes/header.php';
             .section-title h2 {
                 font-size: 2rem !important;
             }
+        }
+        
+        @media (max-width: 768px) {
+            .gradient-text {
+                font-size: 2rem !important;
+            }
+            
+            .section-space {
+                padding: 50px 0 !important;
+            }
             
             .card {
-                margin-bottom: 30px !important;
+                margin-bottom: 25px !important;
+            }
+            
+            /* Adjust button spacing in mobile */
+            .mt-4 {
+                margin-top: 2rem !important;
+            }
+            
+            .travhub-btn {
+                margin: 5px 0;
+                display: inline-block;
+                width: auto;
+                min-width: 140px;
             }
         }
         
-        @media (max-width: 576px) {
+        @media (max-width: 575px) {
             .gradient-text {
-                font-size: 2rem !important;
+                font-size: 1.6rem !important;
+            }
+            
+            .section-space {
+                padding: 40px 0 !important;
+            }
+            
+            .card {
+                margin-bottom: 20px !important;
+            }
+            
+            .card-body {
+                padding: 15px !important;
+            }
+            
+            .card-title {
+                font-size: 1.1rem !important;
+            }
+            
+            .card-text {
+                font-size: 0.9rem !important;
+            }
+            
+            /* Mobile hero adjustments */
+            .lead {
+                font-size: 1.1rem !important;
+            }
+            
+            /* Stats section mobile */
+            .glass-effect {
+                padding: 15px !important;
+                margin-bottom: 15px !important;
+            }
+            
+            /* Button improvements */
+            .travhub-btn {
+                padding: 10px 20px !important;
+                font-size: 0.9rem !important;
+                min-width: 120px;
+                margin: 8px 5px;
+            }
+            
+            /* Two column layout for buttons on very small screens */
+            .mt-4 {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
             }
         }
         </style>

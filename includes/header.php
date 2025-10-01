@@ -45,6 +45,9 @@
   <!-- Design Improvements CSS -->
   <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/design-improvements.css" />
   
+  <!-- Responsive Improvements CSS -->
+  <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/responsive-improvements.css" />
+  
   <!-- Flatpickr CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   
