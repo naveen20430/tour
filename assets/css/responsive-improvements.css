@@ -19,6 +19,7 @@ body {
     max-width: 100%;
     height: auto;
     transition: all 0.3s ease;
+    max-height: 60px;
 }
 
 /* Navigation Enhancements */
@@ -150,7 +151,7 @@ body {
     }
     
     .main-header__logo img {
-        width: 130px;
+        width: 70px;
     }
     
     .hero-title {
@@ -180,7 +181,7 @@ body {
     }
     
     .main-header__logo img {
-        width: 120px;
+        width: 65px;
     }
     
     .main-header__nav {
@@ -263,7 +264,7 @@ body {
     }
     
     .main-header__logo img {
-        width: 100px;
+        width: 60px;
     }
     
     .main-header__nav {
@@ -373,7 +374,7 @@ body {
     }
     
     .main-header__logo img {
-        width: 85px;
+        width: 55px;
     }
     
     .main-header__nav {

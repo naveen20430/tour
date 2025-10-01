@@ -7,7 +7,7 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="main-footer__about">
                         <a href="<?php echo navUrl('home'); ?>" class="main-footer__logo mb-3 d-block">
-                            <img src="<?php echo BASE_URL; ?>assets/images/logo.png" alt="<?php echo function_exists('getSetting') ? getSetting('site_name') ?: 'TravHub' : 'TravHub'; ?>" width="130">
+                            <img src="<?php echo BASE_URL; ?>assets/images/logo.png" alt="<?php echo function_exists('getSetting') ? getSetting('site_name') ?: 'TravHub' : 'TravHub'; ?>" width="100">
                         </a>
                         <p class="main-footer__text">
                             <?php echo function_exists('getSetting') ? getSetting('site_description', 'Discover amazing destinations and create unforgettable memories with our expertly crafted travel experiences.') : 'Discover amazing destinations and create unforgettable memories with our expertly crafted travel experiences.'; ?>
@@ -108,7 +108,7 @@
 	<div class="mobile-nav__content">
 		<span class="mobile-nav__close mobile-nav__toggler"><i class="fa fa-times"></i></span>
 		<div class="logo-box">
-		<a href="<?php echo navUrl('home'); ?>" aria-label="logo image"><img src="<?php echo BASE_URL; ?>assets/images/logo.png" width="155" alt="<?php echo function_exists('getSetting') ? getSetting('site_name') ?: 'TravHub' : 'TravHub'; ?>" /></a>
+		<a href="<?php echo navUrl('home'); ?>" aria-label="logo image"><img src="<?php echo BASE_URL; ?>assets/images/logo.png" width="120" alt="<?php echo function_exists('getSetting') ? getSetting('site_name') ?: 'TravHub' : 'TravHub'; ?>" /></a>
 		</div>
 		<!-- /.logo-box -->
 		<div class="mobile-nav__container"></div>

@@ -129,7 +129,7 @@
 	        <div class="main-header__inner">
             <div class="main-header__logo">
                 <a href="<?php echo navUrl('home'); ?>">
-                    <img src="<?php echo BASE_URL; ?>assets/images/logo.png" alt="<?php echo function_exists('getSetting') ? getSetting('site_name') ?: 'TravHub' : 'TravHub'; ?>" width="152">
+                    <img src="<?php echo BASE_URL; ?>assets/images/logo.png" alt="<?php echo function_exists('getSetting') ? getSetting('site_name') ?: 'TravHub' : 'TravHub'; ?>" width="80">
 	                </a>
 	            </div><!-- /.main-header__logo -->
 <nav class="main-header__nav main-menu">

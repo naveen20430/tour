@@ -156,6 +156,24 @@
     backdrop-filter: blur(10px) !important;
     background: rgba(255, 255, 255, 0.95) !important;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
+    padding: 10px 0 !important;
+}
+
+.main-header__inner {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+}
+
+.main-header__logo {
+    flex-shrink: 0 !important;
+}
+
+.main-header__logo img {
+    display: block !important;
+    max-height: 50px !important;
+    width: auto !important;
+    object-fit: contain !important;
 }
 
 .main-menu__list li a {
