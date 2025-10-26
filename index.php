@@ -31,9 +31,275 @@ $popular_destinations = $db->fetchAll("
 include 'includes/header.php';
 ?>
 
-<?php displayTourSlider(); ?>
+<!-- Search Bar Section -->
+<section class="search-bar-section" style="margin-top: 80px; position: relative; z-index: 100;">
+    <div class="container">
+        <div class="search-bar-wrapper" style="background: white; border-radius: 20px; padding: 40px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15); position: relative;">
+            <h3 class="text-center mb-4" style="color: #333; font-weight: 700;">Find Your Perfect Tour</h3>
+            <form id="tourSearchForm" onsubmit="return false;">
+                <div class="row g-3">
+                    <!-- From Location -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="form-group">
+                            <label class="form-label" style="font-weight: 600; color: #667eea; margin-bottom: 8px; display: block;">
+                                <i class="flaticon-pin-1"></i> From
+                            </label>
+                            <input type="text" name="from" class="form-control" placeholder="Your Location" 
+                                   style="border: 2px solid #e9ecef; border-radius: 10px; padding: 12px 15px; transition: all 0.3s ease;" 
+                                   onfocus="this.style.borderColor='#667eea'; this.style.boxShadow='0 0 0 0.2rem rgba(102, 126, 234, 0.25)'" 
+                                   onblur="this.style.borderColor='#e9ecef'; this.style.boxShadow='none'">
+                        </div>
+                    </div>
+                    
+                    <!-- To Location -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="form-group">
+                            <label class="form-label" style="font-weight: 600; color: #667eea; margin-bottom: 8px; display: block;">
+                                <i class="flaticon-pin-1"></i> To
+                            </label>
+                            <select name="destination" class="form-control" 
+                                    style="border: 2px solid #e9ecef; border-radius: 10px; padding: 12px 15px; transition: all 0.3s ease;" 
+                                    onfocus="this.style.borderColor='#667eea'; this.style.boxShadow='0 0 0 0.2rem rgba(102, 126, 234, 0.25)'" 
+                                    onblur="this.style.borderColor='#e9ecef'; this.style.boxShadow='none'">
+                                <option value="">Select Destination</option>
+                                <?php 
+                                $destinations = $db->fetchAll("SELECT slug, name FROM destinations WHERE status = 'active' ORDER BY name");
+                                foreach ($destinations as $dest): 
+                                ?>
+                                <option value="<?php echo htmlspecialchars($dest['slug']); ?>"><?php echo htmlspecialchars($dest['name']); ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Travel Date -->
+                    <div class="col-lg-2 col-md-6">
+                        <div class="form-group">
+                            <label class="form-label" style="font-weight: 600; color: #667eea; margin-bottom: 8px; display: block;">
+                                <i class="flaticon-calendar"></i> Travel Date
+                            </label>
+                            <input type="date" name="travel_date" class="form-control" min="<?php echo date('Y-m-d'); ?>" 
+                                   style="border: 2px solid #e9ecef; border-radius: 10px; padding: 12px 15px; transition: all 0.3s ease;" 
+                                   onfocus="this.style.borderColor='#667eea'; this.style.boxShadow='0 0 0 0.2rem rgba(102, 126, 234, 0.25)'" 
+                                   onblur="this.style.borderColor='#e9ecef'; this.style.boxShadow='none'">
+                        </div>
+                    </div>
+                    
+                    <!-- Return Date -->
+                    <div class="col-lg-2 col-md-6">
+                        <div class="form-group">
+                            <label class="form-label" style="font-weight: 600; color: #667eea; margin-bottom: 8px; display: block;">
+                                <i class="flaticon-calendar"></i> Return Date
+                            </label>
+                            <input type="date" name="return_date" class="form-control" min="<?php echo date('Y-m-d'); ?>" 
+                                   style="border: 2px solid #e9ecef; border-radius: 10px; padding: 12px 15px; transition: all 0.3s ease;" 
+                                   onfocus="this.style.borderColor='#667eea'; this.style.boxShadow='0 0 0 0.2rem rgba(102, 126, 234, 0.25)'" 
+                                   onblur="this.style.borderColor='#e9ecef'; this.style.boxShadow='none'">
+                        </div>
+                    </div>
+                    
+                    <!-- Search Button -->
+                    <div class="col-lg-2 col-md-12">
+                        <label class="form-label d-none d-lg-block" style="visibility: hidden;">Search</label>
+                        <button type="button" onclick="showPhoneModal()" class="btn w-100"
+                                style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 10px; padding: 12px 20px; font-weight: 600; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); transition: all 0.3s ease;"
+                                onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(102, 126, 234, 0.6)'"
+                                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(102, 126, 234, 0.4)'">
+                            <i class="flaticon-search"></i> Search Tours
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
 
-<?php displayTourCarousel(); ?>
+<!-- Phone Number Modal -->
+<div id="phoneModal" class="modal" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); overflow: auto;">
+    <div class="modal-content" style="background-color: white; margin: 8% auto; padding: 0; border-radius: 20px; max-width: 500px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); animation: slideDown 0.3s ease;">
+        <div class="modal-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 25px 30px; border-radius: 20px 20px 0 0; position: relative;">
+            <h4 style="margin: 0; font-weight: 700;"><i class="flaticon-search"></i> Confirm Your Search</h4>
+            <span onclick="closePhoneModal()" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); font-size: 28px; font-weight: bold; color: white; cursor: pointer; line-height: 1;">&times;</span>
+        </div>
+        <div class="modal-body" style="padding: 30px;">
+            <div style="background: #f8f9fa; padding: 20px; border-radius: 15px; margin-bottom: 25px;">
+                <h6 style="color: #667eea; font-weight: 600; margin-bottom: 15px;">Your Search Details:</h6>
+                <div id="searchDetails" style="font-size: 0.95rem; line-height: 1.8;"></div>
+            </div>
+            
+            <form id="phoneForm" onsubmit="submitSearch(event)">
+                <div class="form-group">
+                    <label class="form-label" style="font-weight: 600; color: #333; margin-bottom: 10px; display: block;">
+                        <i class="flaticon-phone-call"></i> Phone Number <span style="color: red;">*</span>
+                    </label>
+                    <input type="tel" name="phone" id="modalPhone" class="form-control" placeholder="Enter your 10-digit phone number" required
+                           pattern="[0-9]{10}" maxlength="10"
+                           style="border: 2px solid #e9ecef; border-radius: 10px; padding: 12px 15px; width: 100%; font-size: 1rem;" 
+                           onfocus="this.style.borderColor='#667eea'; this.style.boxShadow='0 0 0 0.2rem rgba(102, 126, 234, 0.25)'" 
+                           onblur="this.style.borderColor='#e9ecef'; this.style.boxShadow='none'">
+                    <small style="color: #6c757d; margin-top: 5px; display: block;">We'll use this to contact you about your tour inquiry</small>
+                </div>
+                
+                <div style="display: flex; gap: 10px; margin-top: 25px;">
+                    <button type="button" onclick="closePhoneModal()" class="btn" 
+                            style="flex: 1; background: #e9ecef; color: #495057; border: none; border-radius: 10px; padding: 12px 20px; font-weight: 600; transition: all 0.3s ease;"
+                            onmouseover="this.style.background='#dee2e6'" onmouseout="this.style.background='#e9ecef'">
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn" 
+                            style="flex: 1; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 10px; padding: 12px 20px; font-weight: 600; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); transition: all 0.3s ease;"
+                            onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(102, 126, 234, 0.6)'"
+                            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(102, 126, 234, 0.4)'">
+                        <i class="flaticon-search"></i> Search Tours
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+@keyframes slideDown {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+<style>
+/* Search Bar Responsive Styles */
+@media (max-width: 768px) {
+    .search-bar-section {
+        margin-top: 0 !important;
+        padding: 20px 0;
+    }
+    
+    .search-bar-wrapper {
+        padding: 25px 20px !important;
+    }
+    
+    .search-bar-wrapper h3 {
+        font-size: 1.5rem !important;
+    }
+}
+
+@media (max-width: 991px) {
+    .search-bar-section {
+        margin-top: -20px !important;
+    }
+}
+</style>
+
+<script>
+function showPhoneModal() {
+    // Get form values
+    const from = document.querySelector('input[name="from"]').value;
+    const destination = document.querySelector('select[name="destination"]');
+    const destinationText = destination.options[destination.selectedIndex].text;
+    const travelDate = document.querySelector('input[name="travel_date"]').value;
+    const returnDate = document.querySelector('input[name="return_date"]').value;
+    
+    // Build search details HTML
+    let detailsHTML = '';
+    if (from) detailsHTML += `<div><strong>From:</strong> ${from}</div>`;
+    if (destination.value) detailsHTML += `<div><strong>To:</strong> ${destinationText}</div>`;
+    if (travelDate) detailsHTML += `<div><strong>Travel Date:</strong> ${travelDate}</div>`;
+    if (returnDate) detailsHTML += `<div><strong>Return Date:</strong> ${returnDate}</div>`;
+    
+    if (!detailsHTML) {
+        detailsHTML = '<div style="color: #6c757d; font-style: italic;">No search filters selected</div>';
+    }
+    
+    document.getElementById('searchDetails').innerHTML = detailsHTML;
+    document.getElementById('phoneModal').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+}
+
+function closePhoneModal() {
+    document.getElementById('phoneModal').style.display = 'none';
+    document.body.style.overflow = 'auto';
+    document.getElementById('modalPhone').value = '';
+}
+
+function submitSearch(event) {
+    event.preventDefault();
+    
+    const phone = document.getElementById('modalPhone').value;
+    const phonePattern = /^[0-9]{10}$/;
+    
+    if (!phonePattern.test(phone)) {
+        alert('Please enter a valid 10-digit phone number');
+        return false;
+    }
+    
+    // Get form data
+    const formData = new FormData();
+    formData.append('from', document.querySelector('input[name="from"]').value);
+    formData.append('destination', document.querySelector('select[name="destination"]').value);
+    formData.append('travel_date', document.querySelector('input[name="travel_date"]').value);
+    formData.append('return_date', document.querySelector('input[name="return_date"]').value);
+    formData.append('phone', phone);
+    
+    // Save to database
+    fetch('<?php echo BASE_URL; ?>api/save-search-query.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        // Log raw response for debugging
+        return response.text().then(text => {
+            console.log('Raw Response:', text);
+            try {
+                return JSON.parse(text);
+            } catch (e) {
+                console.error('JSON Parse Error:', e);
+                throw new Error('Server returned invalid JSON: ' + text.substring(0, 200));
+            }
+        });
+    })
+    .then(data => {
+        console.log('API Response:', data);
+        if (data.success) {
+            // Redirect to tours page with search parameters
+            const params = new URLSearchParams();
+            formData.forEach((value, key) => {
+                if (value && key !== 'phone') params.append(key, value);
+            });
+            window.location.href = '<?php echo navUrl('tours'); ?>?' + params.toString();
+        } else {
+            console.error('API Error:', data);
+            alert('Error: ' + (data.message || 'Failed to save search query. Please try again.'));
+        }
+    })
+    .catch(error => {
+        console.error('Network Error:', error);
+        alert('Network error. Please check your connection and try again.');
+    });
+    
+    return false;
+}
+
+// Close modal on outside click
+window.onclick = function(event) {
+    const modal = document.getElementById('phoneModal');
+    if (event.target == modal) {
+        closePhoneModal();
+    }
+}
+
+// Close modal on ESC key
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closePhoneModal();
+    }
+});
+</script>
+
+<?php include 'includes/destinations_cab_section.php'; ?>
 
     <section class="about-one section-space" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); position: relative; overflow: hidden;">
         <!-- Floating elements for visual appeal -->

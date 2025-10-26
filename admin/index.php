@@ -83,6 +83,31 @@ try {
     $sliderEnabled = '1';
 }
 
+// Get cab booking statistics
+try {
+    $totalCabBookings = $db->fetch("SELECT COUNT(*) as count FROM cab_bookings")['count'] ?? 0;
+} catch (Exception $e) {
+    $totalCabBookings = 0;
+}
+
+try {
+    $pendingCabBookings = $db->fetch("SELECT COUNT(*) as count FROM cab_bookings WHERE status = 'pending'")['count'] ?? 0;
+} catch (Exception $e) {
+    $pendingCabBookings = 0;
+}
+
+try {
+    $totalCabRoutes = $db->fetch("SELECT COUNT(*) as count FROM cab_routes WHERE status = 'active'")['count'] ?? 0;
+} catch (Exception $e) {
+    $totalCabRoutes = 0;
+}
+
+try {
+    $cabRevenue = $db->fetch("SELECT SUM(total_price) as total FROM cab_bookings WHERE payment_status = 'paid'")['total'] ?? 0;
+} catch (Exception $e) {
+    $cabRevenue = 0;
+}
+
 // Get recent activity
 try {
     $recentTours = $db->fetchAll("SELECT title, created_at FROM tours ORDER BY created_at DESC LIMIT 5");
@@ -161,6 +186,9 @@ try {
                     </a>
                     <a class="nav-link" href="bookings.php">
                         <i class="fas fa-calendar-check me-2"></i> Bookings
+                    </a>
+                    <a class="nav-link" href="search-queries.php">
+                        <i class="fas fa-search me-2"></i> Search Queries
                     </a>
                     <a class="nav-link" href="cab_pricing.php">
                         <i class="fas fa-car me-2"></i> Cab Pricing
@@ -247,6 +275,50 @@ try {
                         </div>
                     </div>
                     
+                    <!-- Cab Booking Stats -->
+                    <div class="row mb-4">
+                        <div class="col-md-3 mb-3">
+                            <div class="card stats-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-taxi fa-3x mb-3"></i>
+                                    <h3><?php echo $totalCabBookings; ?></h3>
+                                    <p>Cab Bookings</p>
+                                    <small><?php echo $pendingCabBookings; ?> Pending</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="card stats-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-route fa-3x mb-3"></i>
+                                    <h3><?php echo $totalCabRoutes; ?></h3>
+                                    <p>Active Routes</p>
+                                    <small>Cab Routes</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="card stats-card" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-rupee-sign fa-3x mb-3"></i>
+                                    <h3><?php echo formatPriceINR($cabRevenue); ?></h3>
+                                    <p>Cab Revenue</p>
+                                    <small>Paid Bookings</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="card stats-card" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-chart-line fa-3x mb-3"></i>
+                                    <h3><?php echo $totalCabRoutes + $totalCabBookings; ?></h3>
+                                    <p>Total Cab System</p>
+                                    <small>Routes + Bookings</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <div class="row">
                         <div class="col-md-8">
                             <div class="card">
@@ -306,6 +378,24 @@ try {
                                                 <?php if ($newContacts > 0): ?>
                                                     <span class="badge bg-danger ms-1"><?php echo $newContacts; ?></span>
                                                 <?php endif; ?>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <a href="cab-routes.php" class="btn btn-primary w-100">
+                                                <i class="fas fa-route me-2"></i>Cab Routes
+                                            </a>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <a href="cab-bookings.php" class="btn btn-success w-100">
+                                                <i class="fas fa-taxi me-2"></i>Cab Bookings
+                                                <?php if ($pendingCabBookings > 0): ?>
+                                                    <span class="badge bg-warning ms-1"><?php echo $pendingCabBookings; ?></span>
+                                                <?php endif; ?>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <a href="cab-reports.php" class="btn btn-info w-100">
+                                                <i class="fas fa-chart-line me-2"></i>Cab Reports
                                             </a>
                                         </div>
                                     </div>
@@ -423,6 +513,29 @@ try {
                                                 </a>
                                                 <a href="../booking.php" class="list-group-item list-group-item-action py-2" target="_blank">
                                                     <i class="fas fa-external-link-alt me-2"></i>View Booking Form
+                                                </a>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Cab Management -->
+                                        <div class="col-md-3 mb-4">
+                                            <h6 class="text-danger border-bottom pb-2"><i class="fas fa-taxi me-2"></i>Cab Management</h6>
+                                            <div class="list-group list-group-flush">
+                                                <a href="cab-routes.php" class="list-group-item list-group-item-action py-2">
+                                                    <i class="fas fa-route me-2"></i>Cab Routes (<?php echo $totalCabRoutes; ?>)
+                                                </a>
+                                                <a href="cab-bookings.php" class="list-group-item list-group-item-action py-2">
+                                                    <i class="fas fa-taxi me-2"></i>Cab Bookings (<?php echo $totalCabBookings; ?>)
+                                                    <?php if ($pendingCabBookings > 0): ?>
+                                                        <span class="badge bg-warning ms-2"><?php echo $pendingCabBookings; ?></span>
+                                                    <?php endif; ?>
+                                                </a>
+                                                <a href="cab-reports.php" class="list-group-item list-group-item-action py-2">
+                                                    <i class="fas fa-chart-line me-2"></i>Cab Reports
+                                                    <span class="badge bg-info ms-2">Analytics</span>
+                                                </a>
+                                                <a href="cab-route-pricing.php" class="list-group-item list-group-item-action py-2">
+                                                    <i class="fas fa-dollar-sign me-2"></i>Route Pricing
                                                 </a>
                                             </div>
                                         </div>

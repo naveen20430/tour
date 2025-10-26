@@ -82,6 +82,15 @@ try {
                     <a class="nav-link" href="bookings.php">
                         <i class="fas fa-calendar-check me-2"></i> Bookings
                     </a>
+                    <a class="nav-link" href="cab-routes.php">
+                        <i class="fas fa-route me-2"></i> Cab Routes
+                    </a>
+                    <a class="nav-link" href="cab-bookings.php">
+                        <i class="fas fa-taxi me-2"></i> Cab Bookings
+                    </a>
+                    <a class="nav-link" href="cab-reports.php">
+                        <i class="fas fa-chart-line me-2"></i> Cab Reports
+                    </a>
                     <a class="nav-link" href="blog.php">
                         <i class="fas fa-blog me-2"></i> Blog Posts
                     </a>
@@ -124,6 +133,10 @@ try {
                                 case 'bookings': echo 'Bookings Management'; break;
                                 case 'booking-add': echo 'Add New Booking'; break;
                                 case 'booking-edit': echo 'Edit Booking'; break;
+                                case 'cab-routes': echo 'Cab Routes Management'; break;
+                                case 'cab-route-pricing': echo 'Cab Route Pricing'; break;
+                                case 'cab-bookings': echo 'Cab Bookings Management'; break;
+                                case 'cab-reports': echo 'Cab Bookings Reports'; break;
                                 case 'blog': echo 'Blog Management'; break;
                                 case 'users': echo 'Users Management'; break;
                                 case 'contacts': echo 'Contact Messages'; break;
