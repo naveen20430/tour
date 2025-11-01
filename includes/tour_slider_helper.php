@@ -208,14 +208,7 @@ function renderTourSlider($tours) {
                 
                 <!-- Navigation arrows -->
                 <?php if ($show_arrows): ?>
-                <div class="tour-slider-nav">
-                    <div class="tour-slider-prev">
-                        <i class="flaticon-arrow-2"></i>
-                    </div>
-                    <div class="tour-slider-next">
-                        <i class="flaticon-arrow-2"></i>
-                    </div>
-                </div>
+           
                 <?php endif; ?>
                 
                 <!-- Dots navigation -->
@@ -569,18 +562,7 @@ function displayTourCarousel($limit = 9) {
                 </div>
                 
                 <!-- Custom navigation - Hidden -->
-                <div class="tour-carousel-nav" style="display: none !important;">
-                    <div class="tour-carousel-prev" style="position: absolute; top: 50%; left: -25px; transform: translateY(-50%); width: 50px; height: 50px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); transition: all 0.3s ease;">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="margin: 0; padding: 0;">
-                            <path d="M15 18L9 12L15 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    <div class="tour-carousel-next" style="position: absolute; top: 50%; right: -25px; transform: translateY(-50%); width: 50px; height: 50px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); transition: all 0.3s ease;">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="margin: 0; padding: 0;">
-                            <path d="M9 18L15 12L9 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                </div>
+             
             </div>
             
             <div class="text-center mt-5 scroll-reveal">
