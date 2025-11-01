@@ -170,16 +170,9 @@
 	                    <span></span>
 	                    <span></span>
 	                </div><!-- /.mobile-nav__toggler -->
-					<a href="#" class="search-toggler main-header__search">
-						<i class="flaticon-search" aria-hidden="true"></i>
-						<!-- Fallback icon if flaticon doesn't load -->
-						<i class="fas fa-search" aria-hidden="true" style="display: none;"></i>
-						<span class="sr-only">Search</span>
-					</a><!-- /.search-toggler -->
+				
 	                <div class="main-header__btn">
-	                    <a href="<?php echo navUrl('tours'); ?>" class="travhub-btn">
-	                        <span>Start Booking</span>
-	                    </a><!-- /.thm-btn main-header__btn -->
+	                    
 	                </div>
 	            </div><!-- /.main-header__right -->
 	        </div><!-- /.main-header__inner -->
