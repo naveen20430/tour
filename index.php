@@ -37,28 +37,49 @@ include 'includes/header.php';
         <div class="search-bar-wrapper" style="background: white; border-radius: 20px; padding: 40px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15); position: relative;">
             <h3 class="text-center mb-4" style="color: #333; font-weight: 700;">Find Your Perfect Tour</h3>
             <form id="tourSearchForm" onsubmit="return false;">
-                <div class="row g-3">
+                <div class="row g-3 align-items-end">
+                    <!-- Country -->
+                    <div class="col-lg-2 col-md-6">
+                        <div class="form-group">
+                            <label class="form-label" style="font-weight: 600; color: #667eea; margin-bottom: 8px; display: block;">
+                                <i class="flaticon-earth"></i> Country
+                            </label>
+                            <select name="country" class="form-control" 
+                                    style="border: 2px solid #e9ecef; border-radius: 10px; padding: 12px 15px; height: 48px; transition: all 0.3s ease;" 
+                                    onfocus="this.style.borderColor='#667eea'; this.style.boxShadow='0 0 0 0.2rem rgba(102, 126, 234, 0.25)'" 
+                                    onblur="this.style.borderColor='#e9ecef'; this.style.boxShadow='none'">
+                                <option value="">Select Country</option>
+                                <?php 
+                                $countries = $db->fetchAll("SELECT DISTINCT country FROM destinations WHERE status = 'active' AND country IS NOT NULL AND country != '' ORDER BY country");
+                                foreach ($countries as $country): 
+                                ?>
+                                <option value="<?php echo htmlspecialchars($country['country']); ?>"><?php echo htmlspecialchars($country['country']); ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    
                     <!-- From Location -->
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-2 col-md-6">
                         <div class="form-group">
                             <label class="form-label" style="font-weight: 600; color: #667eea; margin-bottom: 8px; display: block;">
                                 <i class="flaticon-pin-1"></i> From
                             </label>
                             <input type="text" name="from" class="form-control" placeholder="Your Location" 
-                                   style="border: 2px solid #e9ecef; border-radius: 10px; padding: 12px 15px; transition: all 0.3s ease;" 
+                                   style="border: 2px solid #e9ecef; border-radius: 10px; padding: 12px 15px; height: 48px; transition: all 0.3s ease;" 
                                    onfocus="this.style.borderColor='#667eea'; this.style.boxShadow='0 0 0 0.2rem rgba(102, 126, 234, 0.25)'" 
                                    onblur="this.style.borderColor='#e9ecef'; this.style.boxShadow='none'">
                         </div>
                     </div>
                     
                     <!-- To Location -->
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-2 col-md-6">
                         <div class="form-group">
                             <label class="form-label" style="font-weight: 600; color: #667eea; margin-bottom: 8px; display: block;">
                                 <i class="flaticon-pin-1"></i> To
                             </label>
                             <select name="destination" class="form-control" 
-                                    style="border: 2px solid #e9ecef; border-radius: 10px; padding: 12px 15px; transition: all 0.3s ease;" 
+                                    style="border: 2px solid #e9ecef; border-radius: 10px; padding: 12px 15px; height: 48px; transition: all 0.3s ease;" 
                                     onfocus="this.style.borderColor='#667eea'; this.style.boxShadow='0 0 0 0.2rem rgba(102, 126, 234, 0.25)'" 
                                     onblur="this.style.borderColor='#e9ecef'; this.style.boxShadow='none'">
                                 <option value="">Select Destination</option>
@@ -79,7 +100,7 @@ include 'includes/header.php';
                                 <i class="flaticon-calendar"></i> Travel Date
                             </label>
                             <input type="date" name="travel_date" class="form-control" min="<?php echo date('Y-m-d'); ?>" 
-                                   style="border: 2px solid #e9ecef; border-radius: 10px; padding: 12px 15px; transition: all 0.3s ease;" 
+                                   style="border: 2px solid #e9ecef; border-radius: 10px; padding: 12px 15px; height: 48px; transition: all 0.3s ease;" 
                                    onfocus="this.style.borderColor='#667eea'; this.style.boxShadow='0 0 0 0.2rem rgba(102, 126, 234, 0.25)'" 
                                    onblur="this.style.borderColor='#e9ecef'; this.style.boxShadow='none'">
                         </div>
@@ -92,7 +113,7 @@ include 'includes/header.php';
                                 <i class="flaticon-calendar"></i> Return Date
                             </label>
                             <input type="date" name="return_date" class="form-control" min="<?php echo date('Y-m-d'); ?>" 
-                                   style="border: 2px solid #e9ecef; border-radius: 10px; padding: 12px 15px; transition: all 0.3s ease;" 
+                                   style="border: 2px solid #e9ecef; border-radius: 10px; padding: 12px 15px; height: 48px; transition: all 0.3s ease;" 
                                    onfocus="this.style.borderColor='#667eea'; this.style.boxShadow='0 0 0 0.2rem rgba(102, 126, 234, 0.25)'" 
                                    onblur="this.style.borderColor='#e9ecef'; this.style.boxShadow='none'">
                         </div>
@@ -100,13 +121,14 @@ include 'includes/header.php';
                     
                     <!-- Search Button -->
                     <div class="col-lg-2 col-md-12">
-                        <label class="form-label d-none d-lg-block" style="visibility: hidden;">Search</label>
-                        <button type="button" onclick="showPhoneModal()" class="btn w-100"
-                                style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 10px; padding: 12px 20px; font-weight: 600; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); transition: all 0.3s ease;"
-                                onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(102, 126, 234, 0.6)'"
-                                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(102, 126, 234, 0.4)'">
-                            <i class="flaticon-search"></i> Search Tours
-                        </button>
+                        <div class="form-group">
+                            <button type="button" onclick="showPhoneModal()" class="btn w-100"
+                                    style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 10px; padding: 12px 20px; height: 48px; font-weight: 600; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); transition: all 0.3s ease;"
+                                    onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(102, 126, 234, 0.6)'"
+                                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(102, 126, 234, 0.4)'">
+                                <i class="flaticon-search"></i> Search Tours
+                            </button>
+                        </div>
                     </div>
                 </div>
             </form>
@@ -200,6 +222,8 @@ function showPhoneModal() {
     const from = document.querySelector('input[name="from"]').value;
     const destination = document.querySelector('select[name="destination"]');
     const destinationText = destination.options[destination.selectedIndex].text;
+    const country = document.querySelector('select[name="country"]');
+    const countryText = country.options[country.selectedIndex].text;
     const travelDate = document.querySelector('input[name="travel_date"]').value;
     const returnDate = document.querySelector('input[name="return_date"]').value;
     
@@ -207,6 +231,7 @@ function showPhoneModal() {
     let detailsHTML = '';
     if (from) detailsHTML += `<div><strong>From:</strong> ${from}</div>`;
     if (destination.value) detailsHTML += `<div><strong>To:</strong> ${destinationText}</div>`;
+    if (country.value) detailsHTML += `<div><strong>Country:</strong> ${countryText}</div>`;
     if (travelDate) detailsHTML += `<div><strong>Travel Date:</strong> ${travelDate}</div>`;
     if (returnDate) detailsHTML += `<div><strong>Return Date:</strong> ${returnDate}</div>`;
     
@@ -240,6 +265,7 @@ function submitSearch(event) {
     const formData = new FormData();
     formData.append('from', document.querySelector('input[name="from"]').value);
     formData.append('destination', document.querySelector('select[name="destination"]').value);
+    formData.append('country', document.querySelector('select[name="country"]').value);
     formData.append('travel_date', document.querySelector('input[name="travel_date"]').value);
     formData.append('return_date', document.querySelector('input[name="return_date"]').value);
     formData.append('phone', phone);

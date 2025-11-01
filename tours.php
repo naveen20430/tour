@@ -138,47 +138,14 @@ include 'includes/header.php';
         </div>
     </section>
 
-    <!-- Filters Section -->
+    <!-- Filters Section - Commented Out
     <section class="filter-section" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #f8f9fa 100%); padding: 40px 0; margin-bottom: 50px; position: relative; overflow: hidden;">
         <!-- Background decorative elements -->
         <div style="position: absolute; top: -30px; right: -30px; width: 120px; height: 120px; background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%); border-radius: 50%; animation: float 8s ease-in-out infinite;"></div>
         <div style="position: absolute; bottom: -50px; left: -50px; width: 180px; height: 180px; background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%); border-radius: 50%; animation: float 10s ease-in-out infinite reverse;"></div>
         
         <div class="container">
-            <form method="GET" class="row g-4" style="position: relative; z-index: 2; align-items: center;">
-                <div class="col-lg-3 col-md-4">
-                    <input type="text" class="form-control filter-input" name="search" placeholder="Search tours..." value="<?php echo htmlspecialchars($search); ?>" style="border-radius: 25px; border: none; padding: 14px 20px; background: #2c3e50; color: white; font-weight: 500; box-shadow: 0 4px 15px rgba(44, 62, 80, 0.3); transition: all 0.3s ease;">
-                </div>
-                <div class="col-lg-2 col-md-4">
-                    <select name="category" class="form-control filter-select" style="border-radius: 25px; border: none; padding: 14px 20px; background: #2c3e50; color: white; font-weight: 500; box-shadow: 0 4px 15px rgba(44, 62, 80, 0.3); transition: all 0.3s ease; appearance: none; background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23ffffff" d="M2 0L0 2h4zm0 5L0 3h4z"/></svg>'); background-repeat: no-repeat; background-position: right 15px center; background-size: 12px;">
-                        <option value="">All Categories</option>
-                        <?php foreach ($categories as $cat): ?>
-                            <option value="<?php echo $cat['slug']; ?>" <?php echo $category == $cat['slug'] ? 'selected' : ''; ?>>
-                                <?php echo htmlspecialchars($cat['name']); ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-                <div class="col-lg-2 col-md-4">
-                    <select name="difficulty" class="form-control filter-select" style="border-radius: 25px; border: none; padding: 14px 20px; background: #2c3e50; color: white; font-weight: 500; box-shadow: 0 4px 15px rgba(44, 62, 80, 0.3); transition: all 0.3s ease; appearance: none; background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23ffffff" d="M2 0L0 2h4zm0 5L0 3h4z"/></svg>'); background-repeat: no-repeat; background-position: right 15px center; background-size: 12px;">
-                        <option value="">Difficulty</option>
-                        <option value="easy" <?php echo $difficulty == 'easy' ? 'selected' : ''; ?>>Easy</option>
-                        <option value="moderate" <?php echo $difficulty == 'moderate' ? 'selected' : ''; ?>>Moderate</option>
-                        <option value="difficult" <?php echo $difficulty == 'difficult' ? 'selected' : ''; ?>>Difficult</option>
-                    </select>
-                </div>
-                <div class="col-lg-2 col-md-6">
-                    <input type="number" class="form-control filter-input" name="min_price" placeholder="Min Price" value="<?php echo $min_price; ?>" style="border-radius: 25px; border: none; padding: 14px 20px; background: #2c3e50; color: white; font-weight: 500; box-shadow: 0 4px 15px rgba(44, 62, 80, 0.3); transition: all 0.3s ease;">
-                </div>
-                <div class="col-lg-2 col-md-6">
-                    <input type="number" class="form-control filter-input" name="max_price" placeholder="Max Price" value="<?php echo $max_price; ?>" style="border-radius: 25px; border: none; padding: 14px 20px; background: #2c3e50; color: white; font-weight: 500; box-shadow: 0 4px 15px rgba(44, 62, 80, 0.3); transition: all 0.3s ease;">
-                </div>
-                <div class="col-lg-1 col-md-12 d-flex align-items-center">
-                    <button type="submit" class="btn w-100" style="border-radius: 25px; border: none; padding: 14px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; font-weight: 600; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 0.5px;">
-                        Filter
-                    </button>
-                </div>
-            </form>
+      
         </div>
         
         <style>
@@ -233,6 +200,7 @@ include 'includes/header.php';
         }
         </style>
     </section>
+    -->
 
     <!-- Tours Grid -->
     <section class="tours-grid section-space">

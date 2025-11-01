@@ -568,8 +568,8 @@ function displayTourCarousel($limit = 9) {
                     <?php endforeach; ?>
                 </div>
                 
-                <!-- Custom navigation -->
-                <div class="tour-carousel-nav">
+                <!-- Custom navigation - Hidden -->
+                <div class="tour-carousel-nav" style="display: none !important;">
                     <div class="tour-carousel-prev" style="position: absolute; top: 50%; left: -25px; transform: translateY(-50%); width: 50px; height: 50px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); transition: all 0.3s ease;">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="margin: 0; padding: 0;">
                             <path d="M15 18L9 12L15 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

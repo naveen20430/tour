@@ -510,28 +510,14 @@
     transform: scale(1.2);
 }
 
-/* Tour Carousel Navigation */
+/* Tour Carousel Navigation - HIDDEN */
 .tour-carousel-nav {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 100%;
-    pointer-events: none;
+    display: none !important;
 }
 
 .tour-carousel-prev,
 .tour-carousel-next {
-    pointer-events: all;
-    transition: all 0.3s ease;
-    border: none;
-    outline: none;
-}
-
-.tour-carousel-prev:hover,
-.tour-carousel-next:hover {
-    transform: translateY(-50%) scale(1.1) !important;
-    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6) !important;
+    display: none !important;
 }
 
 /* Tour Carousel Card Enhancements */
