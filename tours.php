@@ -4,6 +4,7 @@ require_once 'config/config.php';
 // Get search and filter parameters
 $search = $_GET['search'] ?? '';
 $category = $_GET['category'] ?? '';
+$destination = $_GET['destination'] ?? '';
 $min_price = $_GET['min_price'] ?? '';
 $max_price = $_GET['max_price'] ?? '';
 $difficulty = $_GET['difficulty'] ?? '';
@@ -23,6 +24,11 @@ if ($search) {
 if ($category) {
     $where_conditions[] = 'tc.slug = ?';
     $params[] = $category;
+}
+
+if ($destination) {
+    $where_conditions[] = 'd.slug = ?';
+    $params[] = $destination;
 }
 
 if ($min_price) {
@@ -238,7 +244,7 @@ include 'includes/header.php';
                         <div class="col-lg-4 col-md-6">
                             <div class="card tour-card shadow-sm">
                                 <div class="position-relative">
-                                    <img src="<?php echo $tour['featured_image'] ?: 'assets/images/tours/default-tour.jpg'; ?>" 
+                                    <img src="<?php echo $tour['featured_image'] ?: '/assets/images/tours/default-tour.jpg'; ?>" 
                                          class="tour-image" alt="<?php echo htmlspecialchars($tour['title']); ?>">
                                     
                                     <?php if ($tour['featured']): ?>
