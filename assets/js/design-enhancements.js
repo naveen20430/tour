@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Design Enhancements & Interactive Animations
  * Modern JavaScript improvements for better user experience
  */
@@ -509,7 +509,7 @@ document.addEventListener('DOMContentLoaded', function() {
             left: 0;
             width: 0%;
             height: 3px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #1bbc9b;
             z-index: 9999;
             transition: width 0.1s ease-out;
         `;

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once 'config/config.php';
 require_once 'includes/cab_options.php';
 
@@ -84,7 +84,7 @@ $extra_css = '
         color: white;
     }
     .price-box {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: #1bbc9b;
         color: white;
         padding: 30px;
         border-radius: 15px;
@@ -156,7 +156,7 @@ include 'includes/header.php';
     <section class="photo-collage-section" style="padding: 80px 0; background: #ffffff;">
         <div class="container">
             <div class="text-center mb-5">
-                <span class="badge" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; margin-bottom: 15px;">
+                <span class="badge" style="background: #1bbc9b; color: white; padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; margin-bottom: 15px;">
                     📸 Photo Gallery
                 </span>
                 <h2 class="mb-3" style="font-size: 2.5rem; font-weight: 700; color: #2c3e50;">Explore <?php echo htmlspecialchars($tour['title']); ?></h2>

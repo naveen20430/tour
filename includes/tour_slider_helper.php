@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Tour Slider Helper Functions
  * Replaces hero section with dynamic tour slider
@@ -307,7 +307,7 @@ function displayTourCarousel($limit = 9) {
         transform: translateY(-50%);
         width: 45px;
         height: 45px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: #1bbc9b;
         border-radius: 50%;
         display: flex;
         align-items: center;
@@ -369,7 +369,7 @@ function displayTourCarousel($limit = 9) {
     
     .tour-carousel .owl-dot.active,
     .tour-carousel .owl-dot:hover {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: #1bbc9b;
         transform: scale(1.3);
     }
     
@@ -442,7 +442,7 @@ function displayTourCarousel($limit = 9) {
         <div class="container">
             <div class="section-title text-center scroll-reveal" style="margin-bottom: 60px;">
                 <div style="margin-bottom: 15px;">
-                    <span class="badge" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 8px 16px; border-radius: 20px; font-size: 0.9rem;">
+                    <span class="badge" style="background: #1bbc9b; color: white; padding: 8px 16px; border-radius: 20px; font-size: 0.9rem;">
                         🌟 Featured Tours
                     </span>
                 </div>
@@ -450,7 +450,7 @@ function displayTourCarousel($limit = 9) {
                 <p style="font-size: 1.1rem; color: #6c757d; max-width: 500px; margin: 0 auto; line-height: 1.6;">
                     Explore our handpicked selection of the most popular tours and destinations
                 </p>
-                <div style="width: 80px; height: 4px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); margin: 20px auto 0; border-radius: 2px;"></div>
+                <div style="width: 80px; height: 4px; background: #1bbc9b; margin: 20px auto 0; border-radius: 2px;"></div>
             </div>
             
             <div class="tour-carousel-container">
@@ -524,7 +524,7 @@ function displayTourCarousel($limit = 9) {
                                 </div>
                                 
                                 <h5 class="card-title" style="margin-bottom: 12px; font-size: 1.25rem; font-weight: 700; line-height: 1.3; color: #111827; height: 52px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">
-                                    <a href="<?php echo BASE_URL; ?>tour-details.php?id=<?php echo $tour['id']; ?>" class="text-decoration-none" style="color: inherit; transition: all 0.3s ease;" onmouseover="this.style.color='#4f46e5'" onmouseout="this.style.color='#111827'">
+                                    <a href="<?php echo BASE_URL; ?>tour-details.php?id=<?php echo $tour['id']; ?>" class="text-decoration-none" style="color: inherit; transition: all 0.3s ease;" onmouseover="this.style.color='#46e5adff'" onmouseout="this.style.color='#111827'">
                                         <?php echo htmlspecialchars($tour['title']); ?>
                                     </a>
                                 </h5>
@@ -550,7 +550,7 @@ function displayTourCarousel($limit = 9) {
                                 </div>
                                 
                                 <div class="mt-auto">
-                                    <a href="<?php echo BASE_URL; ?>tour-details.php?id=<?php echo $tour['id']; ?>" class="w-100 d-inline-block text-center text-decoration-none" style="background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); color: white; padding: 14px 20px; border-radius: 16px; font-size: 0.9rem; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 20px rgba(79, 70, 229, 0.3); position: relative; overflow: hidden;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 30px rgba(79, 70, 229, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(79, 70, 229, 0.3)'">
+                                    <a href="<?php echo BASE_URL; ?>tour-details.php?id=<?php echo $tour['id']; ?>" class="w-100 d-inline-block text-center text-decoration-none" style="background: #1bbc9b; color: white; padding: 14px 20px; border-radius: 16px; font-size: 0.9rem; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 20px rgba(79, 70, 229, 0.3); position: relative; overflow: hidden;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 30px rgba(79, 70, 229, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(79, 70, 229, 0.3)'">
                                         <span style="position: relative; z-index: 1;">Explore Details</span>
                                         <div style="position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: left 0.6s ease;"></div>
                                     </a>

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once 'config/config.php';
 
 // Get search and filter parameters
@@ -92,7 +92,7 @@ $extra_css = '
         position: absolute;
         top: 15px;
         right: 15px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: #1bbc9b;
         color: white;
         padding: 8px 15px;
         border-radius: 25px;
@@ -209,7 +209,7 @@ include 'includes/header.php';
                 <div class="col-lg-12">
                     <div class="section-title text-center scroll-reveal" style="margin-bottom: 60px;">
                         <div style="margin-bottom: 15px;">
-                            <span class="badge" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);">
+                            <span class="badge" style="background: #1bbc9b; color: white; padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);">
                                 ✨ Discover Amazing
                             </span>
                         </div>
@@ -217,7 +217,7 @@ include 'includes/header.php';
                         <p style="font-size: 1.1rem; color: #6c757d; max-width: 500px; margin: 0 auto; line-height: 1.6;">
                             Choose from our carefully curated selection of tours designed to give you the best travel experience
                         </p>
-                        <div style="width: 80px; height: 4px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); margin: 20px auto 0; border-radius: 2px;"></div>
+                        <div style="width: 80px; height: 4px; background: #1bbc9b; margin: 20px auto 0; border-radius: 2px;"></div>
                     </div>
                 </div>
             </div>

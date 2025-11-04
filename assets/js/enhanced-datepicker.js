@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Enhanced Datepicker with Floating Labels
  * Provides modern UX improvements for datepicker inputs
  */
@@ -197,7 +197,7 @@ function createRippleEffect(input) {
         left: 20px;
         width: 4px;
         height: 4px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: #1bbc9b;
         border-radius: 50%;
         transform: translate(-50%, -50%);
         animation: rippleGrow 0.6s ease-out;

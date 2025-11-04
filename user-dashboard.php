@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once 'config/config.php';
 require_once 'includes/header.php';
 
@@ -139,7 +139,7 @@ if ($_POST && isset($_POST['action']) && $_POST['action'] == 'change_password') 
         border-radius: 20px;
     }
     .nav-pills .nav-link.active {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: #1bbc9b;
     }
 </style>
 

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once 'config/config.php';
 
 // Try to include cab options, but handle gracefully if not available
@@ -138,7 +138,7 @@ if ($cab_functionality_enabled) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        .booking-container { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 50px 0; }
+        .booking-container { background: #1bbc9b; min-height: 100vh; padding: 50px 0; }
         .booking-card { background: white; border-radius: 15px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
         .tour-info { background: #f8f9fa; border-radius: 10px; padding: 20px; margin-bottom: 30px; }
         .price-display { font-size: 2em; font-weight: bold; color: #667eea; }

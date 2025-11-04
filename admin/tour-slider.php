@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once '../config/config.php';
 
 // Check admin login
@@ -450,7 +450,7 @@ include 'includes/header.php';
 }
 
 .slider-stats-card {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #1bbc9b;
     color: white;
     border-radius: 15px;
 }

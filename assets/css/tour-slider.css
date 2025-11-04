@@ -1,4 +1,4 @@
-/* ========================================
+﻿/* ========================================
    TOUR SLIDER STYLES
    ======================================== */
 
@@ -162,7 +162,7 @@
    ======================================== */
 
 .travhub-btn--primary {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #1bbc9b;
     color: white;
     padding: 15px 30px;
     border-radius: 30px;
@@ -506,7 +506,7 @@
 
 .tour-carousel .owl-dot.active,
 .tour-carousel .owl-dot:hover {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #1bbc9b;
     transform: scale(1.2);
 }
 

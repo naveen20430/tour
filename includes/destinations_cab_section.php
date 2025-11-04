@@ -1,4 +1,4 @@
-<!-- Destinations & Cab Facilities Section -->
+﻿<!-- Destinations & Cab Facilities Section -->
 <section class="destinations-cab-section section-space" style="background: #f8f9fa; padding: 60px 0;">
     <div class="container">
         <div class="row">
@@ -36,7 +36,7 @@
                         <div class="swiper-wrapper">
                             <?php foreach ($destination_tours as $tour): ?>
                             <div class="swiper-slide">
-                                <div class="card h-100" style="border: none; border-radius: 1px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.1); transition: all 0.3s ease; position: relative;">
+                                <div class="card" style="border: none; border-radius: 1px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.1); transition: all 0.3s ease; position: relative;">
                                     <!-- Featured Badge -->
                                     <?php if ($tour['featured']): ?>
                                     <div style="position: absolute; top: 15px; left: 15px; z-index: 10;">
@@ -91,7 +91,7 @@
                                         </div>
                                         
                                         <!-- Action Button -->
-                                        <a href="<?php echo tourUrl($tour['slug']); ?>" class="btn w-100" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 12px; padding: 12px; font-weight: 600; transition: all 0.3s ease;">
+                                        <a href="<?php echo tourUrl($tour['slug']); ?>" class="btn w-100" style="background: #1bbc9b; color: white; border: none; border-radius: 12px; padding: 12px; font-weight: 600; transition: all 0.3s ease;">
                                             Explore Details
                                         </a>
                                     </div>
@@ -118,7 +118,7 @@
             <!-- 20% - Cab Routes Sidebar -->
             <div class="col-lg-3 col-md-12">
                 <div class="cab-routes-sidebar" style="position: sticky; top: 80px;">
-                    <div class="section-header mb-4" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 15px; border-radius: 12px; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);">
+                    <div class="section-header mb-4" style="background: #1bbc9b; padding: 15px; border-radius: 0px; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);">
                         <h4 style="font-size: 1.2rem; font-weight: 700; color: white; margin-bottom: 5px;">
                             <i class="fas fa-route"></i> 🚗 Transport Facilities
                         </h4>
@@ -138,9 +138,9 @@
                         
                         $starting_price = $cheapest['min_price'] ?? 0;
                     ?>
-                    <div class="card mb-3" style="border: none; border-radius: 15px; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.15); transition: all 0.3s ease; overflow: hidden; background: white;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(102, 126, 234, 0.25)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(102, 126, 234, 0.15)'">
+                    <div class="card mb-3" style="border: none; border-radius: 0px; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.15); transition: all 0.3s ease; overflow: hidden; background: white;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(102, 126, 234, 0.25)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(102, 126, 234, 0.15)'">
                         <!-- Route Header with Gradient -->
-                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 12px 15px;">
+                        <div style="background: #1bbc9b; padding: 12px 15px;">
                             <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
                                 <div style="display: flex; align-items: center; gap: 8px;">
                                     <i class="fas fa-map-marker-alt" style="color: white; font-size: 0.9rem;"></i>
@@ -156,13 +156,13 @@
                             <!-- Distance & Duration -->
                             <div style="display: flex; gap: 12px; justify-content: center;">
                                 <?php if ($route['distance_km'] > 0): ?>
-                                <div style="background: rgba(255,255,255,0.2); padding: 4px 10px; border-radius: 12px; display: flex; align-items: center; gap: 5px;">
+                                <div style="background: #1bbc9b; padding: 4px 10px; border-radius: 12px; display: flex; align-items: center; gap: 5px;">
                                     <i class="fas fa-road" style="color: white; font-size: 0.7rem;"></i>
                                     <span style="color: white; font-weight: 600; font-size: 0.7rem;"><?php echo $route['distance_km']; ?>km</span>
                                 </div>
                                 <?php endif; ?>
                                 <?php if (!empty($route['estimated_duration'])): ?>
-                                <div style="background: rgba(255,255,255,0.2); padding: 4px 10px; border-radius: 12px; display: flex; align-items: center; gap: 5px;">
+                                <div style="background: #1bbc9b; padding: 4px 10px; border-radius: 12px; display: flex; align-items: center; gap: 5px;">
                                     <i class="fas fa-clock" style="color: white; font-size: 0.7rem;"></i>
                                     <span style="color: white; font-weight: 600; font-size: 0.7rem;"><?php echo htmlspecialchars($route['estimated_duration']); ?></span>
                                 </div>
@@ -176,7 +176,7 @@
                             <?php if ($starting_price > 0): ?>
                             <div style="margin-bottom: 12px;">
                                 <div style="font-size: 0.75rem; color: #6c757d; font-weight: 500; margin-bottom: 5px;">Starts from</div>
-                                <div style="font-size: 1.5rem; font-weight: 700; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                                <div style="font-size: 1.5rem; font-weight: 700; background: #1bbc9b; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
                                     <?php echo formatPriceINR($starting_price); ?>
                                 </div>
                             </div>
@@ -187,7 +187,7 @@
                             <?php endif; ?>
                             
                             <!-- View Details Button -->
-                            <a href="<?php echo BASE_URL; ?>cab-route-details.php?route_id=<?php echo $route['id']; ?>" class="btn w-100" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 10px; padding: 10px 15px; font-weight: 600; font-size: 0.8rem; box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3); transition: all 0.3s ease;" onmouseover="this.style.boxShadow='0 6px 18px rgba(102, 126, 234, 0.5)'" onmouseout="this.style.boxShadow='0 4px 12px rgba(102, 126, 234, 0.3)'">
+                            <a href="<?php echo BASE_URL; ?>cab-route-details.php?route_id=<?php echo $route['id']; ?>" class="btn w-100" style="background: #1bbc9b; color: white; border: none; border-radius: 10px; padding: 10px 15px; font-weight: 600; font-size: 0.8rem; box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3); transition: all 0.3s ease;" onmouseover="this.style.boxShadow='0 6px 18px rgba(102, 126, 234, 0.5)'" onmouseout="this.style.boxShadow='0 4px 12px rgba(102, 126, 234, 0.3)'">
                                 <i class="fas fa-info-circle"></i> View Details
                             </a>
                         </div>
@@ -195,7 +195,7 @@
                     <?php endforeach; ?>
                     
                     <!-- Help Card -->
-                    <div class="card" style="border: none; border-radius: 12px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);">
+                    <div class="card" style="border: none; border-radius: 12px; background: #1bbc9b; color: white; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);">
                         <div class="card-body text-center" style="padding: 15px 10px;">
                             <i class="fas fa-headset fa-2x mb-2"></i>
                             <h6 style="font-weight: 700; margin-bottom: 8px; font-size: 0.9rem;">Need Help?</h6>
@@ -220,11 +220,23 @@
 }
 
 .swiper-slide {
-    height: auto;
+    height: auto !important;
 }
 
 .swiper-slide .card {
-    height: 100%;
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.swiper-slide .card .card-body {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.swiper-slide .card .btn {
+    margin-top: auto !important;
 }
 
 /* Navigation Buttons - Hidden */
@@ -254,7 +266,7 @@
 
 .card {
     border: none !important;
-    /* border-radius: 20px !important; */
+    border-radius: 0px !important; 
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1) !important;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
     overflow: hidden !important;

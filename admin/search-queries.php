@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once '../config/config.php';
 requireLogin();
 
@@ -109,7 +109,7 @@ try {
         .sidebar .nav-link:hover, .sidebar .nav-link.active { color: #fff; background: #34495e; }
         .main-content { background: #ecf0f1; min-height: 100vh; }
         .stats-card { 
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+            background: #1bbc9b; 
             color: white; 
             border-radius: 15px; 
             transition: transform 0.2s;

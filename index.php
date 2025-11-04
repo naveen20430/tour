@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once 'config/config.php';
 require_once 'includes/tour_slider_helper.php';
 
@@ -123,7 +123,7 @@ include 'includes/header.php';
                     <div class="col-lg-2 col-md-12">
                         <div class="form-group">
                             <button type="button" onclick="showPhoneModal()" class="btn w-100"
-                                    style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 10px; padding: 12px 20px; height: 48px; font-weight: 600; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); transition: all 0.3s ease;"
+                                    style="background: #1bbc9b; color: white; border: none; border-radius: 10px; padding: 12px 20px; height: 48px; font-weight: 600; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); transition: all 0.3s ease;"
                                     onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(102, 126, 234, 0.6)'"
                                     onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(102, 126, 234, 0.4)'">
                                 <i class="flaticon-search"></i> Search Tours
@@ -139,7 +139,7 @@ include 'includes/header.php';
 <!-- Phone Number Modal -->
 <div id="phoneModal" class="modal" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); overflow: auto;">
     <div class="modal-content" style="background-color: white; margin: 8% auto; padding: 0; border-radius: 20px; max-width: 500px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); animation: slideDown 0.3s ease;">
-        <div class="modal-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 25px 30px; border-radius: 20px 20px 0 0; position: relative;">
+        <div class="modal-header" style="background: #1bbc9b; color: white; padding: 25px 30px; border-radius: 20px 20px 0 0; position: relative;">
             <h4 style="margin: 0; font-weight: 700;"><i class="flaticon-search"></i> Confirm Your Search</h4>
             <span onclick="closePhoneModal()" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); font-size: 28px; font-weight: bold; color: white; cursor: pointer; line-height: 1;">&times;</span>
         </div>
@@ -169,7 +169,7 @@ include 'includes/header.php';
                         Cancel
                     </button>
                     <button type="submit" class="btn" 
-                            style="flex: 1; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 10px; padding: 12px 20px; font-weight: 600; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); transition: all 0.3s ease;"
+                            style="flex: 1; background: #1bbc9b; color: white; border: none; border-radius: 10px; padding: 12px 20px; font-weight: 600; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); transition: all 0.3s ease;"
                             onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(102, 126, 234, 0.6)'"
                             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(102, 126, 234, 0.4)'">
                         <i class="flaticon-search"></i> Search Tours
@@ -337,7 +337,7 @@ document.addEventListener('keydown', function(event) {
                 <div class="col-lg-12">
                     <div class="text-center scroll-reveal" style="z-index: 2; position: relative;">
                         <div style="margin-bottom: 30px;">
-                            <span class="badge bg-primary" style="padding: 8px 20px; font-size: 0.9rem; border-radius: 25px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;">✈️ Premium Travel Experience</span>
+                            <span class="badge bg-primary" style="padding: 8px 20px; font-size: 0.9rem; border-radius: 25px; background: #1bbc9b !important;">✈️ Premium Travel Experience</span>
                         </div>
                         
                         <h2 class="gradient-text" style="font-size: 3.5rem; font-weight: 700; margin-bottom: 20px; line-height: 1.2;">Welcome to <?php echo getSetting('site_name'); ?></h2>

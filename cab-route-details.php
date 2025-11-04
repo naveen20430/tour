@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once 'config/config.php';
 require_once 'includes/header.php';
 
@@ -114,7 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <style>
     .route-hero {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: #1bbc9b;
         color: white;
         padding: 60px 0;
         margin-bottom: 40px;
@@ -393,7 +393,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
 
                         <button type="submit" class="btn w-100 mt-3" 
-                                style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+                                style="background: #1bbc9b; 
                                        color: white; border: none; border-radius: 10px; padding: 12px; 
                                        font-weight: 600; font-size: 1.1rem;">
                             <i class="fas fa-check-circle"></i> Confirm Booking

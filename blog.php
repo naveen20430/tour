@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once 'config/config.php';
 
 // Set page variables
@@ -86,7 +86,7 @@ $extra_css = '
         width: 100%;
     }
     .blog-hero {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: #1bbc9b;
         color: white;
         padding: 80px 0;
         text-align: center;
@@ -103,7 +103,7 @@ $extra_css = '
         font-weight: bold;
     }
     .category-badge {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: #1bbc9b;
         color: white;
         padding: 4px 12px;
         border-radius: 15px;

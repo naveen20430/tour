@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once '../config/config.php';
 requireLogin();
 
@@ -90,7 +90,7 @@ $countries = $db->fetchAll("SELECT DISTINCT country FROM users WHERE country IS 
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #1bbc9b;
             display: inline-flex;
             align-items: center;
             justify-content: center;

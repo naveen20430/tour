@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once '../config/config.php';
 requireLogin();
 
@@ -81,7 +81,7 @@ $pricing_data = $db->fetchAll("
         .cab-icon {
             width: 70px;
             height: 70px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #1bbc9b;
             border-radius: 15px;
             display: flex;
             align-items: center;
@@ -90,7 +90,7 @@ $pricing_data = $db->fetchAll("
             font-size: 2rem;
         }
         .input-group-text {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #1bbc9b;
             color: white;
             border: none;
             font-weight: 600;
@@ -145,7 +145,7 @@ $pricing_data = $db->fetchAll("
                     <?php endif; ?>
 
                     <!-- Route Info Card -->
-                    <div class="card mb-4" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                    <div class="card mb-4" style="background: #1bbc9b; color: white;">
                         <div class="card-body">
                             <div class="d-flex align-items-center gap-3">
                                 <i class="fas fa-route fa-3x"></i>

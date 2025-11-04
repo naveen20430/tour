@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once 'config/config.php';
 
 // Redirect if already logged in
@@ -74,7 +74,7 @@ if (isset($_GET['registered']) && $_GET['registered'] == '1') {
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         body { 
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+            background: #1bbc9b; 
             min-height: 100vh; 
             display: flex; 
             align-items: center; 
@@ -87,7 +87,7 @@ if (isset($_GET['registered']) && $_GET['registered'] == '1') {
             overflow: hidden;
         }
         .login-header { 
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+            background: #1bbc9b; 
             color: white; 
         }
         .form-control:focus {
@@ -95,7 +95,7 @@ if (isset($_GET['registered']) && $_GET['registered'] == '1') {
             box-shadow: 0 0 0 0.25rem rgba(102, 126, 234, 0.25);
         }
         .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #1bbc9b;
             border: none;
         }
         .btn-primary:hover {
