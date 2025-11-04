@@ -61,6 +61,321 @@ $current_page = 'tours';
 $extra_css = '
 
 <style>
+
+/* Enhanced Price Box Design */
+.price-box {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 0;
+    border-radius: 20px;
+    position: sticky;
+    top: 100px;
+    box-shadow: 0 20px 60px rgba(102, 126, 234, 0.4);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.price-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 25px 70px rgba(102, 126, 234, 0.5);
+}
+
+/* Price Header Section */
+.price-box .price-header {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.price-box .price-amount {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 5px;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.price-box .price-original {
+    font-size: 1.5rem;
+    text-decoration: line-through;
+    opacity: 0.6;
+    margin-right: 10px;
+}
+
+.price-box .price-discount {
+    background: linear-gradient(135deg, #f09433 0%, #e6683c 100%);
+    color: white;
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: inline-block;
+    margin-top: 10px;
+    box-shadow: 0 4px 15px rgba(240, 148, 51, 0.4);
+}
+
+.price-box .price-label {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    margin-top: 10px;
+}
+
+/* Price Body Section */
+.price-box .price-body {
+    padding: 30px;
+}
+
+.price-box .tour-info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.price-box .tour-info-item:last-child {
+    border-bottom: none;
+}
+
+.price-box .tour-info-item:hover {
+    padding-left: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    margin: 0 -10px;
+    padding-right: 10px;
+    border-radius: 10px;
+}
+
+.price-box .tour-info-item i {
+    color: #ffd700;
+    margin-right: 10px;
+    font-size: 1.1rem;
+}
+
+.price-box .tour-info-item .label {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    opacity: 0.95;
+}
+
+.price-box .tour-info-item .value {
+    font-weight: 700;
+    font-size: 1.05rem;
+}
+
+/* Form Section */
+.price-box .booking-form {
+    padding: 0 30px 30px 30px;
+}
+
+.price-box .form-label {
+    color: white;
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.price-box .form-label i {
+    color: #ffd700;
+}
+
+.price-box .form-control,
+.price-box .form-select {
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 12px 15px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.price-box .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.price-box .form-control:focus,
+.price-box .form-select:focus {
+    border-color: #ffd700;
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
+    outline: none;
+    color: white;
+}
+
+.price-box .form-select option {
+    background: #764ba2;
+    color: white;
+}
+
+.price-box .form-text {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.75rem;
+    margin-top: 5px;
+    display: block;
+}
+
+/* Book Button */
+.price-box .btn-book {
+    background: linear-gradient(135deg, #1bbc9b 0%, #17a689 100%);
+    color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 15px 30px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    width: 100%;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(27, 188, 155, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.price-box .btn-book::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.price-box .btn-book:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 40px rgba(27, 188, 155, 0.6);
+}
+
+.price-box .btn-book:hover::before {
+    left: 100%;
+}
+
+.price-box .btn-book:active {
+    transform: translateY(0);
+}
+
+.price-box .btn-book i {
+    margin-right: 10px;
+}
+
+/* Security Badge */
+.price-box .security-badge {
+    text-align: center;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    margin: 20px 30px 0 30px;
+    border-radius: 12px;
+}
+
+.price-box .security-badge i {
+    color: #ffd700;
+    margin-right: 8px;
+}
+
+/* Divider */
+.price-box .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    margin: 25px 30px;
+}
+
+/* Contact Section */
+.price-box .contact-section {
+    padding: 0 30px 30px 30px;
+}
+
+.price-box .contact-section h6 {
+    font-weight: 700;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.price-box .contact-section h6 i {
+    color: #ffd700;
+}
+
+.price-box .contact-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.price-box .contact-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateX(5px);
+}
+
+.price-box .contact-item i {
+    color: #ffd700;
+    margin-right: 12px;
+    font-size: 1.1rem;
+    width: 20px;
+    text-align: center;
+}
+
+.price-box .contact-item a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 991px) {
+    .price-box {
+        position: relative;
+        top: 0;
+        margin-top: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .price-box .price-amount {
+        font-size: 2.5rem;
+    }
+    
+    .price-box .price-header,
+    .price-box .price-body,
+    .price-box .booking-form,
+    .price-box .contact-section {
+        padding: 20px;
+    }
+}
+
+/* Animation for elements */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.price-box .tour-info-item {
+    animation: slideInRight 0.5s ease forwards;
+}
+
+.price-box .tour-info-item:nth-child(1) { animation-delay: 0.1s; }
+.price-box .tour-info-item:nth-child(2) { animation-delay: 0.2s; }
+.price-box .tour-info-item:nth-child(3) { animation-delay: 0.3s; }
+.price-box .tour-info-item:nth-child(4) { animation-delay: 0.4s; }
     .tour-hero {
         height: 400px;
         background-size: cover;
@@ -87,7 +402,7 @@ $extra_css = '
         background: #1bbc9b;
         color: white;
         padding: 30px;
-        border-radius: 15px;
+        border-radius: 0px;
         position: sticky;
         top: 100px;
     }
@@ -122,8 +437,9 @@ $extra_css = '
         color: #28a745;
         margin-right: 10px;
     }
-</style>';
+</style>
 
+<?php
 // Include header
 include 'includes/header.php';
 ?>
@@ -378,108 +694,133 @@ include 'includes/header.php';
                 </div>
 
                 <!-- Booking Sidebar -->
-                <div class="col-lg-4">
-                    <div class="price-box">
-                        <div class="text-center mb-3">
-                            <?php if ($tour['discount_price']): ?>
-                                <div class="h4 mb-1">
-                                    <span class="text-decoration-line-through opacity-50">₹<?php echo number_format($tour['price'], 0); ?></span>
-                                    <span class="ms-2">₹<?php echo number_format($tour['discount_price'], 0); ?></span>
-                                </div>
-                                <small class="text-light">You save ₹<?php echo number_format($tour['price'] - $tour['discount_price'], 0); ?>!</small>
-                            <?php else: ?>
-                                <div class="h3">₹<?php echo number_format($tour['price'], 0); ?></div>
-                            <?php endif; ?>
-                            <div class="small">Per Person</div>
-                        </div>
-
-                        <hr class="border-light opacity-25">
-
-                        <div class="tour-info mb-4">
-                            <div class="d-flex justify-content-between py-2">
-                                <span><i class="fas fa-calendar me-2"></i>Duration:</span>
-                                <span><?php echo $tour['duration_days']; ?> Days</span>
-                            </div>
-                            <div class="d-flex justify-content-between py-2">
-                                <span><i class="fas fa-users me-2"></i>Max People:</span>
-                                <span><?php echo $tour['max_people']; ?></span>
-                            </div>
-                            <div class="d-flex justify-content-between py-2">
-                                <span><i class="fas fa-mountain me-2"></i>Difficulty:</span>
-                                <span><?php echo ucfirst($tour['difficulty_level']); ?></span>
-                            </div>
-                            <div class="d-flex justify-content-between py-2">
-                                <span><i class="fas fa-map-marker-alt me-2"></i>Location:</span>
-                                <span><?php echo htmlspecialchars($tour['destination_name']); ?></span>
-                            </div>
-                        </div>
-
-                        <form action="<?php echo bookingUrl(); ?>" method="POST" id="quickBookingForm">
-                            <input type="hidden" name="tour_id" value="<?php echo $tour['id']; ?>">
-                            
-                            <div class="mb-3">
-                                <label class="form-label text-light">Tour Date</label>
-                                <input type="date" class="form-control" name="tour_date" required 
-                                       min="<?php echo date('Y-m-d'); ?>">
-                            </div>
-                            
-                            <div class="mb-3">
-                                <label class="form-label text-light">Number of People</label>
-                                <select class="form-control" name="people" required id="peopleSelect">
-                                    <?php for ($i = $tour['min_people']; $i <= $tour['max_people']; $i++): ?>
-                                        <option value="<?php echo $i; ?>"><?php echo $i; ?> Person<?php echo $i > 1 ? 's' : ''; ?></option>
-                                    <?php endfor; ?>
-                                </select>
-                            </div>
-                            
-                            <?php if ($cab_functionality_enabled && !empty($availableCabs)): ?>
-                            <div class="mb-3">
-                                <label class="form-label text-light">Cab Type</label>
-                                <select class="form-control" name="cab_type" required id="cabSelect">
-                                    <option value="">Select cab type...</option>
-                                    <?php foreach ($availableCabs as $cab): ?>
-                                        <option value="<?php echo $cab['value']; ?>" 
-                                                data-price="<?php echo $cab['price']; ?>"
-                                                data-max-passengers="<?php echo $cab['max_passengers']; ?>">
-                                            <?php echo htmlspecialchars($cab['text']); ?>
-                                        </option>
-                                    <?php endforeach; ?>
-                                </select>
-                                <small class="text-light opacity-75">Cab provided for entire tour duration</small>
-                            </div>
-                            <?php endif; ?>
-                            
-                            <button type="submit" class="btn btn-light w-100 fw-bold">
-                                <i class="fas fa-calendar-plus me-2"></i>Book This Tour
-                            </button>
-                        </form>
-
-                        <div class="text-center mt-3">
-                            <small class="text-light opacity-75">
-                                <i class="fas fa-shield-alt me-1"></i>
-                                Secure booking guaranteed
-                            </small>
-                        </div>
-
-                        <hr class="border-light opacity-25 mt-4">
-
-                        <div class="contact-info">
-                            <h6 class="text-light mb-3">Need Help?</h6>
-                            <div class="mb-2">
-                                <i class="fas fa-phone me-2"></i>
-                                <a href="tel:<?php echo getSetting('site_phone'); ?>" class="text-light text-decoration-none">
-                                    <?php echo getSetting('site_phone'); ?>
-                                </a>
-                            </div>
-                            <div>
-                                <i class="fas fa-envelope me-2"></i>
-                                <a href="mailto:<?php echo getSetting('site_email'); ?>" class="text-light text-decoration-none">
-                                    <?php echo getSetting('site_email'); ?>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+               <!-- Booking Sidebar -->
+<div class="col-lg-4">
+    <div class="price-box">
+        <!-- Price Header -->
+        <div class="price-header">
+            <?php if ($tour['discount_price']): ?>
+                <div>
+                    <span class="price-original">₹<?php echo number_format($tour['price'], 0); ?></span>
+                    <div class="price-amount">₹<?php echo number_format($tour['discount_price'], 0); ?></div>
                 </div>
+                <div class="price-discount">
+                    <i class="fas fa-tag"></i> Save ₹<?php echo number_format($tour['price'] - $tour['discount_price'], 0); ?>
+                </div>
+            <?php else: ?>
+                <div class="price-amount">₹<?php echo number_format($tour['price'], 0); ?></div>
+            <?php endif; ?>
+            <div class="price-label">Per Person</div>
+        </div>
+
+        <!-- Tour Info -->
+        <div class="price-body">
+            <div class="tour-info-item">
+                <span class="label">
+                    <i class="fas fa-calendar-alt"></i> Duration
+                </span>
+                <span class="value"><?php echo $tour['duration_days']; ?> Days</span>
+            </div>
+            <div class="tour-info-item">
+                <span class="label">
+                    <i class="fas fa-users"></i> Max People
+                </span>
+                <span class="value"><?php echo $tour['max_people']; ?></span>
+            </div>
+            <div class="tour-info-item">
+                <span class="label">
+                    <i class="fas fa-mountain"></i> Difficulty
+                </span>
+                <span class="value"><?php echo ucfirst($tour['difficulty_level']); ?></span>
+            </div>
+            <div class="tour-info-item">
+                <span class="label">
+                    <i class="fas fa-map-marker-alt"></i> Location
+                </span>
+                <span class="value"><?php echo htmlspecialchars($tour['destination_name']); ?></span>
+            </div>
+        </div>
+
+        <!-- Booking Form -->
+        <div class="booking-form">
+            <form action="<?php echo bookingUrl(); ?>" method="POST" id="quickBookingForm">
+                <input type="hidden" name="tour_id" value="<?php echo $tour['id']; ?>">
+                
+                <div class="mb-3">
+                    <label class="form-label">
+                        <i class="fas fa-calendar-check"></i> Tour Date
+                    </label>
+                    <input type="date" class="form-control" name="tour_date" required 
+                           min="<?php echo date('Y-m-d'); ?>">
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">
+                        <i class="fas fa-user-friends"></i> Number of People
+                    </label>
+                    <select class="form-control form-select" name="people" required id="peopleSelect">
+                        <?php for ($i = $tour['min_people']; $i <= $tour['max_people']; $i++): ?>
+                            <option value="<?php echo $i; ?>"><?php echo $i; ?> Person<?php echo $i > 1 ? 's' : ''; ?></option>
+                        <?php endfor; ?>
+                    </select>
+                </div>
+                
+                <?php if ($cab_functionality_enabled && !empty($availableCabs)): ?>
+                <div class="mb-3">
+                    <label class="form-label">
+                        <i class="fas fa-car"></i> Cab Type
+                    </label>
+                    <select class="form-control form-select" name="cab_type" required id="cabSelect">
+                        <option value="">Select cab type...</option>
+                        <?php foreach ($availableCabs as $cab): ?>
+                            <option value="<?php echo $cab['value']; ?>" 
+                                    data-price="<?php echo $cab['price']; ?>"
+                                    data-max-passengers="<?php echo $cab['max_passengers']; ?>">
+                                <?php echo htmlspecialchars($cab['text']); ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                    <small class="form-text">
+                        <i class="fas fa-info-circle"></i> Cab provided for entire tour duration
+                    </small>
+                </div>
+                <?php endif; ?>
+                
+                <button type="submit" class="btn-book">
+                    <i class="fas fa-calendar-plus"></i> Book This Tour
+                </button>
+            </form>
+
+            <div class="security-badge">
+                <small>
+                    <i class="fas fa-shield-alt"></i>
+                    Secure booking guaranteed
+                </small>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Contact Section -->
+        <div class="contact-section">
+            <h6>
+                <i class="fas fa-headset"></i> Need Help?
+            </h6>
+            <div class="contact-item">
+                <i class="fas fa-phone"></i>
+                <a href="tel:<?php echo getSetting('site_phone'); ?>">
+                    <?php echo getSetting('site_phone'); ?>
+                </a>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <a href="mailto:<?php echo getSetting('site_email'); ?>">
+                    <?php echo getSetting('site_email'); ?>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
             </div>
         </div>
     </section>
