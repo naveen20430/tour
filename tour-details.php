@@ -1,66 +1,4 @@
-﻿<?php
-require_once 'config/config.php';
-require_once 'includes/cab_options.php';
-
-// Get tour slug
-$slug = $_GET['slug'] ?? '';
-
-if (!$slug) {
-    header('Location: tours.php');
-    exit;
-}
-
-// Get tour details
-$tour = $db->fetch("
-    SELECT t.*, d.name as destination_name, d.country, d.description as destination_description
-    FROM tours t 
-    LEFT JOIN destinations d ON t.destination_id = d.id
-    WHERE t.slug = ? AND t.status = 'active'
-", [$slug]);
-
-if (!$tour) {
-    header('Location: tours.php');
-    exit;
-}
-
-// Parse JSON fields
-$inclusions = json_decode($tour['inclusions'], true) ?: [];
-$exclusions = json_decode($tour['exclusions'], true) ?: [];
-$itinerary = json_decode($tour['itinerary'], true) ?: [];
-
-// Get related tours
-$related_tours = $db->fetchAll("
-    SELECT t.*, d.name as destination_name
-    FROM tours t 
-    LEFT JOIN destinations d ON t.destination_id = d.id
-    WHERE t.destination_id = ? AND t.id != ? AND t.status = 'active'
-    LIMIT 3
-", [$tour['destination_id'], $tour['id']]);
-
-// Initialize cab options with error handling
-$availableCabs = [];
-$cab_functionality_enabled = false;
-
-try {
-    if (file_exists('includes/cab_options.php')) {
-        // Test if cab_types table exists
-        $db->fetch("SELECT COUNT(*) as count FROM cab_types LIMIT 1");
-        $cabOptions = new CabOptions($db);
-        $availableCabs = $cabOptions->getCabOptionsForDropdown();
-        $cab_functionality_enabled = true;
-    }
-} catch (Exception $e) {
-    // Cab functionality not available, continue without it
-    $availableCabs = [];
-    $cab_functionality_enabled = false;
-}
-
-// Set page variables
-$page_title = htmlspecialchars($tour['title']) . ' - ' . getSetting('site_name');
-$current_page = 'tours';
-$extra_css = '
-
-<style>
+﻿<style>
 
 /* Enhanced Price Box Design */
 .price-box {
@@ -438,8 +376,68 @@ $extra_css = '
         margin-right: 10px;
     }
 </style>
-
 <?php
+require_once 'config/config.php';
+require_once 'includes/cab_options.php';
+
+// Get tour slug
+$slug = $_GET['slug'] ?? '';
+
+if (!$slug) {
+    header('Location: tours.php');
+    exit;
+}
+
+// Get tour details
+$tour = $db->fetch("
+    SELECT t.*, d.name as destination_name, d.country, d.description as destination_description
+    FROM tours t 
+    LEFT JOIN destinations d ON t.destination_id = d.id
+    WHERE t.slug = ? AND t.status = 'active'
+", [$slug]);
+
+if (!$tour) {
+    header('Location: tours.php');
+    exit;
+}
+
+// Parse JSON fields
+$inclusions = json_decode($tour['inclusions'], true) ?: [];
+$exclusions = json_decode($tour['exclusions'], true) ?: [];
+$itinerary = json_decode($tour['itinerary'], true) ?: [];
+
+// Get related tours
+$related_tours = $db->fetchAll("
+    SELECT t.*, d.name as destination_name
+    FROM tours t 
+    LEFT JOIN destinations d ON t.destination_id = d.id
+    WHERE t.destination_id = ? AND t.id != ? AND t.status = 'active'
+    LIMIT 3
+", [$tour['destination_id'], $tour['id']]);
+
+// Initialize cab options with error handling
+$availableCabs = [];
+$cab_functionality_enabled = false;
+
+try {
+    if (file_exists('includes/cab_options.php')) {
+        // Test if cab_types table exists
+        $db->fetch("SELECT COUNT(*) as count FROM cab_types LIMIT 1");
+        $cabOptions = new CabOptions($db);
+        $availableCabs = $cabOptions->getCabOptionsForDropdown();
+        $cab_functionality_enabled = true;
+    }
+} catch (Exception $e) {
+    // Cab functionality not available, continue without it
+    $availableCabs = [];
+    $cab_functionality_enabled = false;
+}
+
+// Set page variables
+$page_title = htmlspecialchars($tour['title']) . ' - ' . getSetting('site_name');
+$current_page = 'tours';
+$extra_css = '';
+
 // Include header
 include 'includes/header.php';
 ?>
