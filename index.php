@@ -27,22 +27,16 @@ $popular_destinations = $db->fetchAll("
     LIMIT 4
 ");
 
-// Get destinations for home page (3 cards) - Shimla, Manali, and Other
+// Get popular destinations for home page (3 cards) - Shimla, Manali, and Other
 $home_categories = $db->fetchAll("
     SELECT d.*, COUNT(t.id) as tour_count
     FROM destinations d
     LEFT JOIN tours t ON d.id = t.destination_id AND t.status = 'active'
     WHERE d.status = 'active' 
-    AND (d.name LIKE '%Shimla%' OR d.name LIKE '%Manali%' OR d.name = 'Other')
+    AND d.popular = 1
     GROUP BY d.id
-    HAVING tour_count > 0
-    ORDER BY 
-        CASE 
-            WHEN d.name LIKE '%Shimla%' THEN 1 
-            WHEN d.name LIKE '%Manali%' THEN 2 
-            WHEN d.name = 'Other' THEN 3 
-            ELSE 4 
-        END
+    HAVING tour_count >= 0
+    ORDER BY d.created_at DESC
     LIMIT 3
 ");
 
@@ -52,7 +46,7 @@ include 'includes/header.php';
 
 <!-- Destinations Section - Before Hero -->
 <?php if (!empty($home_categories)): ?>
-<section class="categories-section" style="background: #f8f9fa; padding: 60px 0; position: relative; overflow: hidden;">
+<section class="categories-section" style="background: #f8f9fa; padding: 20px 0; position: relative; overflow: hidden;">
     <div class="container">
         <div class="row">
             <?php foreach ($home_categories as $index => $destination): 
@@ -120,7 +114,7 @@ include 'includes/header.php';
     
     @media (max-width: 768px) {
         .categories-section {
-            padding: 40px 0 !important;
+            padding: 20px 0 !important;
         }
         
         .category-card {
@@ -133,57 +127,140 @@ include 'includes/header.php';
 <?php endif; ?>
 
 <!-- Search Section -->
-<section class="hero-one">
-    <div class="hero-one__form">
-        <div class="banner-form wow fadeInUp" data-wow-duration='1500ms' data-wow-delay='300ms'>
-            <form class="banner-form__wrapper" id="tourSearchForm" onsubmit="return false;">
-                <div class="banner-form row gutter-x-30 align-items-center">
-                    <div class="banner-form__control banner-form__col--1 banner-form__control--form">
-                        <i class="flaticon-earth"></i>
-                        <label for="country">Country</label>
-                        <select name="country" class="selectpicker" id="country">
-                            <option value="">Select Country</option>
-                            <?php 
-                            $countries = $db->fetchAll("SELECT DISTINCT country FROM destinations WHERE status = 'active' AND country IS NOT NULL AND country != '' ORDER BY country");
-                            foreach ($countries as $country): 
-                            ?>
-                            <option value="<?php echo htmlspecialchars($country['country']); ?>"><?php echo htmlspecialchars($country['country']); ?></option>
-                            <?php endforeach; ?>
-                        </select>
+<section class="search-section" style="background: linear-gradient(135deg, #764ba2 0%, #667eea 100%); padding: 20px 0; position: relative; overflow: hidden;">
+    <!-- Background decorative elements -->
+    <div style="position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; background: rgba(255, 255, 255, 0.1); border-radius: 50%; animation: float 10s ease-in-out infinite;"></div>
+    <div style="position: absolute; bottom: -100px; left: -100px; width: 300px; height: 300px; background: rgba(255, 255, 255, 0.05); border-radius: 50%; animation: float 12s ease-in-out infinite reverse;"></div>
+    
+    <div class="container" style="position: relative; z-index: 2;">
+       
+        
+        <div class="search-form-wrapper" style="background: white; border-radius: 0; padding: 40px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); position: relative; z-index: 2;">
+            <form id="tourSearchForm" onsubmit="return false;">
+                <div class="row g-3">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="search-field" style="position: relative;">
+                            <label for="country" style="display: block; font-weight: 600; color: #333; margin-bottom: 8px; font-size: 0.9rem;">
+                                <i class="flaticon-earth" style="color: #764ba2; margin-right: 5px;"></i>Country
+                            </label>
+                            <select name="country" class="form-select" id="country" style="border: 2px solid #e9ecef; border-radius: 0; padding: 12px 15px; height: 50px; font-size: 1rem; transition: all 0.3s ease;">
+                                <option value="">Select Country</option>
+                                <?php 
+                                $countries = $db->fetchAll("SELECT DISTINCT country FROM destinations WHERE status = 'active' AND country IS NOT NULL AND country != '' ORDER BY country");
+                                foreach ($countries as $country): 
+                                ?>
+                                <option value="<?php echo htmlspecialchars($country['country']); ?>"><?php echo htmlspecialchars($country['country']); ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
                     </div>
-                    <div class="banner-form__control banner-form__col--2">
-                        <i class="flaticon-pin-1"></i>
-                        <label for="destination">Destination</label>
-                        <select name="destination" class="selectpicker" id="destination">
-                            <option value="">Select Destination</option>
-                            <?php 
-                            $destinations = $db->fetchAll("SELECT slug, name FROM destinations WHERE status = 'active' ORDER BY name");
-                            foreach ($destinations as $dest): 
-                            ?>
-                            <option value="<?php echo htmlspecialchars($dest['slug']); ?>"><?php echo htmlspecialchars($dest['name']); ?></option>
-                            <?php endforeach; ?>
-                        </select>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="search-field" style="position: relative;">
+                            <label for="destination" style="display: block; font-weight: 600; color: #333; margin-bottom: 8px; font-size: 0.9rem;">
+                                <i class="flaticon-pin-1" style="color: #764ba2; margin-right: 5px;"></i>Destination
+                            </label>
+                            <select name="destination" class="form-select" id="destination" style="border: 2px solid #e9ecef; border-radius: 0; padding: 12px 15px; height: 50px; font-size: 1rem; transition: all 0.3s ease;">
+                                <option value="">Select Destination</option>
+                                <?php 
+                                $destinations = $db->fetchAll("SELECT slug, name FROM destinations WHERE status = 'active' ORDER BY name");
+                                foreach ($destinations as $dest): 
+                                ?>
+                                <option value="<?php echo htmlspecialchars($dest['slug']); ?>"><?php echo htmlspecialchars($dest['name']); ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
                     </div>
-                    <div class="banner-form__control banner-form__control--date banner-form__col--3">
-                        <i class="flaticon-calendar"></i>
-                        <label for="travel_date">Travel Date</label>
-                        <input class="travhub-multi-datepicker" id="travel_date" type="text" name="travel_date" placeholder="Select Date">
+                    <div class="col-lg-2 col-md-6">
+                        <div class="search-field" style="position: relative;">
+                            <label for="travel_date" style="display: block; font-weight: 600; color: #333; margin-bottom: 8px; font-size: 0.9rem;">
+                                <i class="flaticon-calendar" style="color: #764ba2; margin-right: 5px;"></i>Travel Date
+                            </label>
+                            <input class="travhub-multi-datepicker form-control" id="travel_date" type="text" name="travel_date" placeholder="Select Date" style="border: 2px solid #e9ecef; border-radius: 0; padding: 12px 15px; height: 50px; font-size: 1rem; transition: all 0.3s ease;">
+                        </div>
                     </div>
-                    <div class="banner-form__control banner-form__col--4">
-                        <i class="flaticon-calendar"></i>
-                        <label for="return_date">Return Date</label>
-                        <input class="travhub-multi-datepicker" id="return_date" type="text" name="return_date" placeholder="Select Date">
+                    <div class="col-lg-2 col-md-6">
+                        <div class="search-field" style="position: relative;">
+                            <label for="return_date" style="display: block; font-weight: 600; color: #333; margin-bottom: 8px; font-size: 0.9rem;">
+                                <i class="flaticon-calendar" style="color: #764ba2; margin-right: 5px;"></i>Return Date
+                            </label>
+                            <input class="travhub-multi-datepicker form-control" id="return_date" type="text" name="return_date" placeholder="Select Date" style="border: 2px solid #e9ecef; border-radius: 0; padding: 12px 15px; height: 50px; font-size: 1rem; transition: all 0.3s ease;">
+                        </div>
                     </div>
-                    <div class="banner-form__control banner-form__button banner-form__col--5">
-                        <button class="travhub-btn" type="button" onclick="showPhoneModal()">
-                            <span>Search <i class="flaticon-search"></i></span>
-                        </button>
+                    <div class="col-lg-2 col-md-12">
+                        <div class="search-field" style="position: relative;">
+                            <label style="display: block; margin-bottom: 8px; font-size: 0.9rem; opacity: 0;">Button</label>
+                            <button class="travhub-btn w-100" type="button" onclick="showPhoneModal()" style="background: #764ba2; color: white; border: none; border-radius: 0; padding: 12px 20px; height: 50px; font-weight: 600; font-size: 1rem; box-shadow: 0 4px 15px rgba(118, 75, 162, 0.4); transition: all 0.3s ease; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                                <span>Search</span>
+                                <i class="flaticon-search"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-</section><!-- /.hero-one -->
+    
+    <style>
+    .search-section {
+        position: relative;
+    }
+    
+    .search-form-wrapper .form-select:focus,
+    .search-form-wrapper .form-control:focus {
+        border-color: #764ba2 !important;
+        box-shadow: 0 0 0 0.2rem rgba(118, 75, 162, 0.25) !important;
+        outline: none;
+    }
+    
+    .search-form-wrapper .form-select:hover,
+    .search-form-wrapper .form-control:hover {
+        border-color: #764ba2;
+    }
+    
+    .search-form-wrapper .travhub-btn:hover {
+        background: #667eea !important;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(118, 75, 162, 0.6) !important;
+    }
+    
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-20px); }
+    }
+    
+    @media (max-width: 991px) {
+        .search-section {
+            padding: 20px 0 !important;
+        }
+        
+        .search-form-wrapper {
+            padding: 30px 20px !important;
+        }
+        
+        .search-section h2 {
+            font-size: 2rem !important;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .search-section {
+            padding: 20px 0 !important;
+        }
+        
+        .search-form-wrapper {
+            padding: 25px 15px !important;
+        }
+        
+        .search-section h2 {
+            font-size: 1.75rem !important;
+        }
+        
+        .search-section p {
+            font-size: 1rem !important;
+        }
+    }
+    </style>
+</section>
 
 <!-- Phone Number Modal -->
 <div id="phoneModal" class="modal" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); overflow: auto;">
