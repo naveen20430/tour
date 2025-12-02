@@ -31,110 +31,65 @@ $popular_destinations = $db->fetchAll("
 include 'includes/header.php';
 ?>
 
-<!-- Search Bar Section -->
-<section class="search-bar-section" style="margin-top: 80px; position: relative; z-index: 100;">
+<!-- Hero One Section -->
+<section class="hero-one">
     <div class="container">
-        <div class="search-bar-wrapper" style="background: white; border-radius: 20px; padding: 40px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15); position: relative;">
-            <h3 class="text-center mb-4" style="color: #333; font-weight: 700;">Find Your Perfect Tour</h3>
-            <form id="tourSearchForm" onsubmit="return false;">
-                <div class="row g-3 align-items-end">
-                    <!-- Country -->
-                    <div class="col-lg-2 col-md-6">
-                        <div class="form-group">
-                            <label class="form-label" style="font-weight: 600; color: #667eea; margin-bottom: 8px; display: block;">
-                                <i class="flaticon-earth"></i> Country
-                            </label>
-                            <select name="country" class="form-control" 
-                                    style="border: 2px solid #e9ecef; border-radius: 10px; padding: 12px 15px; height: 48px; transition: all 0.3s ease;" 
-                                    onfocus="this.style.borderColor='#667eea'; this.style.boxShadow='0 0 0 0.2rem rgba(102, 126, 234, 0.25)'" 
-                                    onblur="this.style.borderColor='#e9ecef'; this.style.boxShadow='none'">
-                                <option value="">Select Country</option>
-                                <?php 
-                                $countries = $db->fetchAll("SELECT DISTINCT country FROM destinations WHERE status = 'active' AND country IS NOT NULL AND country != '' ORDER BY country");
-                                foreach ($countries as $country): 
-                                ?>
-                                <option value="<?php echo htmlspecialchars($country['country']); ?>"><?php echo htmlspecialchars($country['country']); ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
+        <div class="hero-one__content">
+            <h5 class="hero-one__sub-title sub-title bw-split-in-left">Welcome to <?php echo htmlspecialchars(getSetting('site_name')); ?></h5>
+            <h2 class="hero-one__title title bw-split-in-down">Adventure & Experience The Travel</h2>
+            <p class="hero-one__text sub-title bw-split-in-left">Experience the world like never before with our carefully curated travel packages. From exotic destinations to cultural experiences, we make your travel dreams come true.</p>
+        </div><!-- /.hero-one__content -->
+    </div><!-- /.container -->
+    <div class="hero-one__form">
+        <div class="banner-form wow fadeInUp" data-wow-duration='1500ms' data-wow-delay='300ms'>
+            <form class="banner-form__wrapper" id="tourSearchForm" onsubmit="return false;">
+                <div class="banner-form row gutter-x-30 align-items-center">
+                    <div class="banner-form__control banner-form__col--1 banner-form__control--form">
+                        <i class="flaticon-earth"></i>
+                        <label for="country">Country</label>
+                        <select name="country" class="selectpicker" id="country">
+                            <option value="">Select Country</option>
+                            <?php 
+                            $countries = $db->fetchAll("SELECT DISTINCT country FROM destinations WHERE status = 'active' AND country IS NOT NULL AND country != '' ORDER BY country");
+                            foreach ($countries as $country): 
+                            ?>
+                            <option value="<?php echo htmlspecialchars($country['country']); ?>"><?php echo htmlspecialchars($country['country']); ?></option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
-                    
-                    <!-- From Location -->
-                    <div class="col-lg-2 col-md-6">
-                        <div class="form-group">
-                            <label class="form-label" style="font-weight: 600; color: #667eea; margin-bottom: 8px; display: block;">
-                                <i class="flaticon-pin-1"></i> From
-                            </label>
-                            <input type="text" name="from" class="form-control" placeholder="Your Location" 
-                                   style="border: 2px solid #e9ecef; border-radius: 10px; padding: 12px 15px; height: 48px; transition: all 0.3s ease;" 
-                                   onfocus="this.style.borderColor='#667eea'; this.style.boxShadow='0 0 0 0.2rem rgba(102, 126, 234, 0.25)'" 
-                                   onblur="this.style.borderColor='#e9ecef'; this.style.boxShadow='none'">
-                        </div>
+                    <div class="banner-form__control banner-form__col--2">
+                        <i class="flaticon-pin-1"></i>
+                        <label for="destination">Destination</label>
+                        <select name="destination" class="selectpicker" id="destination">
+                            <option value="">Select Destination</option>
+                            <?php 
+                            $destinations = $db->fetchAll("SELECT slug, name FROM destinations WHERE status = 'active' ORDER BY name");
+                            foreach ($destinations as $dest): 
+                            ?>
+                            <option value="<?php echo htmlspecialchars($dest['slug']); ?>"><?php echo htmlspecialchars($dest['name']); ?></option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
-                    
-                    <!-- To Location -->
-                    <div class="col-lg-2 col-md-6">
-                        <div class="form-group">
-                            <label class="form-label" style="font-weight: 600; color: #667eea; margin-bottom: 8px; display: block;">
-                                <i class="flaticon-pin-1"></i> To
-                            </label>
-                            <select name="destination" class="form-control" 
-                                    style="border: 2px solid #e9ecef; border-radius: 10px; padding: 12px 15px; height: 48px; transition: all 0.3s ease;" 
-                                    onfocus="this.style.borderColor='#667eea'; this.style.boxShadow='0 0 0 0.2rem rgba(102, 126, 234, 0.25)'" 
-                                    onblur="this.style.borderColor='#e9ecef'; this.style.boxShadow='none'">
-                                <option value="">Select Destination</option>
-                                <?php 
-                                $destinations = $db->fetchAll("SELECT slug, name FROM destinations WHERE status = 'active' ORDER BY name");
-                                foreach ($destinations as $dest): 
-                                ?>
-                                <option value="<?php echo htmlspecialchars($dest['slug']); ?>"><?php echo htmlspecialchars($dest['name']); ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
+                    <div class="banner-form__control banner-form__control--date banner-form__col--3">
+                        <i class="flaticon-calendar"></i>
+                        <label for="travel_date">Travel Date</label>
+                        <input class="travhub-multi-datepicker" id="travel_date" type="text" name="travel_date" placeholder="Select Date">
                     </div>
-                    
-                    <!-- Travel Date -->
-                    <div class="col-lg-2 col-md-6">
-                        <div class="form-group">
-                            <label class="form-label" style="font-weight: 600; color: #667eea; margin-bottom: 8px; display: block;">
-                                <i class="flaticon-calendar"></i> Travel Date
-                            </label>
-                            <input type="date" name="travel_date" class="form-control" min="<?php echo date('Y-m-d'); ?>" 
-                                   style="border: 2px solid #e9ecef; border-radius: 10px; padding: 12px 15px; height: 48px; transition: all 0.3s ease;" 
-                                   onfocus="this.style.borderColor='#667eea'; this.style.boxShadow='0 0 0 0.2rem rgba(102, 126, 234, 0.25)'" 
-                                   onblur="this.style.borderColor='#e9ecef'; this.style.boxShadow='none'">
-                        </div>
+                    <div class="banner-form__control banner-form__col--4">
+                        <i class="flaticon-calendar"></i>
+                        <label for="return_date">Return Date</label>
+                        <input class="travhub-multi-datepicker" id="return_date" type="text" name="return_date" placeholder="Select Date">
                     </div>
-                    
-                    <!-- Return Date -->
-                    <div class="col-lg-2 col-md-6">
-                        <div class="form-group">
-                            <label class="form-label" style="font-weight: 600; color: #667eea; margin-bottom: 8px; display: block;">
-                                <i class="flaticon-calendar"></i> Return Date
-                            </label>
-                            <input type="date" name="return_date" class="form-control" min="<?php echo date('Y-m-d'); ?>" 
-                                   style="border: 2px solid #e9ecef; border-radius: 10px; padding: 12px 15px; height: 48px; transition: all 0.3s ease;" 
-                                   onfocus="this.style.borderColor='#667eea'; this.style.boxShadow='0 0 0 0.2rem rgba(102, 126, 234, 0.25)'" 
-                                   onblur="this.style.borderColor='#e9ecef'; this.style.boxShadow='none'">
-                        </div>
-                    </div>
-                    
-                    <!-- Search Button -->
-                    <div class="col-lg-2 col-md-12">
-                        <div class="form-group">
-                            <button type="button" onclick="showPhoneModal()" class="btn w-100"
-                                    style="background: #1bbc9b; color: white; border: none; border-radius: 10px; padding: 12px 20px; height: 48px; font-weight: 600; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); transition: all 0.3s ease;"
-                                    onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(102, 126, 234, 0.6)'"
-                                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(102, 126, 234, 0.4)'">
-                                <i class="flaticon-search"></i> Search Tours
-                            </button>
-                        </div>
+                    <div class="banner-form__control banner-form__button banner-form__col--5">
+                        <button class="travhub-btn" type="button" onclick="showPhoneModal()">
+                            <span>Search <i class="flaticon-search"></i></span>
+                        </button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-</section>
+</section><!-- /.hero-one -->
 
 <!-- Phone Number Modal -->
 <div id="phoneModal" class="modal" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); overflow: auto;">
@@ -218,20 +173,26 @@ include 'includes/header.php';
 
 <script>
 function showPhoneModal() {
-    // Get form values
-    const from = document.querySelector('input[name="from"]').value;
+    // Get form values - handle both selectpicker and regular selects
     const destination = document.querySelector('select[name="destination"]');
-    const destinationText = destination.options[destination.selectedIndex].text;
+    const destinationText = destination ? (destination.options[destination.selectedIndex]?.text || '') : '';
+    const destinationValue = destination ? destination.value : '';
+    
     const country = document.querySelector('select[name="country"]');
-    const countryText = country.options[country.selectedIndex].text;
-    const travelDate = document.querySelector('input[name="travel_date"]').value;
-    const returnDate = document.querySelector('input[name="return_date"]').value;
+    const countryText = country ? (country.options[country.selectedIndex]?.text || '') : '';
+    const countryValue = country ? country.value : '';
+    
+    // Handle datepicker inputs
+    const travelDateInput = document.querySelector('input[name="travel_date"]');
+    const travelDate = travelDateInput ? travelDateInput.value : '';
+    
+    const returnDateInput = document.querySelector('input[name="return_date"]');
+    const returnDate = returnDateInput ? returnDateInput.value : '';
     
     // Build search details HTML
     let detailsHTML = '';
-    if (from) detailsHTML += `<div><strong>From:</strong> ${from}</div>`;
-    if (destination.value) detailsHTML += `<div><strong>To:</strong> ${destinationText}</div>`;
-    if (country.value) detailsHTML += `<div><strong>Country:</strong> ${countryText}</div>`;
+    if (destinationValue) detailsHTML += `<div><strong>Destination:</strong> ${destinationText}</div>`;
+    if (countryValue) detailsHTML += `<div><strong>Country:</strong> ${countryText}</div>`;
     if (travelDate) detailsHTML += `<div><strong>Travel Date:</strong> ${travelDate}</div>`;
     if (returnDate) detailsHTML += `<div><strong>Return Date:</strong> ${returnDate}</div>`;
     
@@ -263,11 +224,15 @@ function submitSearch(event) {
     
     // Get form data
     const formData = new FormData();
-    formData.append('from', document.querySelector('input[name="from"]').value);
-    formData.append('destination', document.querySelector('select[name="destination"]').value);
-    formData.append('country', document.querySelector('select[name="country"]').value);
-    formData.append('travel_date', document.querySelector('input[name="travel_date"]').value);
-    formData.append('return_date', document.querySelector('input[name="return_date"]').value);
+    const destination = document.querySelector('select[name="destination"]');
+    const country = document.querySelector('select[name="country"]');
+    const travelDateInput = document.querySelector('input[name="travel_date"]');
+    const returnDateInput = document.querySelector('input[name="return_date"]');
+    
+    if (destination) formData.append('destination', destination.value);
+    if (country) formData.append('country', country.value);
+    if (travelDateInput) formData.append('travel_date', travelDateInput.value);
+    if (returnDateInput) formData.append('return_date', returnDateInput.value);
     formData.append('phone', phone);
     
     // Save to database

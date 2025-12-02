@@ -188,6 +188,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         background: #f8f9fa;
         padding: 40px 0;
     }
+    .form-check {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 12px;
+        background: #f8f9fa;
+        border-radius: 8px;
+        margin-bottom: 0;
+    }
+    .form-check-input {
+        margin-top: 4px;
+        flex-shrink: 0;
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+    }
+    .form-check-label {
+        flex: 1;
+        line-height: 1.5;
+        cursor: pointer;
+        font-size: 0.95rem;
+        color: #495057;
+    }
+    .form-check-input:checked {
+        background-color: #1bbc9b;
+        border-color: #1bbc9b;
+    }
+    .form-check-input:focus {
+        border-color: #1bbc9b;
+        box-shadow: 0 0 0 0.2rem rgba(27, 188, 155, 0.25);
+    }
 </style>
 
 <?php if ($success): ?>
@@ -266,20 +297,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">Full Name *</label>
+                                <label class="form-label">Name of Lead Person *</label>
                                 <input type="text" name="guest_name" class="form-control" required 
                                        value="<?php echo htmlspecialchars($_POST['guest_name'] ?? ''); ?>">
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">Phone Number *</label>
+                                <label class="form-label">PH no (wats app no) *</label>
                                 <input type="tel" name="guest_phone" class="form-control" required 
                                        value="<?php echo htmlspecialchars($_POST['guest_phone'] ?? ''); ?>">
                             </div>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Email Address *</label>
+                            <label class="form-label">Mail id *</label>
                             <input type="email" name="guest_email" class="form-control" required 
                                    value="<?php echo htmlspecialchars($_POST['guest_email'] ?? ''); ?>">
                         </div>
@@ -301,9 +332,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Special Requirements</label>
+                            <label class="form-label">Note</label>
                             <textarea name="special_requirements" class="form-control" rows="3" 
                                       placeholder="Any special requests or notes..."><?php echo htmlspecialchars($_POST['special_requirements'] ?? ''); ?></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="vehicle_terms" id="vehicleTerms" 
+                                       value="1" <?php echo (isset($_POST['vehicle_terms']) && $_POST['vehicle_terms'] == '1') ? 'checked' : ''; ?>>
+                                <label class="form-check-label" for="vehicleTerms">
+                                    Vehicle are for 8 Hours Or 80 Kms per day, No meals included
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
