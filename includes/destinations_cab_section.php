@@ -75,7 +75,7 @@
                     <div class="owl-carousel owl-theme tours-carousel-<?php echo $dest['id']; ?>">
                             <?php foreach ($destination_tours as $tour): ?>
                             <div class="item">
-                                <div class="card" style="border: none; border-radius: 8px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.1); transition: all 0.3s ease; position: relative;">
+                                <div class="card" style="border: none; border-radius: 0; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.1); transition: all 0.3s ease; position: relative;">
                                     
                                     <!-- Featured Badge -->
                                     <?php if (!empty($tour['featured']) && $tour['featured'] == 1): ?>
@@ -130,7 +130,7 @@
                                             <?php endif; ?>
                                         </div>
                                         
-                                        <a href="<?php echo tourUrl($tour['slug']); ?>" class="btn w-100" style="background: #1bbc9b; color: white; border: none; border-radius: 12px; padding: 12px; font-weight: 600;">
+                                        <a href="<?php echo tourUrl($tour['slug']); ?>" class="btn w-100" style="background: #764ba2; color: white; border: none; border-radius: 0; padding: 12px; font-weight: 600;">
                                             Explore Details
                                         </a>
                                     </div>
@@ -178,7 +178,7 @@
 
                         $starting_price = $cheapest['min_price'] ?? 0;
                     ?>
-                    <div class="card mb-3" style="border: none; border-radius: 8px; box-shadow: 0 4px 15px rgba(102,126,234,0.15); overflow: hidden; background: white;">
+                    <div class="card mb-3" style="border: none; border-radius: 0; box-shadow: 0 4px 15px rgba(102,126,234,0.15); overflow: hidden; background: white;">
                         <div style="background: #1bbc9b; padding: 12px 15px;">
                             <div style="display: flex; align-items: center; justify-content: space-between;">
                                 <span style="color: white; font-weight: 600; font-size: 0.85rem;">
@@ -195,28 +195,26 @@
                             <?php else: ?>
                                 <div style="font-size: 0.9rem; color: #6c757d;">Price on request</div>
                             <?php endif; ?>
-                            <a href="<?php echo BASE_URL; ?>cab-route-details.php?route_id=<?php echo $route['id']; ?>" class="btn w-100" style="background: #1bbc9b; color: white; border: none; border-radius: 10px; padding: 10px 15px; font-weight: 600; font-size: 0.8rem;">
+                            <a href="<?php echo BASE_URL; ?>cab-route-details.php?route_id=<?php echo $route['id']; ?>" class="btn w-100" style="background: #764ba2; color: white; border: none; border-radius: 0; padding: 10px 15px; font-weight: 600; font-size: 0.8rem;">
                                 <i class="fas fa-info-circle"></i> View Details
                             </a>
                         </div>
                     </div>
                     <?php endforeach; ?>
 
-                    <div class="card" style="border: none; border-radius: 12px; background: #1bbc9b; color: white;">
+                    <div class="card" style="border: none; border-radius: 0; background: #1bbc9b; color: white;">
                         <div class="card-body text-center">
                             <i class="fas fa-headset fa-2x mb-2"></i>
                             <h6 style="font-weight: 700; margin-bottom: 8px;">Need Help?</h6>
                             <p style="font-size: 0.8rem;">24/7 support</p>
-                            <a href="<?php echo navUrl('contact'); ?>" class="btn w-100" style="background: white; color: #1bbc9b; border: none; border-radius: 8px; padding: 8px; font-weight: 600;">Contact</a>
+                            <a href="<?php echo navUrl('contact'); ?>" class="btn w-100" style="background: white; color: #764ba2; border: none; border-radius: 0; padding: 8px; font-weight: 600;">Contact</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-        </div>
-    </div>
-</section
+</section>
 
 <!-- OwlCarousel CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
@@ -237,7 +235,7 @@
     display: flex !important;
     flex-direction: column !important;
     border: none !important;
-    border-radius: 8px !important; 
+    border-radius: 0 !important; 
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1) !important;
     transition: all 0.3s ease !important;
     overflow: hidden !important;
@@ -269,7 +267,7 @@
 }
 
 .owl-theme .owl-dots .owl-dot.active span {
-    background: #1bbc9b;
+    background: #764ba2;
 }
 
 /* Navigation - Hidden */

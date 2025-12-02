@@ -27,19 +27,113 @@ $popular_destinations = $db->fetchAll("
     LIMIT 4
 ");
 
+// Get destinations for home page (3 cards) - Shimla, Manali, and Other
+$home_categories = $db->fetchAll("
+    SELECT d.*, COUNT(t.id) as tour_count
+    FROM destinations d
+    LEFT JOIN tours t ON d.id = t.destination_id AND t.status = 'active'
+    WHERE d.status = 'active' 
+    AND (d.name LIKE '%Shimla%' OR d.name LIKE '%Manali%' OR d.name = 'Other')
+    GROUP BY d.id
+    HAVING tour_count > 0
+    ORDER BY 
+        CASE 
+            WHEN d.name LIKE '%Shimla%' THEN 1 
+            WHEN d.name LIKE '%Manali%' THEN 2 
+            WHEN d.name = 'Other' THEN 3 
+            ELSE 4 
+        END
+    LIMIT 3
+");
+
 // Include header
 include 'includes/header.php';
 ?>
 
-<!-- Hero One Section -->
-<section class="hero-one">
+<!-- Destinations Section - Before Hero -->
+<?php if (!empty($home_categories)): ?>
+<section class="categories-section" style="background: #f8f9fa; padding: 60px 0; position: relative; overflow: hidden;">
     <div class="container">
-        <div class="hero-one__content">
-            <h5 class="hero-one__sub-title sub-title bw-split-in-left">Welcome to <?php echo htmlspecialchars(getSetting('site_name')); ?></h5>
-            <h2 class="hero-one__title title bw-split-in-down">Adventure & Experience The Travel</h2>
-            <p class="hero-one__text sub-title bw-split-in-left">Experience the world like never before with our carefully curated travel packages. From exotic destinations to cultural experiences, we make your travel dreams come true.</p>
-        </div><!-- /.hero-one__content -->
-    </div><!-- /.container -->
+        <div class="row">
+            <?php foreach ($home_categories as $index => $destination): 
+                // Get destination image or use default
+                $destination_image = !empty($destination['featured_image']) ? BASE_URL . $destination['featured_image'] : BASE_URL . 'assets/images/destinations/default.jpg';
+                
+                // Tour count is already in the query result
+                $count = $destination['tour_count'] ?? 0;
+            ?>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="category-card" style="position: relative; overflow: hidden; height: 350px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1); transition: all 0.4s ease; cursor: pointer; background: #fff; border-radius: 0;">
+                    <!-- Destination Image -->
+                    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url('<?php echo htmlspecialchars($destination_image); ?>'); background-size: cover; background-position: center; transition: transform 0.4s ease;">
+                    </div>
+                    
+                    <!-- Dark Overlay -->
+                    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 50%, transparent 100%); z-index: 1;"></div>
+                    
+                    <!-- Destination Content -->
+                    <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 30px; z-index: 2;">
+                        <h3 style="color: white; font-size: 1.8rem; font-weight: 700; margin-bottom: 10px; text-shadow: 0 2px 10px rgba(0,0,0,0.5);">
+                            <?php echo htmlspecialchars($destination['name']); ?>
+                        </h3>
+                        
+                        <?php if (!empty($destination['short_description'])): ?>
+                        <p style="color: rgba(255,255,255,0.9); font-size: 0.95rem; margin-bottom: 15px; text-shadow: 0 1px 5px rgba(0,0,0,0.5); line-height: 1.5;">
+                            <?php echo htmlspecialchars(substr($destination['short_description'], 0, 80)); ?>...
+                        </p>
+                        <?php endif; ?>
+                        
+                        <!-- Listing Badge -->
+                        <div style="text-align: center; margin-top: 15px;">
+                            <span style="background: #764ba2; color: white; padding: 8px 20px; font-size: 0.9rem; font-weight: 600; display: inline-block; border-radius: 0;">
+                                <?php echo $count; ?> Listing<?php echo $count != 1 ? 's' : ''; ?>
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <!-- Hover Overlay -->
+                    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(118, 75, 162, 0.9); opacity: 0; transition: all 0.3s ease; z-index: 3; display: flex; align-items: center; justify-content: center;">
+                        <a href="<?php echo BASE_URL; ?>tours.php?destination=<?php echo htmlspecialchars($destination['slug']); ?>" 
+                           style="color: white; text-decoration: none; font-weight: 700; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px;">
+                            Explore Destination <i class="fas fa-arrow-right" style="margin-left: 10px;"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+    
+    <style>
+    .category-card:hover {
+        transform: translateY(-10px) !important;
+        box-shadow: 0 25px 50px rgba(118, 75, 162, 0.3) !important;
+    }
+    
+    .category-card:hover > div:first-child {
+        transform: scale(1.1) !important;
+    }
+    
+    .category-card:hover > div:last-child {
+        opacity: 1 !important;
+    }
+    
+    @media (max-width: 768px) {
+        .categories-section {
+            padding: 40px 0 !important;
+        }
+        
+        .category-card {
+            height: 300px !important;
+            margin-bottom: 20px !important;
+        }
+    }
+    </style>
+</section>
+<?php endif; ?>
+
+<!-- Search Section -->
+<section class="hero-one">
     <div class="hero-one__form">
         <div class="banner-form wow fadeInUp" data-wow-duration='1500ms' data-wow-delay='300ms'>
             <form class="banner-form__wrapper" id="tourSearchForm" onsubmit="return false;">
@@ -119,12 +213,12 @@ include 'includes/header.php';
                 
                 <div style="display: flex; gap: 10px; margin-top: 25px;">
                     <button type="button" onclick="closePhoneModal()" class="btn" 
-                            style="flex: 1; background: #e9ecef; color: #495057; border: none; border-radius: 10px; padding: 12px 20px; font-weight: 600; transition: all 0.3s ease;"
+                            style="flex: 1; background: #e9ecef; color: #495057; border: none; border-radius: 0; padding: 12px 20px; font-weight: 600; transition: all 0.3s ease;"
                             onmouseover="this.style.background='#dee2e6'" onmouseout="this.style.background='#e9ecef'">
                         Cancel
                     </button>
                     <button type="submit" class="btn" 
-                            style="flex: 1; background: #1bbc9b; color: white; border: none; border-radius: 10px; padding: 12px 20px; font-weight: 600; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); transition: all 0.3s ease;"
+                            style="flex: 1; background: #764ba2; color: white; border: none; border-radius: 0; padding: 12px 20px; font-weight: 600; box-shadow: 0 4px 15px rgba(118, 75, 162, 0.4); transition: all 0.3s ease;"
                             onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(102, 126, 234, 0.6)'"
                             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(102, 126, 234, 0.4)'">
                         <i class="flaticon-search"></i> Search Tours
@@ -147,7 +241,6 @@ include 'includes/header.php';
     }
 }
 
-<style>
 /* Search Bar Responsive Styles */
 @media (max-width: 768px) {
     .search-bar-section {
@@ -167,6 +260,89 @@ include 'includes/header.php';
 @media (max-width: 991px) {
     .search-bar-section {
         margin-top: -20px !important;
+    }
+}
+
+/* Hero Section Improvements */
+.hero-one {
+    position: relative;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 80px 0 120px;
+    overflow: hidden;
+}
+
+.hero-one::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.hero-one .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Banner Form Responsive Improvements */
+@media (max-width: 991px) {
+    .hero-one__form .banner-form {
+        flex-direction: column;
+    }
+    
+    .hero-one__form .banner-form__control {
+        width: 100% !important;
+        margin-bottom: 15px;
+    }
+    
+    .hero-one__form .banner-form__button {
+        width: 100% !important;
+    }
+    
+    .hero-one__form .banner-form__button button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-one {
+        padding: 60px 0 80px;
+    }
+    
+    .hero-one__title {
+        font-size: 2.5rem !important;
+    }
+    
+    .hero-one__sub-title {
+        font-size: 1.2rem !important;
+    }
+    
+    .hero-one__text {
+        font-size: 1rem !important;
+    }
+}
+
+@media (max-width: 575px) {
+    .hero-one {
+        padding: 40px 0 60px;
+    }
+    
+    .hero-one__title {
+        font-size: 2rem !important;
+    }
+    
+    .hero-one__sub-title {
+        font-size: 1rem !important;
+    }
+    
+    .hero-one__text {
+        font-size: 0.9rem !important;
     }
 }
 </style>
@@ -592,9 +768,9 @@ document.addEventListener('keydown', function(event) {
             <div class="row mt-5">
                 <?php foreach ($popular_destinations as $index => $destination): ?>
                     <div class="col-lg-3 col-md-6 mb-5 scroll-reveal" style="transition-delay: <?php echo $index * 0.15; ?>s; position: relative; z-index: 2;">
-                        <div class="card h-100" style="border: none; border-radius: 25px; overflow: hidden; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); position: relative; background: #fff;">
+                        <div class="card h-100" style="border: none; border-radius: 0; overflow: hidden; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); position: relative; background: #fff;">
                             <!-- Hover overlay -->
-                            <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(40, 167, 69, 0.9) 0%, rgba(32, 201, 151, 0.9) 100%); opacity: 0; transition: all 0.3s ease; z-index: 1; border-radius: 25px; display: flex; align-items: center; justify-content: center;">
+                            <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(40, 167, 69, 0.9) 0%, rgba(32, 201, 151, 0.9) 100%); opacity: 0; transition: all 0.3s ease; z-index: 1; border-radius: 0; display: flex; align-items: center; justify-content: center;">
                                 <div style="text-align: center; color: white; transform: translateY(20px); transition: all 0.3s ease;">
                                     <i class="fas fa-plane" style="font-size: 2rem; margin-bottom: 10px; display: block;"></i>
                                     <p style="font-weight: 600; margin: 0;">Explore Destination</p>
@@ -627,7 +803,7 @@ document.addEventListener('keydown', function(event) {
                                     <?php echo substr(htmlspecialchars($destination['short_description']), 0, 85); ?>...
                                 </p>
                                 
-                                <a href="<?php echo toursUrl(['destination' => $destination['slug']]); ?>" class="btn w-100" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white; border: none; border-radius: 15px; padding: 12px; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);">
+                                <a href="<?php echo toursUrl(['destination' => $destination['slug']]); ?>" class="btn w-100" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white; border: none; border-radius: 0; padding: 12px; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);">
                                     🗺️ Explore Tours
                                 </a>
                             </div>

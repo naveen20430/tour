@@ -4,15 +4,15 @@
 
 /* Modern Button Styles */
 .travhub-btn {
-    background: #1bbc9b !important;
+    background: #764ba2 !important;
     border: none !important;
-    border-radius: 25px !important;
+    border-radius: 0 !important;
     padding: 12px 30px !important;
     font-weight: 600 !important;
     text-transform: uppercase !important;
     letter-spacing: 0.5px !important;
     transition: all 0.3s ease !important;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4) !important;
+    box-shadow: 0 4px 15px rgba(118, 75, 162, 0.4) !important;
     position: relative !important;
     overflow: hidden !important;
 }
@@ -38,10 +38,15 @@
     left: 100%;
 }
 
+/* Global Button Styles - No Border Radius */
+.btn, button, .travhub-btn, input[type="button"], input[type="submit"] {
+    border-radius: 0 !important;
+}
+
 /* Card Enhancements - Global Light Theme */
 .card {
     border: none !important;
-    border-radius: 0px !important;
+    border-radius: 0 !important;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1) !important;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
     overflow: hidden !important;
@@ -55,7 +60,7 @@
 }
 
 .card-img-top {
-    border-radius: 0px 0px 0 0 !important;
+    border-radius: 0 !important;
     transition: transform 0.4s ease !important;
 }
 
@@ -66,7 +71,7 @@
 /* Card Body Light Theme */
 .card-body {
     background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%) !important;
-    border-radius: 0 0 20px 20px !important;
+    border-radius: 0 !important;
     position: relative !important;
     z-index: 2 !important;
 }
@@ -75,7 +80,7 @@
 .card:hover .card-body.text-center,
 .card-body.text-center:hover {
     color: white !important;
-    background: linear-gradient(135deg, #1bbc9b 0%, #17a689 100%) !important;
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%) !important;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
     transition: all 0.3s ease !important;
 }
@@ -125,7 +130,7 @@
 }
 
 .badge-primary {
-    background: #1bbc9b !important;
+    background: #764ba2 !important;
 }
 
 .badge-success {
@@ -230,7 +235,7 @@
     transform: translateX(-50%);
     width: 30px;
     height: 3px;
-    background: #1bbc9b;
+    background: #764ba2;
     border-radius: 2px;
 }
 
@@ -250,7 +255,7 @@
 
 /* Price Box Enhancements */
 .price-display, .h3, .h4 {
-    background: #1bbc9b !important;
+    background: #764ba2 !important;
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
     background-clip: text !important;
@@ -330,7 +335,7 @@
 
 /* Search Enhancements */
 .search-toggler {
-    background: #1bbc9b !important;
+    background: #764ba2 !important;
     border-radius: 50% !important;
     width: 45px !important;
     height: 45px !important;
@@ -446,9 +451,9 @@
 }
 
 .main-footer__social a:hover {
-    background: #1bbc9b !important;
+    background: #764ba2 !important;
     transform: translateY(-3px) !important;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4) !important;
+    box-shadow: 0 4px 15px rgba(118, 75, 162, 0.4) !important;
     color: white !important;
 }
 
@@ -465,7 +470,7 @@
 }
 
 .gradient-text {
-    background: #1bbc9b !important;
+    background: #764ba2 !important;
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
     background-clip: text !important;
@@ -572,22 +577,22 @@
 
 /* Search Button */
 .search-bar-section .btn {
-    background: #1bbc9b;
+    background: #764ba2;
     color: white;
     border: none;
-    border-radius: 10px;
+    border-radius: 0;
     padding: 12px 20px;
     height: 48px;
     font-weight: 600;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 4px 15px rgba(118, 75, 162, 0.4);
     transition: all 0.3s ease;
     cursor: pointer;
 }
 
 .search-bar-section .btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
-    background: #17a689;
+    box-shadow: 0 6px 20px rgba(118, 75, 162, 0.6);
+    background: #667eea;
 }
 
 .search-bar-section .btn:active {
