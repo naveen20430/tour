@@ -51,14 +51,18 @@ include 'includes/header.php';
         <div class="col-lg-8">
             <!-- Blog Post -->
             <article class="blog-post">
-                <?php if ($post['featured_image']): ?>
-                    <div class="post-image mb-4">
-                        <img src="<?php echo htmlspecialchars($post['featured_image']); ?>" 
-                             class="img-fluid rounded" 
-                             alt="<?php echo htmlspecialchars($post['title']); ?>"
-                             style="width: 100%; height: 400px; object-fit: cover;">
-                    </div>
-                <?php endif; ?>
+                <div class="post-image mb-4">
+                    <?php 
+                    $image_path = !empty($post['featured_image']) && file_exists($post['featured_image']) 
+                        ? BASE_URL . htmlspecialchars($post['featured_image']) 
+                        : BASE_URL . 'assets/images/blog/default-blog.jpg';
+                    ?>
+                    <img src="<?php echo $image_path; ?>" 
+                         class="img-fluid rounded" 
+                         alt="<?php echo htmlspecialchars($post['title']); ?>"
+                         style="width: 100%; height: 400px; object-fit: cover;"
+                         onerror="this.src='<?php echo BASE_URL; ?>assets/images/blog/default-blog.jpg'">
+                </div>
 
                 <header class="post-header mb-4">
                     <h1 class="post-title mb-3"><?php echo htmlspecialchars($post['title']); ?></h1>

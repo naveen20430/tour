@@ -244,8 +244,14 @@ include 'includes/header.php';
                         <div class="col-lg-4 col-md-6">
                             <div class="card tour-card shadow-sm">
                                 <div class="position-relative">
-                                    <img src="/<?php echo $tour['featured_image'] ?: '/assets/images/tours/default-tour.jpg'; ?>" 
-                                         class="tour-image" alt="<?php echo htmlspecialchars($tour['title']); ?>">
+                                    <?php 
+                                    $image_path = !empty($tour['featured_image']) && file_exists($tour['featured_image']) 
+                                        ? BASE_URL . htmlspecialchars($tour['featured_image']) 
+                                        : BASE_URL . 'assets/images/tours/default-tour.jpg';
+                                    ?>
+                                    <img src="<?php echo $image_path; ?>" 
+                                         class="tour-image" alt="<?php echo htmlspecialchars($tour['title']); ?>"
+                                         onerror="this.src='<?php echo BASE_URL; ?>assets/images/tours/default-tour.jpg'">
                                     
                                     <?php if ($tour['featured']): ?>
                                         <span class="tour-badge">Featured</span>

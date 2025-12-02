@@ -214,8 +214,14 @@ include 'includes/header.php';
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card blog-card shadow-sm h-100">
                             <div class="position-relative">
-                                <img src="<?php echo $post['featured_image'] ?: 'assets/images/blog/default-blog.jpg'; ?>" 
-                                     class="blog-image" alt="<?php echo htmlspecialchars($post['title']); ?>">
+                                <?php 
+                                $image_path = !empty($post['featured_image']) && file_exists($post['featured_image']) 
+                                    ? BASE_URL . htmlspecialchars($post['featured_image']) 
+                                    : BASE_URL . 'assets/images/blog/default-blog.jpg';
+                                ?>
+                                <img src="<?php echo $image_path; ?>" 
+                                     class="blog-image" alt="<?php echo htmlspecialchars($post['title']); ?>"
+                                     onerror="this.src='<?php echo BASE_URL; ?>assets/images/blog/default-blog.jpg'">
                                 <span class="featured-badge">Featured</span>
                             </div>
                             
@@ -295,8 +301,14 @@ include 'includes/header.php';
                         <div class="col-lg-4 col-md-6 mb-4">
                             <div class="card blog-card shadow-sm h-100">
                                 <div class="position-relative">
-                                    <img src="<?php echo $post['featured_image'] ?: 'assets/images/blog/default-blog.jpg'; ?>" 
-                                         class="blog-image" alt="<?php echo htmlspecialchars($post['title']); ?>">
+                                    <?php 
+                                    $image_path = !empty($post['featured_image']) && file_exists($post['featured_image']) 
+                                        ? BASE_URL . htmlspecialchars($post['featured_image']) 
+                                        : BASE_URL . 'assets/images/blog/default-blog.jpg';
+                                    ?>
+                                    <img src="<?php echo $image_path; ?>" 
+                                         class="blog-image" alt="<?php echo htmlspecialchars($post['title']); ?>"
+                                         onerror="this.src='<?php echo BASE_URL; ?>assets/images/blog/default-blog.jpg'">
                                     
                                     <?php if ($post['featured']): ?>
                                         <span class="featured-badge">Featured</span>

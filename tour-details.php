@@ -669,8 +669,8 @@ include 'includes/header.php';
                                     <?php foreach ($related_tours as $related): ?>
                                         <div class="col-md-4 mb-3">
                                             <div class="card">
-                                                <img src="<?php echo $related['featured_image'] ?: 'assets/images/tours/default-tour.jpg'; ?>" 
-                                                     class="card-img-top" style="height: 200px; object-fit: cover;">
+                                                <img src="<?php echo BASE_URL . ($related['featured_image'] ?: 'assets/images/tours/default-tour.jpg'); ?>" 
+                                                     class="card-img-top" style="height: 200px; object-fit: cover;" alt="<?php echo htmlspecialchars($related['title']); ?>">
                                                 <div class="card-body">
                                                     <h6 class="card-title">
                                         <a href="<?php echo tourUrl($related['slug']); ?>" class="text-decoration-none">

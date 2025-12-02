@@ -290,6 +290,9 @@ if (function_exists('initTourSliderJS')) {
 if (function_exists('initTourCarouselJS')) {
     initTourCarouselJS();
 }
+
+// Include page-specific JavaScript
+if (isset($extra_js) && $extra_js): echo $extra_js; endif;
 ?>
 
 </body>
