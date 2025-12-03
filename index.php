@@ -47,7 +47,51 @@ include 'includes/header.php';
 ?>
 
 <!-- Destinations Section - Before Hero -->
-
+<?php if (!empty($home_categories)): ?>
+<section class="categories-section">
+    <div class="container">
+        <div class="row">
+            <?php foreach ($home_categories as $index => $destination): 
+                $destination_image = getDestinationImageUrl($destination);
+                $count = $destination['tour_count'] ?? 0;
+            ?>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="category-card">
+                    <!-- Destination Image -->
+                    <div class="destination-image" style="background-image: url('<?php echo htmlspecialchars($destination_image); ?>');"></div>
+                    
+                    <!-- Dark Overlay -->
+                    <div class="dark-overlay"></div>
+                    
+                    <!-- Destination Content -->
+                    <div class="destination-content">
+                        <h3><?php echo htmlspecialchars($destination['name']); ?></h3>
+                        
+                        <?php if (!empty($destination['short_description'])): ?>
+                        <p><?php echo htmlspecialchars(substr($destination['short_description'], 0, 80)); ?>...</p>
+                        <?php endif; ?>
+                        
+                        <!-- Listing Badge -->
+                        <div style="text-align: center; margin-top: 15px;">
+                            <span class="listing-badge">
+                                <?php echo $count; ?> Listing<?php echo $count != 1 ? 's' : ''; ?>
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <!-- Hover Overlay -->
+                    <div class="hover-overlay">
+                        <a href="<?php echo BASE_URL; ?>tours.php?destination=<?php echo htmlspecialchars($destination['slug']); ?>">
+                            Explore Destination <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+<?php endif; ?>
 
 <!-- Search Section -->
 <section class="search-section">
@@ -211,10 +255,16 @@ include 'includes/header.php';
 
 <!-- Tour Carousel Section - 3 slides at a time -->
 <?php displayTourCarousel(9); ?>
-<?php if (!empty($home_categories)): ?>
-<section class="categories-section">
+
+<!-- Popular Destinations -->
+<?php if (!empty($popular_destinations)): ?>
+<section class="destinations-one section-space">
+    <!-- Background decorative elements -->
+    <div class="decorative-element decorative-element-1"></div>
+    <div class="decorative-element decorative-element-2"></div>
+    
     <div class="container">
-    <div class="section-title text-center scroll-reveal" style="margin-bottom: 60px; position: relative; z-index: 2;">
+        <div class="section-title text-center scroll-reveal" style="margin-bottom: 60px; position: relative; z-index: 2;">
             <div style="margin-bottom: 15px;">
                 <span class="badge" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white; padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);">
                     🌍 Explore The World
@@ -226,49 +276,59 @@ include 'includes/header.php';
             </p>
             <div style="width: 80px; height: 4px; background: linear-gradient(135deg, #28a745 0%, #20c997 100%); margin: 20px auto 0; border-radius: 2px;"></div>
         </div>
-        <div class="row">
-            <?php foreach ($home_categories as $index => $destination): 
+        
+        <div class="row mt-5">
+            <?php foreach ($popular_destinations as $index => $destination): 
                 $destination_image = getDestinationImageUrl($destination);
-                $count = $destination['tour_count'] ?? 0;
             ?>
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="category-card">
-                    <!-- Destination Image -->
-                    <div class="destination-image" style="background-image: url('<?php echo htmlspecialchars($destination_image); ?>');"></div>
-                    
-                    <!-- Dark Overlay -->
-                    <div class="dark-overlay"></div>
-                    
-                    <!-- Destination Content -->
-                    <div class="destination-content">
-                        <h3><?php echo htmlspecialchars($destination['name']); ?></h3>
+                <div class="col-lg-3 col-md-6 mb-5 scroll-reveal" style="transition-delay: <?php echo $index * 0.15; ?>s; position: relative; z-index: 2;">
+                    <div class="card h-100 destination-card">
+                        <!-- Hover overlay -->
+                        <div class="hover-overlay">
+                            <div style="text-align: center; color: white; transform: translateY(20px); transition: all 0.3s ease;">
+                                <i class="fas fa-plane" style="font-size: 2rem; margin-bottom: 10px; display: block;"></i>
+                                <p style="font-weight: 600; margin: 0;">Explore Destination</p>
+                            </div>
+                        </div>
                         
-                        <?php if (!empty($destination['short_description'])): ?>
-                        <p><?php echo htmlspecialchars(substr($destination['short_description'], 0, 80)); ?>...</p>
-                        <?php endif; ?>
+                        <div class="position-relative" style="overflow: hidden;">
+                            <img src="<?php echo $destination_image; ?>" 
+                                 class="card-img-top" style="height: 250px; object-fit: cover; transition: transform 0.4s ease;" 
+                                 alt="<?php echo htmlspecialchars($destination['name']); ?>"
+                                 onerror="this.src='<?php echo BASE_URL; ?>assets/images/destinations/default.jpg'">
+                            
+                            <!-- Gradient overlay -->
+                            <div style="position: absolute; bottom: 0; start: 0; end: 0; padding: 25px; background: linear-gradient(transparent, rgba(0,0,0,0.8)); z-index: 2;">
+                                <div style="display: flex; justify-content: space-between; align-items: end;">
+                                    <div>
+                                        <h6 class="text-white mb-1" style="font-weight: 700; font-size: 1.2rem; text-shadow: 0 2px 10px rgba(0,0,0,0.5);"><?php echo htmlspecialchars($destination['name']); ?></h6>
+                                        <small class="text-light" style="font-size: 0.9rem; opacity: 0.9;">🌍 <?php echo htmlspecialchars($destination['country']); ?></small>
+                                    </div>
+                                    <div>
+                                        <span class="badge" style="background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px); color: white; padding: 5px 10px; border-radius: 15px; font-size: 0.75rem;">
+                                            📍 Popular
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         
-                        <!-- Listing Badge -->
-                        <div style="text-align: center; margin-top: 15px;">
-                            <span class="listing-badge">
-                                <?php echo $count; ?> Listing<?php echo $count != 1 ? 's' : ''; ?>
-                            </span>
+                        <div class="card-body" style="padding: 25px; position: relative; z-index: 2;">
+                            <p class="card-text" style="color: #6c757d; font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px; height: 60px; overflow: hidden;">
+                                <?php echo substr(htmlspecialchars($destination['short_description']), 0, 85); ?>...
+                            </p>
+                            
+                            <a href="<?php echo toursUrl(['destination' => $destination['slug']]); ?>" class="btn w-100" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white; border: none; border-radius: 0; padding: 12px; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);">
+                                🗺️ Explore Tours
+                            </a>
                         </div>
                     </div>
-                    
-                    <!-- Hover Overlay -->
-                    <div class="hover-overlay">
-                        <a href="<?php echo BASE_URL; ?>tours.php?destination=<?php echo htmlspecialchars($destination['slug']); ?>">
-                            Explore Destination <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
                 </div>
-            </div>
             <?php endforeach; ?>
         </div>
     </div>
 </section>
 <?php endif; ?>
-
 
 <?php initTourSliderJS(); ?>
 
