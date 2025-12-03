@@ -1,0 +1,550 @@
+﻿/**
+ * Attractive Modern Datepicker Styles
+ * Matches the website's modern theme with gradients and animations
+ */
+
+/* Custom Datepicker Input */
+.datepicker-input {
+    position: relative;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%) !important;
+    border: 2px solid #e9ecef !important;
+    border-radius: 15px !important;
+    padding: 15px 50px 15px 20px !important;
+    font-size: 16px;
+    font-weight: 500;
+    color: #495057 !important;
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    line-height: 1.5;
+    letter-spacing: 0.3px;
+}
+
+.datepicker-input:focus {
+    border-color: #667eea !important;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.15), 0 8px 25px rgba(102, 126, 234, 0.1) !important;
+    transform: translateY(-2px) scale(1.02);
+    outline: none !important;
+}
+
+.datepicker-input:hover {
+    border-color: #667eea !important;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Group and Label Styling */
+.datepicker-form-group,
+.form-group {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.datepicker-label,
+.form-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 8px;
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.datepicker-label::after,
+.form-label::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #1bbc9b;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 1px;
+}
+
+.datepicker-wrapper:focus-within .datepicker-label::after,
+.form-group:focus-within .form-label::after {
+    width: 30px;
+}
+
+.datepicker-label.required::before,
+.form-label.required::before {
+    content: '*';
+    color: #dc3545;
+    margin-right: 4px;
+    font-weight: 700;
+}
+
+/* Calendar Icon */
+.datepicker-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.datepicker-wrapper::after {
+    content: '\f073';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #667eea;
+    font-size: 18px;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.datepicker-wrapper:hover::after {
+    color: #5a67d8;
+    transform: translateY(-50%) scale(1.1);
+}
+
+/* Floating Label Effects */
+.floating-label {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.floating-label .datepicker-input {
+    padding: 20px 50px 8px 20px !important;
+}
+
+.floating-label .form-label {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #6c757d;
+    text-transform: none;
+    letter-spacing: 0.3px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    z-index: 2;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    padding: 0 8px;
+    margin: 0;
+}
+
+.floating-label .datepicker-input:focus + .form-label,
+.floating-label .datepicker-input:not(:placeholder-shown) + .form-label,
+.floating-label .datepicker-input.has-value + .form-label {
+    top: -8px;
+    left: 16px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #667eea;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Enhanced Placeholder Styling */
+.datepicker-input::placeholder {
+    color: #6c757d;
+    font-style: italic;
+    font-weight: 400;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.datepicker-input:focus::placeholder {
+    opacity: 0.4;
+    transform: translateX(4px);
+}
+
+/* Animation Enhancements */
+.datepicker-input {
+    animation: slideInFromBottom 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideInFromBottom {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.floating-label .form-label {
+    animation: fadeInLabel 0.8s ease 0.2s both;
+}
+
+@keyframes fadeInLabel {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hover Effects */
+.datepicker-wrapper:hover .datepicker-input {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(102, 126, 234, 0.25) !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .datepicker-input {
+        font-size: 16px !important;
+        padding: 16px 45px 16px 16px !important;
+        min-height: 50px;
+    }
+    
+    .floating-label .datepicker-input {
+        padding: 18px 45px 8px 16px !important;
+    }
+    
+    .floating-label .form-label {
+        top: 18px;
+        left: 16px;
+        font-size: 15px;
+    }
+    
+    .flatpickr-calendar {
+        font-size: 14px;
+    }
+    
+    .flatpickr-day {
+        height: 35px;
+        line-height: 35px;
+    }
+}
+
+@media (max-width: 480px) {
+    .datepicker-wrapper {
+        margin: 15px 0;
+    }
+    
+    .datepicker-input {
+        font-size: 16px !important;
+        padding: 14px 40px 14px 14px !important;
+    }
+    
+    .floating-label .form-label {
+        font-size: 14px;
+    }
+    
+    .flatpickr-calendar {
+        width: 280px !important;
+    }
+}
+
+/* Flatpickr Calendar Styling */
+.flatpickr-calendar {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%) !important;
+    border-radius: 20px !important;
+    border: none !important;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(102, 126, 234, 0.1) !important;
+    animation: datepicker-slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+@keyframes datepicker-slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Calendar Header */
+.flatpickr-months {
+    background: #1bbc9b !important;
+    border-radius: 20px 20px 0 0;
+    padding: 15px 20px;
+    position: relative;
+}
+
+.flatpickr-month {
+    color: white !important;
+}
+
+.flatpickr-current-month .cur-month,
+.flatpickr-current-month .cur-year {
+    color: white !important;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.flatpickr-current-month input.cur-year {
+    background: transparent !important;
+    border: none !important;
+    color: white !important;
+    font-weight: 600;
+}
+
+/* Navigation Arrows */
+.flatpickr-prev-month,
+.flatpickr-next-month {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-radius: 50% !important;
+    width: 40px !important;
+    height: 40px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.3s ease;
+}
+
+.flatpickr-prev-month:hover,
+.flatpickr-next-month:hover {
+    background: rgba(255, 255, 255, 0.3) !important;
+    transform: scale(1.1);
+}
+
+.flatpickr-prev-month svg,
+.flatpickr-next-month svg {
+    fill: white !important;
+    width: 16px !important;
+    height: 16px !important;
+}
+
+/* Weekdays */
+.flatpickr-weekdays {
+    background: #f8f9fa;
+    padding: 15px 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.flatpickr-weekday {
+    color: #6c757d !important;
+    font-weight: 600 !important;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Calendar Days */
+.flatpickr-days {
+    padding: 10px;
+}
+
+.flatpickr-day {
+    border-radius: 50% !important;
+    border: none !important;
+    color: #495057 !important;
+    font-weight: 500;
+    font-size: 14px;
+    width: 40px !important;
+    height: 40px !important;
+    line-height: 40px !important;
+    margin: 2px !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    position: relative;
+}
+
+.flatpickr-day:hover {
+    background: #1bbc9b !important;
+    color: white !important;
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.flatpickr-day.today {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%) !important;
+    color: white !important;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+}
+
+.flatpickr-day.today:hover {
+    background: linear-gradient(135deg, #20c997 0%, #28a745 100%) !important;
+    transform: scale(1.15);
+}
+
+.flatpickr-day.selected {
+    background: #1bbc9b !important;
+    color: white !important;
+    font-weight: 700;
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    transform: scale(1.05);
+}
+
+.flatpickr-day.selected:hover {
+    transform: scale(1.1);
+}
+
+.flatpickr-day.inRange {
+    background: rgba(102, 126, 234, 0.1) !important;
+    color: #667eea !important;
+    border-radius: 0 !important;
+    box-shadow: none;
+}
+
+.flatpickr-day.startRange,
+.flatpickr-day.endRange {
+    background: #1bbc9b !important;
+    color: white !important;
+    border-radius: 50% !important;
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+/* Disabled Days */
+.flatpickr-day.flatpickr-disabled,
+.flatpickr-day.flatpickr-disabled:hover {
+    background: transparent !important;
+    color: #ced4da !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+.flatpickr-day.prevMonthDay,
+.flatpickr-day.nextMonthDay {
+    color: #ced4da !important;
+}
+
+.flatpickr-day.prevMonthDay:hover,
+.flatpickr-day.nextMonthDay:hover {
+    background: rgba(102, 126, 234, 0.1) !important;
+    color: #667eea !important;
+}
+
+/* Time Picker */
+.flatpickr-time {
+    border-top: 1px solid #e9ecef !important;
+    background: #f8f9fa;
+    padding: 15px 20px;
+    border-radius: 0 0 20px 20px;
+}
+
+.flatpickr-time-separator,
+.flatpickr-am-pm {
+    color: #667eea !important;
+    font-weight: 600;
+}
+
+.flatpickr-time input {
+    background: white !important;
+    border: 2px solid #e9ecef !important;
+    border-radius: 10px !important;
+    color: #495057 !important;
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.flatpickr-time input:focus {
+    border-color: #667eea !important;
+    box-shadow: 0 0 0 0.15rem rgba(102, 126, 234, 0.15) !important;
+    outline: none;
+}
+
+/* Custom Animations */
+.flatpickr-day {
+    animation: dayFadeIn 0.2s ease-out;
+}
+
+@keyframes dayFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .flatpickr-calendar {
+        max-width: 95vw;
+        margin: 0 auto;
+    }
+    
+    .flatpickr-day {
+        width: 35px !important;
+        height: 35px !important;
+        line-height: 35px !important;
+        font-size: 13px;
+    }
+    
+    .flatpickr-months {
+        padding: 12px 15px;
+    }
+    
+    .flatpickr-current-month .cur-month,
+    .flatpickr-current-month .cur-year {
+        font-size: 16px;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    .flatpickr-calendar {
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%) !important;
+    }
+    
+    .flatpickr-day {
+        color: white !important;
+    }
+    
+    .flatpickr-weekdays {
+        background: #34495e;
+    }
+    
+    .flatpickr-weekday {
+        color: rgba(255, 255, 255, 0.7) !important;
+    }
+}
+
+/* Additional Enhancements */
+.flatpickr-calendar::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #667eea;
+    z-index: 1001;
+}
+
+/* Loading Animation */
+.datepicker-loading {
+    position: relative;
+}
+
+.datepicker-loading::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}

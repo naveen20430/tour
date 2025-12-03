@@ -1,0 +1,262 @@
+/* Contact Page Custom Styles */
+
+.page-header {
+    position: relative;
+    overflow: hidden;
+}
+
+.page-header__breadcrumb {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.page-header__breadcrumb li:not(:last-child)::after {
+    content: '/';
+    margin-left: 10px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Contact Info Cards */
+.contact-info__item {
+    transition: all 0.3s ease;
+    border: 1px solid #f0f0f0;
+}
+
+.contact-info__item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+    border-color: #ff6b35;
+}
+
+.contact-info__icon i {
+    transition: all 0.3s ease;
+}
+
+.contact-info__item:hover .contact-info__icon i {
+    transform: scale(1.1);
+    color: #ff6b35 !important;
+}
+
+.contact-info__title {
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.contact-info__text {
+    color: #666;
+    margin-bottom: 0;
+}
+
+.contact-info__text a {
+    color: #ff6b35;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.contact-info__text a:hover {
+    color: #e55a2e;
+}
+
+/* Contact Form Styling */
+.contact-form__inner {
+    border-top: 4px solid #ff6b35;
+}
+
+.contact-form__form .form-label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.contact-form__form .form-control,
+.contact-form__form .form-select {
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    padding: 12px 15px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.contact-form__form .form-control:focus,
+.contact-form__form .form-select:focus {
+    border-color: #ff6b35;
+    box-shadow: 0 0 0 0.2rem rgba(255, 107, 53, 0.25);
+}
+
+.contact-form__form textarea.form-control {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Business Hours Styling */
+.business-hours__inner {
+    border-left: 4px solid #ff6b35;
+}
+
+.business-hours__list .row {
+    margin: 0;
+}
+
+.business-hours__list .border-bottom {
+    border-color: #f0f0f0 !important;
+}
+
+/* Map Styling */
+.contact-map__inner {
+    position: relative;
+    border-radius: 0;
+    overflow: hidden;
+}
+
+.contact-map__inner iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    filter: grayscale(20%);
+    transition: filter 0.3s ease;
+}
+
+.contact-map__inner:hover iframe {
+    filter: grayscale(0%);
+}
+
+/* Alert Styling */
+.alert {
+    border: none;
+    border-radius: 8px;
+    padding: 15px 20px;
+}
+
+.alert-success {
+    background-color: #d1edff;
+    color: #0c5460;
+    border-left: 4px solid #0dcaf0;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-left: 4px solid #dc3545;
+}
+
+/* Button Styling */
+.travhub-btn {
+    background: linear-gradient(45deg, #ff6b35, #f7931e);
+    border: none;
+    border-radius: 25px;
+    padding: 12px 30px;
+    color: white;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+}
+
+.travhub-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+    color: white;
+}
+
+/* Section Spacing */
+.section-space {
+    padding: 80px 0;
+}
+
+/* Section Title Styling */
+.section-title__tagline {
+    color: #ff6b35;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 14px;
+}
+
+.section-title__title {
+    color: #333;
+    font-weight: 700;
+    margin: 10px 0 15px;
+    font-size: 2.5rem;
+}
+
+.section-title__text {
+    color: #666;
+    font-size: 16px;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .section-title__title {
+        font-size: 2rem;
+    }
+    
+    .section-space {
+        padding: 60px 0;
+    }
+    
+    .contact-form__inner {
+        padding: 2rem !important;
+    }
+    
+    .page-header {
+        padding: 80px 0 40px !important;
+    }
+    
+    .contact-map__inner {
+        height: 300px !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .section-title__title {
+        font-size: 1.75rem;
+    }
+    
+    .contact-form__inner {
+        padding: 1.5rem !important;
+    }
+    
+    .business-hours__inner {
+        padding: 2rem !important;
+    }
+}
+
+/* Loading Animation for Form Submit */
+.contact-form__form.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.contact-form__form.loading .travhub-btn {
+    position: relative;
+}
+
+.contact-form__form.loading .travhub-btn::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    left: 50%;
+    margin-left: -8px;
+    margin-top: -8px;
+    border: 2px solid transparent;
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

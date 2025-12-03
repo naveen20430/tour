@@ -1,0 +1,189 @@
+/* Hero Section Styles - Standalone CSS for Dynamic Hero */
+
+/* Main Hero Container */
+.hero-dynamic {
+    position: relative;
+    min-height: 500px;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    color: white;
+    background-attachment: scroll; /* Better performance on mobile */
+}
+
+/* Hero Overlay for Better Text Contrast */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6));
+    z-index: 1;
+}
+
+/* Hero Content Container */
+.hero-one__content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: white;
+    padding: 2rem 1rem;
+    width: 100%;
+}
+
+/* Hero Title Styling */
+.hero-one__title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin: 1rem 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    line-height: 1.2;
+}
+
+/* Hero Subtitle Styling */
+.hero-one__sub-title {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+    font-weight: 400;
+    opacity: 0.95;
+}
+
+/* Hero Description Text */
+.hero-one__text {
+    font-size: 1.2rem;
+    margin: 1.5rem auto;
+    max-width: 700px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+/* Hero Buttons Container */
+.hero-one__buttons {
+    margin-top: 3rem;
+}
+
+/* Hero Button Base Styling (only for hero section) */
+.hero-one__buttons .travhub-btn {
+    display: inline-block;
+    padding: 15px 35px;
+    background: #007bff;
+    color: white !important;
+    text-decoration: none !important;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    border: 2px solid #007bff;
+    margin: 0.5rem;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.hero-one__buttons .travhub-btn:hover {
+    background: #0056b3;
+    border-color: #0056b3;
+    transform: translateY(-3px);
+    color: white !important;
+    box-shadow: 0 6px 20px rgba(0, 86, 179, 0.4);
+}
+
+/* Outline Button Styling (only for hero) */
+.hero-one__buttons .travhub-btn--outline {
+    background: transparent !important;
+    color: white !important;
+    border: 2px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+}
+
+.hero-one__buttons .travhub-btn--outline:hover {
+    background: rgba(255, 255, 255, 0.95) !important;
+    color: #333 !important;
+    border-color: white;
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive Design - Tablet */
+@media (max-width: 768px) {
+    .hero-dynamic {
+        min-height: 450px;
+        padding: 1rem 0;
+    }
+    
+    .hero-one__title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-one__sub-title {
+        font-size: 1.2rem;
+    }
+    
+    .hero-one__text {
+        font-size: 1.1rem;
+        margin: 1rem auto;
+        max-width: 90%;
+    }
+    
+    .hero-one__buttons .travhub-btn {
+        padding: 12px 25px;
+        margin: 0.5rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Responsive Design - Mobile */
+@media (max-width: 480px) {
+    .hero-dynamic {
+        min-height: 400px;
+        padding: 1rem 0;
+    }
+    
+    .hero-one__title {
+        font-size: 2rem;
+        margin: 0.5rem 0;
+    }
+    
+    .hero-one__sub-title {
+        font-size: 1rem;
+    }
+    
+    .hero-one__text {
+        font-size: 1rem;
+        margin: 1rem auto;
+        max-width: 95%;
+        line-height: 1.5;
+    }
+    
+    .hero-one__buttons {
+        margin-top: 2rem;
+    }
+    
+    .hero-one__buttons .travhub-btn {
+        display: block;
+        margin: 0.75rem auto;
+        max-width: 250px;
+        padding: 12px 20px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Very Small Mobile */
+@media (max-width: 360px) {
+    .hero-dynamic {
+        min-height: 350px;
+    }
+    
+    .hero-one__title {
+        font-size: 1.75rem;
+    }
+    
+    .hero-one__buttons .travhub-btn {
+        max-width: 200px;
+        padding: 10px 15px;
+    }
+}

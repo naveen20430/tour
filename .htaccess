@@ -1,0 +1,125 @@
+RewriteEngine On
+
+# Enable rewrite log for debugging (comment out in production)
+# RewriteLog "logs/rewrite.log"
+# RewriteLogLevel 3
+
+# Remove trailing slashes (do this first)
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)/$ /$1 [R=301,L]
+
+# ===== MAIN PAGES =====
+# Home page
+RewriteRule ^home/?$ index.php [NC,L]
+
+# Tours listing
+RewriteRule ^tours/?$ tours.php [NC,L,QSA]
+
+# Destinations listing  
+RewriteRule ^destinations/?$ destinations.php [NC,L,QSA]
+
+# Blog listing
+RewriteRule ^blog/?$ blog.php [NC,L,QSA]
+
+# Contact page
+RewriteRule ^contact/?$ contact.php [NC,L]
+
+# About page
+RewriteRule ^about/?$ about.php [NC,L]
+
+# Gallery
+RewriteRule ^gallery/?$ gallery.php [NC,L]
+
+# ===== DETAILED PAGES =====
+# Tour details: /tour/tour-name
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^tour/([a-z0-9\-]+)/?$ tour-details.php?slug=$1 [NC,L,QSA]
+
+# Destination details: /destination/destination-name
+RewriteRule ^destination/([a-z0-9\-]+)/?$ destination-details.php?slug=$1 [NC,L,QSA]
+
+# Blog post: /blog/post-name
+RewriteRule ^blog/([a-z0-9\-]+)/?$ blog-post.php?slug=$1 [NC,L,QSA]
+
+# ===== FILTERED PAGES =====
+# Tours by category: /tours/category/category-name
+RewriteRule ^tours/category/([a-z0-9\-]+)/?$ tours.php?category=$1 [NC,L,QSA]
+
+# Tours by destination: /tours/destination/destination-name
+RewriteRule ^tours/destination/([a-z0-9\-]+)/?$ tours.php?destination=$1 [NC,L,QSA]
+
+# Tours by difficulty: /tours/difficulty/easy|moderate|difficult
+RewriteRule ^tours/difficulty/(easy|moderate|difficult)/?$ tours.php?difficulty=$1 [NC,L,QSA]
+
+# Tours search: /tours/search/query
+RewriteRule ^tours/search/([^/]+)/?$ tours.php?search=$1 [NC,L,QSA]
+
+# Blog by category: /blog/category/category-name
+RewriteRule ^blog/category/([a-z0-9\-]+)/?$ blog.php?category=$1 [NC,L,QSA]
+
+# Blog search: /blog/search/query
+RewriteRule ^blog/search/([^/]+)/?$ blog.php?search=$1 [NC,L,QSA]
+
+# ===== USER ACTIONS =====
+# Booking page
+RewriteRule ^book/([0-9]+)/?$ booking.php?tour_id=$1 [NC,L,QSA]
+RewriteRule ^booking/?$ booking.php [NC,L,QSA]
+
+# User authentication
+RewriteRule ^login/?$ login.php [NC,L]
+RewriteRule ^register/?$ register.php [NC,L]
+RewriteRule ^logout/?$ logout.php [NC,L]
+RewriteRule ^profile/?$ profile.php [NC,L]
+
+# ===== ADMIN PANEL =====
+# Admin dashboard
+RewriteRule ^admin/?$ admin/index.php [NC,L]
+
+# Admin pages: /admin/page-name
+RewriteRule ^admin/([a-z0-9\-]+)/?$ admin/$1.php [NC,L,QSA]
+
+# Admin actions: /admin/action/id
+RewriteRule ^admin/([a-z0-9\-]+)/([0-9]+)/?$ admin/$1.php?id=$2 [NC,L,QSA]
+
+# ===== API ENDPOINTS =====
+# API routes
+RewriteRule ^api/([a-z0-9\-]+)/?$ api/$1.php [NC,L,QSA]
+
+# ===== TOUR SLUG FALLBACK =====
+# Direct tour slug (fallback for tour details)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/(admin|api|assets|config|includes|vendor|auth|user)/
+RewriteCond %{REQUEST_URI} !\.(css|js|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)$
+RewriteRule ^([a-z0-9\-]+)/?$ tour-details.php?slug=$1 [NC,L,QSA]
+
+# ===== REMOVE .PHP EXTENSION (must be near end) =====
+# Remove .php extension for direct file access
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+# ===== SECURITY RULES =====
+# Deny access to sensitive directories
+RewriteRule ^config/ - [F,L]
+RewriteRule ^classes/ - [F,L]
+RewriteRule ^includes/ - [F,L]
+RewriteRule ^vendor/ - [F,L]
+
+# Deny access to sensitive files
+RewriteRule \.(sql|log|ini|conf)$ - [F,L]
+RewriteRule ^\. - [F,L]
+
+# ===== PERFORMANCE & SEO =====
+# Force HTTPS (uncomment for production)
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Redirect www to non-www (uncomment if needed)
+# RewriteCond %{HTTP_HOST} ^www\.(.*)
+# RewriteRule ^(.*)$ https://%1/$1 [L,R=301]
+
+# ===== ERROR PAGES =====
+ErrorDocument 404 /404.php
+ErrorDocument 500 /500.php

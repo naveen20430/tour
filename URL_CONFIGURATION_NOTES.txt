@@ -1,0 +1,18 @@
+
+IMPORTANT: URL Configuration Notes
+================================
+
+1. The main configuration has been updated in config/config.php to use dynamic BASE_URL detection.
+2. This means the application will automatically detect the correct domain and path.
+3. No more hardcoded localhost URLs in the core configuration.
+
+How it works:
+- Detects HTTP/HTTPS automatically
+- Uses current domain name
+- Auto-detects the application directory path
+- Works on any server without modification
+
+Manual Updates (if needed):
+- Update any remaining hardcoded URLs in custom files
+- Check .htaccess file for any domain-specific rules
+- Update database entries that might contain absolute URLs

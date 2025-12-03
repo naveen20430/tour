@@ -1,0 +1,189 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+}
+
+/* Hero Section Styles */
+.hero-dynamic {
+    position: relative;
+    min-height: 500px;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6));
+    z-index: 1;
+}
+
+.hero-one__content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: white;
+}
+
+.hero-one__title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin: 1rem 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-one__sub-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.hero-one__text {
+    font-size: 1.1rem;
+    margin: 1rem 0;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.hero-one__buttons {
+    margin-top: 2rem;
+}
+
+.travhub-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border: 2px solid #007bff;
+}
+
+.travhub-btn:hover {
+    background: #0056b3;
+    border-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.travhub-btn--outline {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+}
+
+.travhub-btn--outline:hover {
+    background: white;
+    color: #333;
+    border-color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-dynamic {
+        min-height: 400px;
+        padding: 2rem 0;
+    }
+    
+    .hero-one__title {
+        font-size: 2rem;
+    }
+    
+    .hero-one__sub-title {
+        font-size: 1rem;
+    }
+    
+    .hero-one__text {
+        font-size: 1rem;
+    }
+    
+    .travhub-btn {
+        padding: 10px 20px;
+        margin: 0.5rem;
+        display: block;
+        max-width: 200px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-dynamic {
+        min-height: 350px;
+    }
+    
+    .hero-one__title {
+        font-size: 1.5rem;
+    }
+}
+h1, h2 {
+    color: #333;
+}
+nav {
+    margin-bottom: 20px;
+}
+nav a {
+    margin-right: 15px;
+    text-decoration: none;
+    color: #007bff;
+}
+.tour-list, .addon {
+    display: flex;
+    flex-wrap: wrap;
+}
+.tour, .addon {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin: 10px;
+    background: white;
+    border-radius: 5px;
+    width: 300px;
+}
+.tour h3, .addon h3 {
+    margin-top: 0;
+}
+form {
+    max-width: 400px;
+}
+label {
+    display: block;
+    margin: 10px 0 5px;
+}
+input, select, textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+button {
+    padding: 10px 15px;
+    background: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+button:hover {
+    background: #218838;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+th {
+    background: #f8f8f8;
+}
