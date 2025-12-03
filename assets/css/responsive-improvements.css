@@ -1,0 +1,920 @@
+/* ==========================================================================
+   COMPREHENSIVE RESPONSIVE DESIGN IMPROVEMENTS
+   Enhanced mobile, tablet, and desktop experience
+   ========================================================================== */
+
+/* Base Viewport and Typography */
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* Logo Responsiveness */
+.main-header__logo {
+    background-color: transparent !important;
+    background: none !important;
+    border-radius: 0 !important;
+}
+
+.main-header__logo img {
+    max-width: 100%;
+    height: auto;
+    transition: all 0.3s ease;
+    max-height: 60px;
+}
+
+/* Desktop Navbar Height Fix - Base desktop styles (992px and up) */
+@media (min-width: 992px) {
+    .main-header {
+        padding: 8px 0 !important;
+        min-height: auto !important;
+        height: auto !important;
+    }
+    
+    .main-header__inner {
+        padding: 8px 0 !important;
+        min-height: auto !important;
+        height: auto !important;
+    }
+    
+    .main-header__logo {
+        padding: 12px 20px !important;
+        height: auto !important;
+        min-height: auto !important;
+        max-height: 70px !important;
+        background-color: transparent !important;
+        background: none !important;
+    }
+    
+    .main-header__logo img {
+        max-height: 55px !important;
+        max-width: 55px !important;
+        width: 55px !important;
+        height: auto !important;
+        object-fit: contain !important;
+    }
+    
+    .main-header__logo a {
+        display: flex !important;
+        align-items: center !important;
+        height: 100% !important;
+    }
+}
+
+/* Mobile Navbar Height Fix - Apply to all small screens */
+@media (max-width: 991px) {
+    .main-header {
+        padding: 5px 0 !important;
+        min-height: auto !important;
+        height: auto !important;
+    }
+    
+    .main-header__inner {
+        padding: 5px 0 !important;
+        min-height: auto !important;
+        height: auto !important;
+    }
+    
+    .main-header__logo {
+        padding: 8px 15px !important;
+        height: auto !important;
+        min-height: auto !important;
+        max-height: 60px !important;
+        background-color: transparent !important;
+        background: none !important;
+    }
+    
+    .main-header__logo img {
+        max-height: 45px !important;
+        max-width: 45px !important;
+        width: 45px !important;
+        height: auto !important;
+        object-fit: contain !important;
+    }
+    
+    .main-header__logo a {
+        display: flex !important;
+        align-items: center !important;
+        height: 100% !important;
+    }
+}
+
+/* Navigation Enhancements */
+.main-header__nav {
+    transition: all 0.3s ease;
+}
+
+.main-menu__list {
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* Mobile Navigation Toggle */
+.mobile-nav__btn {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.mobile-nav__btn span {
+    width: 25px;
+    height: 3px;
+    background: #333;
+    margin: 3px 0;
+    transition: 0.3s;
+    border-radius: 2px;
+}
+
+/* Card Responsiveness */
+.card {
+    margin-bottom: 30px;
+    min-height: auto;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Button Responsiveness */
+.travhub-btn {
+    display: inline-block;
+    width: auto;
+    min-width: 120px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.travhub-btn.w-100 {
+    width: 100% !important;
+}
+
+/* Form Responsiveness */
+.form-control,
+.form-select {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Section Spacing */
+.section-space {
+    padding: 60px 0;
+}
+
+/* Hero Sections */
+.blog-hero,
+.tour-hero,
+.page-header {
+    padding: 60px 0 40px;
+    text-align: center;
+}
+
+.hero-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Grid System Enhancements */
+.row {
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.col-lg-4,
+.col-lg-3,
+.col-lg-6,
+.col-md-4,
+.col-md-6,
+.col-md-12,
+.col-sm-6,
+.col-sm-12 {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* ==========================================================================
+   EXTRA LARGE DEVICES (Large Desktops, 1400px and up)
+   ========================================================================== */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1320px;
+    }
+    
+    /* Header adjustments for extra large screens */
+    .main-header {
+        padding: 1px 0 !important;
+    }
+    
+    .main-header__inner {
+        padding: 10px 0 !important;
+    }
+    
+    .main-header__logo {
+        padding: 15px 24px !important;
+        max-height: 80px !important;
+        background-color: transparent !important;
+        background: none !important;
+    }
+    
+    .main-header__logo img {
+        max-height: 60px !important;
+        max-width: 60px !important;
+        width: 60px !important;
+    }
+    
+    .hero-title {
+        font-size: 3.5rem;
+    }
+    
+    .card-img-top {
+        height: 300px;
+    }
+    
+    .section-space {
+        padding: 100px 0;
+    }
+}
+
+/* ==========================================================================
+   LARGE DEVICES (Desktops, 992px to 1399px)
+   ========================================================================== */
+@media (min-width: 992px) and (max-width: 1399px) {
+    .container {
+        max-width: 960px;
+    }
+    
+    /* Header adjustments for large desktop screens */
+    .main-header {
+        padding: 8px 0 !important;
+    }
+    
+    .main-header__inner {
+        padding: 8px 0 !important;
+    }
+    
+    .main-header__logo {
+        padding: 12px 20px !important;
+        max-height: 70px !important;
+        background-color: transparent !important;
+        background: none !important;
+    }
+    
+    .main-header__logo img {
+        width: 55px !important;
+        max-width: 55px !important;
+        max-height: 55px !important;
+        height: auto !important;
+        object-fit: contain !important;
+    }
+    
+    .hero-title {
+        font-size: 3rem;
+    }
+    
+    .card-img-top {
+        height: 250px;
+    }
+}
+
+/* ==========================================================================
+   MEDIUM DEVICES (Tablets, 768px to 991px)
+   ========================================================================== */
+@media (min-width: 768px) and (max-width: 991px) {
+    .container {
+        max-width: 720px;
+    }
+    
+    /* Header Adjustments */
+    .topbar-one {
+        display: none; /* Hide topbar on tablets for cleaner look */
+    }
+    
+    .main-header {
+        padding: 8px 0 !important;
+        min-height: auto !important;
+    }
+    
+    .main-header__inner {
+        padding: 5px 0 !important;
+        min-height: auto !important;
+    }
+    
+    .main-header__logo {
+        padding: 10px 15px !important;
+        height: auto !important;
+        min-height: auto !important;
+        max-height: 65px !important;
+        background-color: transparent !important;
+        background: none !important;
+    }
+    
+    .main-header__logo img {
+        width: 45px !important;
+        max-width: 45px !important;
+        max-height: 45px !important;
+        height: auto !important;
+        object-fit: contain !important;
+    }
+    
+    .main-header__nav {
+        display: none; /* Hide main nav, show mobile nav */
+    }
+    
+    .mobile-nav__btn {
+        display: flex;
+    }
+    
+    .main-header__btn .travhub-btn {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+    
+    /* Content Adjustments */
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .section-space {
+        padding: 50px 0;
+    }
+    
+    .card {
+        margin-bottom: 25px;
+    }
+    
+    .card-img-top {
+        height: 220px;
+    }
+    
+    /* Blog specific */
+    .blog-hero {
+        padding: 50px 0 30px;
+    }
+    
+    .blog-hero h1 {
+        font-size: 2.2rem;
+    }
+    
+    /* Search form improvements */
+    .row.g-3 > div {
+        margin-bottom: 15px;
+    }
+    
+    /* Button spacing */
+    .travhub-btn {
+        margin: 5px 0;
+    }
+}
+
+/* ==========================================================================
+   SMALL DEVICES (Landscape phones, 576px to 767px)
+   ========================================================================== */
+@media (min-width: 576px) and (max-width: 767px) {
+    .container {
+        max-width: 540px;
+        padding: 0 20px;
+    }
+    
+    /* Header */
+    .topbar-one {
+        display: none;
+    }
+    
+    .main-header {
+        padding: 6px 0 !important;
+        position: relative;
+        min-height: auto !important;
+    }
+    
+    .main-header__inner {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px 0 !important;
+        min-height: auto !important;
+    }
+    
+    .main-header__logo {
+        order: 1;
+        padding: 8px 12px !important;
+        height: auto !important;
+        min-height: auto !important;
+        max-height: 55px !important;
+        background-color: transparent !important;
+        background: none !important;
+    }
+    
+    .main-header__logo img {
+        width: 40px !important;
+        max-width: 40px !important;
+        max-height: 40px !important;
+        height: auto !important;
+        object-fit: contain !important;
+    }
+    
+    .main-header__nav {
+        display: none;
+    }
+    
+    .main-header__right {
+        order: 2;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .mobile-nav__btn {
+        display: flex;
+    }
+    
+    .main-header__btn .travhub-btn {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+    }
+    
+    .search-toggler {
+        width: 35px;
+        height: 35px;
+    }
+    
+    /* Content */
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .section-space {
+        padding: 40px 0;
+    }
+    
+    .card {
+        margin-bottom: 20px;
+    }
+    
+    .card-body {
+        padding: 15px;
+    }
+    
+    .card-img-top {
+        height: 200px;
+    }
+    
+    /* Blog */
+    .blog-hero {
+        padding: 40px 0 25px;
+    }
+    
+    .blog-hero h1 {
+        font-size: 1.8rem;
+    }
+    
+    .blog-hero p {
+        font-size: 1rem;
+    }
+    
+    /* Forms */
+    .form-control,
+    .form-select {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+    }
+    
+    /* Search filters */
+    .col-md-4,
+    .col-md-3,
+    .col-md-2 {
+        flex: 0 0 100%;
+        max-width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .col-md-3.text-end {
+        text-align: left !important;
+    }
+}
+
+/* ==========================================================================
+   EXTRA SMALL DEVICES (Portrait phones, less than 576px)
+   ========================================================================== */
+@media (max-width: 575px) {
+    .container {
+        max-width: 100%;
+        padding: 0 15px;
+    }
+    
+    /* Header */
+    .topbar-one {
+        display: none;
+    }
+    
+    .main-header {
+        padding: 5px 0 !important;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        min-height: auto !important;
+    }
+    
+    .main-header__inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: nowrap;
+        padding: 5px 0 !important;
+        min-height: auto !important;
+    }
+    
+    .main-header__logo {
+        padding: 6px 10px !important;
+        height: auto !important;
+        min-height: auto !important;
+        max-height: 50px !important;
+        background-color: transparent !important;
+        background: none !important;
+    }
+    
+    .main-header__logo img {
+        width: 35px !important;
+        max-width: 35px !important;
+        max-height: 35px !important;
+        height: auto !important;
+        object-fit: contain !important;
+    }
+    
+    .main-header__nav {
+        display: none;
+    }
+    
+    .main-header__right {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .mobile-nav__btn {
+        display: flex;
+    }
+    
+    .main-header__btn .travhub-btn {
+        padding: 5px 10px;
+        font-size: 0.8rem;
+        min-width: 80px;
+    }
+    
+    .search-toggler {
+        width: 32px;
+        height: 32px;
+        font-size: 0.8rem;
+    }
+    
+    /* Typography */
+    html {
+        font-size: 14px;
+    }
+    
+    .hero-title,
+    .display-4 {
+        font-size: 1.6rem !important;
+        line-height: 1.3;
+    }
+    
+    .lead {
+        font-size: 0.95rem;
+    }
+    
+    .section-title__title {
+        font-size: 1.5rem;
+    }
+    
+    /* Content */
+    .section-space {
+        padding: 30px 0;
+    }
+    
+    .card {
+        margin-bottom: 20px;
+        border-radius: 15px;
+    }
+    
+    .card-body {
+        padding: 12px;
+    }
+    
+    .card-img-top {
+        height: 180px;
+        border-radius: 15px 15px 0 0;
+    }
+    
+    .card-title {
+        font-size: 1.1rem;
+        line-height: 1.3;
+        margin-bottom: 8px;
+    }
+    
+    .card-text {
+        font-size: 0.85rem;
+        line-height: 1.4;
+    }
+    
+    /* Blog */
+    .blog-hero {
+        padding: 30px 0 20px;
+    }
+    
+    .blog-hero h1 {
+        font-size: 1.5rem;
+    }
+    
+    .blog-hero p {
+        font-size: 0.9rem;
+    }
+    
+    .blog-image {
+        height: 160px;
+    }
+    
+    /* Forms */
+    .form-control,
+    .form-select {
+        padding: 8px 10px;
+        font-size: 0.85rem;
+        border-radius: 8px;
+    }
+    
+    .form-label {
+        font-size: 0.85rem;
+        margin-bottom: 5px;
+    }
+    
+    /* Buttons */
+    .travhub-btn {
+        padding: 8px 15px !important;
+        font-size: 0.8rem !important;
+        border-radius: 20px !important;
+    }
+    
+    .btn {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+        border-radius: 8px;
+    }
+    
+    /* Grid system for mobile */
+    .col-lg-4,
+    .col-lg-3,
+    .col-lg-6,
+    .col-md-4,
+    .col-md-6,
+    .col-sm-6 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    
+    .row.g-3 > div {
+        margin-bottom: 12px;
+    }
+    
+    /* Search and filter section */
+    .col-md-4,
+    .col-md-3,
+    .col-md-2 {
+        margin-bottom: 10px;
+    }
+    
+    .text-end {
+        text-align: left !important;
+    }
+    
+    /* Badges */
+    .badge {
+        font-size: 0.65rem;
+        padding: 3px 8px;
+    }
+    
+    .featured-badge {
+        font-size: 0.65rem;
+        padding: 3px 8px;
+        top: 10px;
+        left: 10px;
+    }
+    
+    .category-badge {
+        font-size: 0.65rem;
+        padding: 3px 8px;
+    }
+    
+    /* Pagination */
+    .pagination {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .page-link {
+        padding: 5px 8px;
+        font-size: 0.8rem;
+        margin: 2px;
+    }
+    
+    /* Footer adjustments */
+    .main-footer {
+        padding: 30px 0 20px;
+    }
+    
+    .main-footer .col-lg-4,
+    .main-footer .col-lg-2,
+    .main-footer .col-lg-3 {
+        flex: 0 0 100%;
+        max-width: 100%;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    
+    .main-footer__logo img {
+        width: 100px;
+    }
+    
+    .main-footer__social {
+        justify-content: center;
+        margin: 15px 0;
+    }
+    
+    /* Contact page specific */
+    .contact-info__item {
+        margin-bottom: 20px;
+        padding: 15px;
+    }
+    
+    .contact-info__icon i {
+        font-size: 2rem !important;
+    }
+    
+    /* Tour/Destination cards */
+    .position-absolute.top-0.end-0 {
+        top: 8px !important;
+        right: 8px !important;
+    }
+    
+    .position-absolute.top-0.start-0 {
+        top: 8px !important;
+        left: 8px !important;
+    }
+    
+    .position-absolute.bottom-0.start-0 {
+        bottom: 8px !important;
+        left: 8px !important;
+    }
+}
+
+/* ==========================================================================
+   LANDSCAPE ORIENTATION (All mobile devices in landscape)
+   ========================================================================== */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    .blog-hero,
+    .tour-hero,
+    .page-header {
+        padding: 20px 0 15px;
+    }
+    
+    .hero-title {
+        font-size: 1.5rem;
+    }
+    
+    .section-space {
+        padding: 20px 0;
+    }
+    
+    .main-header {
+        padding: 5px 0;
+    }
+    
+    .topbar-one {
+        display: none;
+    }
+}
+
+/* ==========================================================================
+   HIGH DPI DISPLAYS (Retina)
+   ========================================================================== */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .main-header__logo img,
+    .main-footer__logo img {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+/* ==========================================================================
+   PRINT STYLES
+   ========================================================================== */
+@media print {
+    .topbar-one,
+    .main-header,
+    .main-footer,
+    .mobile-nav__wrapper,
+    .search-popup,
+    .scroll-to-top,
+    .mobile-nav__btn,
+    .search-toggler {
+        display: none !important;
+    }
+    
+    .page-wrapper {
+        box-shadow: none;
+    }
+    
+    .card {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+}
+
+/* ==========================================================================
+   ACCESSIBILITY ENHANCEMENTS
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Focus states for better accessibility */
+.travhub-btn:focus,
+.btn:focus,
+.form-control:focus,
+.form-select:focus {
+    outline: 2px solid #667eea;
+    outline-offset: 2px;
+}
+
+/* ==========================================================================
+   TOUCH DEVICE ENHANCEMENTS
+   ========================================================================== */
+@media (pointer: coarse) {
+    .travhub-btn,
+    .btn {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    .page-link {
+        min-height: 40px;
+        min-width: 40px;
+    }
+    
+    .search-toggler {
+        min-height: 44px;
+        min-width: 44px;
+    }
+}
+
+/* ==========================================================================
+   UTILITY CLASSES FOR RESPONSIVE VISIBILITY
+   ========================================================================== */
+.d-mobile-only {
+    display: none !important;
+}
+
+.d-desktop-only {
+    display: block !important;
+}
+
+@media (max-width: 767px) {
+    .d-mobile-only {
+        display: block !important;
+    }
+    
+    .d-desktop-only {
+        display: none !important;
+    }
+    
+    .text-mobile-center {
+        text-align: center !important;
+    }
+    
+    .text-mobile-left {
+        text-align: left !important;
+    }
+}
+
+/* ==========================================================================
+   PERFORMANCE OPTIMIZATIONS
+   ========================================================================== */
+.card-img-top,
+.blog-image {
+    will-change: transform;
+    backface-visibility: hidden;
+}
+
+.card {
+    contain: layout style paint;
+}
